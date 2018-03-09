@@ -2,14 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import AppComponent from "./components/AppComponent";
-import AppRouter from './routers/AppRouter';
 import configureStore from './store/configureStore';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'normalize.css/normalize.css';
 import 'react-dates/lib/css/_datepicker.css';
 import 'react-table/react-table.css'
 import './styles/styles.scss';
-import {getUsersData} from "./actions/users";
 
 
 const store = configureStore();

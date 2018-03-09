@@ -2,9 +2,17 @@ import React from 'react';
 import {Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 import StaticUserDetail from './StaticUserDetail';
 import EditUserDetail from "./EditUserDetail";
+import UrbanSporkAPI from "../api/UrbanSporkAPI";
 
 
 class UserDetailsModal extends React.Component {
+
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.isOpen){
+            const userData = UrbanSporkAPI.getUserFullData(nextProps.userId);
+            userData.then(data => this.setState({userData: data}))
+        }
+    }
 
     state = {
         edit: false
@@ -29,7 +37,7 @@ class UserDetailsModal extends React.Component {
     };
 
     handleOnSave = () => {
-
+        UrbanSporkAPI.updateUserDetails()
     };
 
 
@@ -39,7 +47,7 @@ class UserDetailsModal extends React.Component {
                 <Modal isOpen={this.props.isOpen} toggle={this.handleOnClose}>
                     <ModalHeader toggle={this.handleOnClose}>User Detail</ModalHeader>
                     <ModalBody>
-                        {this.state.edit? <EditUserDetail  userData={this.props.userData}/>: <StaticUserDetail userData={this.props.userData}/>}
+                        {this.state.userData? (this.state.edit? <EditUserDetail  userData={this.state.userData}/>: <StaticUserDetail userData={this.state.userData}/>):null}
                     </ModalBody>
                     <ModalFooter>
                         {this.state.edit?

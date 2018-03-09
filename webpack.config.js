@@ -8,7 +8,8 @@ module.exports = (env) => {
 
 
     return {
-        entry: "./src/app.js",
+        entry: path.join(__dirname, "src", "app.js"),
+        // entry: "./src/app.js",
         // entry: "./src/playground/dev-play.js",
         output: {
             path: path.join(__dirname, "public", "dist"),

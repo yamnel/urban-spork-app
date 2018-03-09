@@ -3,7 +3,6 @@ import UrbanSporkAPI from '../api/UrbanSporkAPI';
 
 
 export const getUsersData = () => (dispatch) => {
-    console.log("getUserData() Was Called!");
     return UrbanSporkAPI.getAllUsers()
 
         .then(payload => {

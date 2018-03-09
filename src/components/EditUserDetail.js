@@ -5,30 +5,31 @@ import {Col, Form, FormGroup, Input, Label} from 'reactstrap';
 export default class EditUserDetailComponent extends React.Component {
     state = {...this.props.userData};
 
+    editedData = {...this.state}
 
-
-
+    handleOnChange = (e) => {
+        console.log(e.target)
+    };
     render() {
         return(
             <div>
-                {console.log(this.state)}
                 <Form>
+
                     <FormGroup row>
                         <Label color={"muted"} sm={"3"} for={"firstName"}>
                             First Name:
                         </Label>
                         <Col sm={20}>
-                            <Input id={"firstName"} defaultValue={this.state.firstName}/>
+                            <Input id={"firstName"} onChange={this.onInputChange} defaultValue={this.editedData.firstName}/>
                         </Col>
                     </FormGroup>
 
                     <FormGroup row>
-                        <Label for="lastName" sm={"3"}>
+                        <Label color={"muted"} sm={"3"} for={"lastName"}>
                             Last Name:
                         </Label>
-
                         <Col sm={20}>
-                            <Input type="text" name="lastName" id="lastName" defaultValue={this.state.lastName}/>
+                            <Input id={"lastName"} defaultValue={this.editedData.lastName}/>
                         </Col>
                     </FormGroup>
 
@@ -38,7 +39,7 @@ export default class EditUserDetailComponent extends React.Component {
                         </Label>
 
                         <Col sm={20}>
-                            <Input  type="email" name="email" id="email" defaultValue={this.state.email}/>
+                            <Input  type="email" name="email" id="email" defaultValue={this.editedData.email}/>
                         </Col>
                     </FormGroup>
 
@@ -48,17 +49,17 @@ export default class EditUserDetailComponent extends React.Component {
                         </Label>
 
                         <Col sm={20}>
-                            <Input type="text" name="department" id="department" defaultValue={this.state.department}/>
+                            <Input type="text" name="department" id="department" defaultValue={this.editedData.department}/>
                         </Col>
                     </FormGroup>
 
                     <FormGroup row>
-                        <Label for="position" sm={"3"}>
-                            Position:
+                        <Label for="title" sm={"3"}>
+                            Title:
                         </Label>
 
                         <Col sm={20}>
-                            <Input type="select" name="position" id="position" defaultValue={this.state.position}/>
+                            <Input type="text" name="tile" id="tile" defaultValue={this.editedData.position}/>
                         </Col>
                     </FormGroup>
                 </Form>

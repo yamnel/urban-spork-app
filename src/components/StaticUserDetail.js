@@ -14,15 +14,16 @@ export default (props) => (
                 </Col>
             </FormGroup>
 
+
             <FormGroup row>
-                <Label for="lastName" sm={"3"}>
+                <Label color={"muted"} sm={"3"} for={"lastName"}>
                     Last Name:
                 </Label>
-
                 <Col sm={20}>
-                    <Input plaintext type="text" name="lastName" id="lastName">{props.userData.lastName}</Input>
+                    <Input id={"lastName"} plaintext>{props.userData.lastName}</Input>
                 </Col>
             </FormGroup>
+
 
             <FormGroup row>
                 <Label for="email" sm={"3"}>
@@ -45,12 +46,12 @@ export default (props) => (
             </FormGroup>
 
             <FormGroup row>
-                <Label for="position" sm={"3"}>
-                    Position:
+                <Label for="title" sm={"3"}>
+                    Title:
                 </Label>
 
                 <Col sm={20}>
-                    <Input plaintext type="select" name="position" id="position">{props.userData.position}</Input>
+                    <Input plaintext type="select" name="title" id="title">{props.userData.position}</Input>
                 </Col>
             </FormGroup>
         </Form>

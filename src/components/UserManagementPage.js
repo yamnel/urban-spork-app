@@ -5,14 +5,23 @@ import {connect} from "react-redux";
 import selectUsers from "../selectors/users";
 import {setTextFilter} from "../actions/filters";
 import UserDetailsModal from "./UserDetailsModal";
-import {getUsersData} from "../actions/users";
 
 export class UserManagementPage extends React.Component {
     // Last ID used stays in the state, I don't like it but it's a bug I need to fix later.
     state = {
-        modalIsOpen: false,
-        selectedUser: undefined
+        modalIsOpen: false
     };
+
+
+    columns = [
+        // {accessor: 'id', Header: 'User ID'},
+        {accessor: 'name', Header: 'Name'},
+        {accessor: 'email', Header: 'Email'},
+        {accessor: 'department', Header: 'Department'},
+        {accessor: 'title', Header: 'Title'}
+
+    ];
+
 
 
     // componentDidMount() {
@@ -27,6 +36,8 @@ export class UserManagementPage extends React.Component {
         //proof that is stays in the old state
         // console.log(`The new state field selectedUserId is ${this.state.selectedUserId}`);
     };
+
+
 
     toggleModalIsOpen = () => this.setState(() => ({modalIsOpen: !this.state.modalIsOpen}));
 
@@ -56,10 +67,10 @@ export class UserManagementPage extends React.Component {
                 </div>
 
                 <div>
-                    <UserTable openUserDetailsModal={this.openUserDetailsModal} users={this.props.users}/>
+                    <UserTable onRowClick={this.openUserDetailsModal} data={this.props.users} columns={this.columns}/>
                 </div>
 
-                <UserDetailsModal isOpen={this.state.modalIsOpen} toggle={this.toggleModalIsOpen} userData={this.state.selectedUser}/>
+                <UserDetailsModal isOpen={this.state.modalIsOpen} toggle={this.toggleModalIsOpen} userId={this.state.selectedUser}/>
             </div>
         )
     }

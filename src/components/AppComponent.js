@@ -1,9 +1,9 @@
 import React from 'react';
+import {connect} from "react-redux";
+
 import AppRouter from "../routers/AppRouter";
 import LogInPage from "./LogInPage";
-import {setTextFilter} from "../actions/filters";
 import {getUsersData} from "../actions/users";
-import {connect} from "react-redux";
 import {setManagerId} from "../actions/manager";
 
 
