@@ -1,0 +1,30 @@
+.header {
+    //border: 2px solid red;
+}
+
+.header-top {
+    background-color: rgba(56, 64, 79, 0.4);
+    display: flex;
+    justify-content: space-between;
+    padding: 0 $m-size 0 $m-size;
+}
+
+
+.header-buttons {
+    background-color: #81a5e2;
+    border: 2px solid black;
+    display: flex;
+    justify-content: space-evenly;
+    padding: $s-size 0 $s-size 0;
+    //margin: 0 1px 0 1px;
+}
+
+.logo-title {
+    color: #2dff12;
+    text-shadow: 1px 1px grey;
+}
+
+.is-active {
+    font-weight: bold;
+    color: blue;
+}
