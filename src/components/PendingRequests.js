@@ -2,16 +2,26 @@ import React from 'react';
 import UserTable from "./UserTable";
 import UrbanSporkAPI from '../api/UrbanSporkAPI';
 import moment from 'moment';
+import PermissionRequestModal from "./PermissionRequestModal";
 
 export default class PendingRequests extends React.Component{
+    state = {
+        pipi: " hi",
+        modalIsOpen: false,
+        requestData: []
+    };
 
-    componentWillMount(){
-        const requestData = UrbanSporkAPI.getPendingRequests();
-        requestData.then(data => this.setState({requestData: data}))
+    componentWillMount() {
+        this.getRequestData();
     }
 
-    state = {
-    };
+
+    // componentWillUpdate(nextProps, nextState) {
+    //     console.log('component Will update');
+    //     const requestData = UrbanSporkAPI.getPendingRequests();
+    //     requestData.then(data => this.setState({requestData: data}))
+    // }
+
 
     styles = {
         flex: 1,
@@ -22,8 +32,8 @@ export default class PendingRequests extends React.Component{
 
     columns = [
         // {accessor: 'id', Header: 'User ID'},
-        {accessor: 'forFirstName', Header: 'Name'},
-        {accessor: 'permissionName', Header: 'System'},
+        {accessor: 'forFullName', Header: 'Name'},
+        {accessor: 'permissionName', Header: 'Request'},
         {
             accessor: 'dateOfRequest',
             Header: 'Date',
@@ -32,13 +42,25 @@ export default class PendingRequests extends React.Component{
         // {accessor: 'reason', Header: 'Request Notes'}
     ];
 
-    openRequestDialogModal = () => {
-
+    getRequestData = () => {
+        const requestData = UrbanSporkAPI.getPendingRequests();
+        requestData.then(data => this.setState({requestData: data})).catch(() => this.setState({requestData: []}));
+        console.log('DataRequested');
     };
 
-    stuff = () => {
-        console.log(this.state.requestData)
+    toggleModalIsOpen = () => {
+        this.setState({modalIsOpen: !this.state.modalIsOpen});
     };
+
+    setSelectedRequestData = (selectedRequestData) => this.setState({selectedRequestData: selectedRequestData});
+
+
+    openRequestDialogModal = (selectedRequestData) => {
+        console.log('selectedRequestData ', selectedRequestData);
+        this.setSelectedRequestData(selectedRequestData);
+        this.toggleModalIsOpen();
+    };
+
     render() {
         return (
             <div>
@@ -46,8 +68,10 @@ export default class PendingRequests extends React.Component{
                 <div style={this.styles}>
                     <h1>Pending Requests</h1>
                 </div>
-                {this.stuff()}
-                <UserTable onRowClick={this.openRequestDialogModal} columns={this.columns} data={this.state.requestData}/>
+                <div>
+                    <UserTable onRowClick={this.openRequestDialogModal} columns={this.columns} data={this.state.requestData}/>
+                </div>
+                <PermissionRequestModal isOpen={this.state.modalIsOpen} toggle={this.toggleModalIsOpen} refreshData={this.getRequestData} requestData={this.state.selectedRequestData}/>
             </div>
         )
     }

@@ -24,7 +24,7 @@ class UserTable extends React.Component {
                     // https://github.com/react-tools/react-table#custom-props
                     getTrProps={(state, rowInfo, column, instance) => (
                         {
-                            onClick: () => this.props.onRowClick(rowInfo.original.id)
+                            onClick: () => this.props.onRowClick(rowInfo.original)
                         }
                     )}
                     // Component={()=> console.log('hey')}

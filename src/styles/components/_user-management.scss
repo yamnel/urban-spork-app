@@ -1,8 +1,8 @@
 .user-management-nav {
     align-items: center;  // this needs to be here so that flex-box doesn't fuck the height up
     display: flex;
-    justify-content: space-evenly;
-    margin: 10px;
+    justify-content: space-between;
+    margin: 20px;
 }
 
 .form-group {

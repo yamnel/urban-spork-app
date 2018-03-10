@@ -21,7 +21,8 @@ export class UrbanSporkAPI {
         return fetch('http://localhost:5000/api/permission/getpendingrequests').then(response => {
             return response.json();
         }).catch(error => {
-            return error;
+            console.log(error);
+            return [];
         });
     }
 

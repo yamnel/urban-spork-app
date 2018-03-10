@@ -29,8 +29,8 @@ export class UserManagementPage extends React.Component {
     //
     // }
 
-    openUserDetailsModal = (selectedUserId) => {
-        this.setUserData(selectedUserId);
+    openUserDetailsModal = (selectedUserData) => {
+        this.setUserData(selectedUserData.id);
         this.toggleModalIsOpen();
 
         //proof that is stays in the old state
@@ -48,7 +48,7 @@ export class UserManagementPage extends React.Component {
     //     this.setState(() => ({selectedUserId: undefined}))
     // };
 
-    setUserData = (selectedUser) => this.setState(() => ({selectedUser: selectedUser}));
+    setUserData = (selectedUserId) => this.setState(() => ({selectedUser: selectedUserId}));
 
     onInputChange = (e) => {
         this.props.setTextFilter(e.target.value);
@@ -59,7 +59,7 @@ export class UserManagementPage extends React.Component {
             <div>
                 <div className={'user-management-nav'}>
                     <Button color={'success'}>Create User</Button>
-                    <Button color={'primary'}>Filter</Button>
+                    {/*<Button color={'primary'}>Filter</Button>*/}
 
                     <FormGroup>
                         <Input type={'text'} value={this.props.filters.text} onChange={this.onInputChange} placeholder={'Search For User'} />
