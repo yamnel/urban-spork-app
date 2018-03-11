@@ -47,7 +47,9 @@ class UserDetailsModal extends React.Component {
                 <Modal isOpen={this.props.isOpen} toggle={this.handleOnClose}>
                     <ModalHeader toggle={this.handleOnClose}>User Detail</ModalHeader>
                     <ModalBody>
-                        {this.state.userData? (this.state.edit? <EditUserDetail  userData={this.state.userData}/>: <StaticUserDetail userData={this.state.userData}/>):null}
+                        <div>
+                            {this.state.userData? (this.state.edit? <EditUserDetail  userData={this.state.userData}/>: <StaticUserDetail userData={this.state.userData}/>):null}
+                        </div>
                     </ModalBody>
                     <ModalFooter>
                         {this.state.edit?

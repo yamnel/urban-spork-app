@@ -34,12 +34,12 @@ export default class EditUserDetailComponent extends React.Component {
                     </FormGroup>
 
                     <FormGroup row>
-                        <Label for="email" sm={"3"}>
-                            Email:
+                        <Label for="title" sm={"3"}>
+                            Title:
                         </Label>
 
                         <Col sm={20}>
-                            <Input  type="email" name="email" id="email" defaultValue={this.editedData.email}/>
+                            <Input type="text" name="tile" id="tile" defaultValue={this.editedData.position}/>
                         </Col>
                     </FormGroup>
 
@@ -54,12 +54,12 @@ export default class EditUserDetailComponent extends React.Component {
                     </FormGroup>
 
                     <FormGroup row>
-                        <Label for="title" sm={"3"}>
-                            Title:
+                        <Label for="email" sm={"3"}>
+                            Email:
                         </Label>
 
                         <Col sm={20}>
-                            <Input type="text" name="tile" id="tile" defaultValue={this.editedData.position}/>
+                            <Input  type="email" name="email" id="email" defaultValue={this.editedData.email}/>
                         </Col>
                     </FormGroup>
                 </Form>
