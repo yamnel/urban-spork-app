@@ -1,5 +1,6 @@
 import React from 'react';
 import UserTable from "./UserTable";
+import {Link} from 'react-router-dom';
 import {Button, FormGroup, Input} from 'reactstrap';
 import {connect} from "react-redux";
 import selectUsers from "../selectors/users";
@@ -37,6 +38,9 @@ export class UserManagementPage extends React.Component {
         // console.log(`The new state field selectedUserId is ${this.state.selectedUserId}`);
     };
 
+    // onCreateUserClick = () =>{
+    //
+    // };
 
 
     toggleModalIsOpen = () => this.setState(() => ({modalIsOpen: !this.state.modalIsOpen}));
@@ -58,7 +62,7 @@ export class UserManagementPage extends React.Component {
         return (
             <div>
                 <div className={'user-management-nav'}>
-                    <Button color={'success'}>Create User</Button>
+                    <Button to={"/create-user"} color={'success'} tag={Link}>Create User</Button>
                     {/*<Button color={'primary'}>Filter</Button>*/}
 
                     <FormGroup>

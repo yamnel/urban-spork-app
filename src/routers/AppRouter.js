@@ -6,6 +6,7 @@ import HeaderComponent from '../components/HeaderComponent';
 import UserManagementPage from '../components/UserManagementPage';
 import PendingRequests from '../components/PendingRequests';
 import NotFound from '../components/NotFound'
+import CreateUser from "../components/CreateUser";
 
 
 const AppRouter = () => (
@@ -17,6 +18,7 @@ const AppRouter = () => (
                     <Route path={"/"} component={DashboardPage} exact={true}/>
                     <Route path="/users" component={UserManagementPage}/>
                     <Route path="/requests" component={PendingRequests}/>
+                    <Route path={"/create-user"} component={CreateUser}/>
 
                     {/*This needs to be last*/}
                     <Route component={NotFound}/>

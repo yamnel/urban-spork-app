@@ -45,7 +45,6 @@ export default class PendingRequests extends React.Component{
     getRequestData = () => {
         const requestData = UrbanSporkAPI.getPendingRequests();
         requestData.then(data => this.setState({requestData: data})).catch(() => this.setState({requestData: []}));
-        console.log('DataRequested');
     };
 
     toggleModalIsOpen = () => {
@@ -56,7 +55,6 @@ export default class PendingRequests extends React.Component{
 
 
     openRequestDialogModal = (selectedRequestData) => {
-        console.log('selectedRequestData ', selectedRequestData);
         this.setSelectedRequestData(selectedRequestData);
         this.toggleModalIsOpen();
     };
