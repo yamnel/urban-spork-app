@@ -1,6 +1,9 @@
 import React from 'react';
 import {NavLink as RouterNavLink} from 'react-router-dom';
-import {Nav, NavItem, NavLink} from 'reactstrap';
+import {DropdownItem, DropdownMenu, DropdownToggle, Nav, NavItem, NavLink, UncontrolledDropdown} from 'reactstrap';
+import SystemActivityReport from "./SystemActivityReport";
+import SystemReport from "./SystemReport";
+import ApproverActivityReport from "./ApproverActivityReport";
 // Changed the name of reactstrap's Navlink to NavLinkStrap so as to avoid confusion.
 
 const HeaderComponent = () => (
@@ -28,10 +31,33 @@ const HeaderComponent = () => (
                 </NavItem>
 
 
-                <NavItem>
-                    <NavLink to={"/reports"} activeClassName={"is-active"} tag={RouterNavLink}>Reports</NavLink>
-                </NavItem>
+                {/*<NavItem>*/}
+                    {/*<NavLink to={"/reports"} activeClassName={"is-active"} tag={RouterNavLink}>Reports</NavLink>*/}
+                {/*</NavItem>*/}
 
+                <UncontrolledDropdown nav inNavbar>
+                    <DropdownToggle nav caret>
+                        Reports
+                    </DropdownToggle>
+                    <DropdownMenu >
+                        <DropdownItem tag={RouterNavLink} to={"/reports/off-boarding-report"}>
+                            Off-Boarding Report
+                        </DropdownItem>
+
+                        <DropdownItem tag={RouterNavLink} to={"/reports/system-report"}>
+                            System Report
+                        </DropdownItem>
+
+                        {/*<DropdownItem divider />*/}
+                        <DropdownItem tag={RouterNavLink} to={"/reports/system-activity-report"}>
+                            System Activity Report
+                        </DropdownItem>
+
+                        <DropdownItem tag={RouterNavLink} to={"/reports/approver-activity-report"}>
+                            Approver Activity Report
+                        </DropdownItem>
+                    </DropdownMenu>
+                </UncontrolledDropdown>
             </Nav>
 
         </header>

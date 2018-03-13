@@ -1,13 +1,18 @@
 import React from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 
+import NotFound from '../components/NotFound'
+
 import DashboardPage from '../components/DashboardPage';
 import HeaderComponent from '../components/HeaderComponent';
 import UserManagementPage from '../components/UserManagementPage';
 import PendingRequests from '../components/PendingRequests';
-import NotFound from '../components/NotFound'
 import CreateUser from "../components/CreateUser";
-import ReportsPage from "../components/ReportsPage";
+// Reports
+import OffBoardingReport from "../components/OffBoardingReport";
+import SystemReport from "../components/SystemReport";
+import SystemActivityReport from "../components/SystemActivityReport";
+import ApproverActivityReport from "../components/ApproverActivityReport";
 
 
 const AppRouter = () => (
@@ -20,9 +25,16 @@ const AppRouter = () => (
                     <Route path="/users" component={UserManagementPage}/>
                     <Route path="/requests" component={PendingRequests}/>
                     <Route path={"/create-user"} component={CreateUser}/>
-                    <Route ppath={"/reports"} component={ReportsPage}/>
 
-                    {/*This needs to be last*/}
+                    <Route path={"/reports/off-boarding-report"} component={OffBoardingReport}/>
+                    <Route path={"/reports/system-report"} component={SystemReport}/>
+                    <Route path={"/reports/system-activity-report"} component={SystemActivityReport}/>
+                    <Route path={"/reports/approver-activity-report"} component={ApproverActivityReport}/>
+
+                    {/*
+                    This needs to be the last component route
+                    it acts as a default case
+                    */}
                     <Route component={NotFound}/>
                 </Switch>
             </div>

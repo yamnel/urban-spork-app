@@ -26,6 +26,15 @@ export class UrbanSporkAPI {
         });
     }
 
+    static getAproverActivity() {
+        return fetch('http://localhost:5000/api/user/getapproveractivity').then(response => {
+            return response.json();
+        }).catch(error => {
+            console.log(error);
+            return [];
+        });
+    }
+
 
 
 
