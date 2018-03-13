@@ -12,7 +12,7 @@ const HeaderComponent = () => (
 
             <div className={"header-top"}>
                 <h1 className={"logo-title"}>Urban Spork Logo</h1>
-                <h3 style={{color: "white", marginTop: "36px"}}>User Name & IMG</h3>
+                <h3 style={{color: "grey", marginTop: "36px"}}>User Name & IMG</h3>
             </div>
 
             <Nav tabs justified style={{marginTop: '10px'}}>
@@ -22,12 +22,12 @@ const HeaderComponent = () => (
 
 
                 <NavItem>
-                    <NavLink to={`/users`} activeClassName={"is-active"} tag={RouterNavLink}>User Management</NavLink>
+                    <NavLink to={`/users`} activeClassName={"is-active"} tag={RouterNavLink} style={{whiteSpace: 'nowrap'}}>User Management</NavLink>
                 </NavItem>
 
 
                 <NavItem>
-                    <NavLink to={"/requests"} activeClassName={"is-active"} tag={RouterNavLink}>Pending Requests</NavLink>
+                    <NavLink to={"/requests"} activeClassName={"is-active"} tag={RouterNavLink} style={{whiteSpace: 'nowrap'}}>Pending Requests</NavLink>
                 </NavItem>
 
 
@@ -36,10 +36,10 @@ const HeaderComponent = () => (
                 {/*</NavItem>*/}
 
                 <UncontrolledDropdown nav inNavbar>
-                    <DropdownToggle nav caret>
+                    <DropdownToggle caret nav>
                         Reports
                     </DropdownToggle>
-                    <DropdownMenu >
+                    <DropdownMenu right nav>
                         <DropdownItem tag={RouterNavLink} to={"/reports/off-boarding-report"}>
                             Off-Boarding Report
                         </DropdownItem>
@@ -48,7 +48,6 @@ const HeaderComponent = () => (
                             System Report
                         </DropdownItem>
 
-                        {/*<DropdownItem divider />*/}
                         <DropdownItem tag={RouterNavLink} to={"/reports/system-activity-report"}>
                             System Activity Report
                         </DropdownItem>

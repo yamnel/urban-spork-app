@@ -21,7 +21,7 @@ export default class CreateUser extends React.Component {
                     <h1>Create User</h1>
                 </div>
 
-                <div style={{paddingTop: '20px', display: 'flex', justifyContent: 'space-between'}}>
+                <div style={{paddingTop: '20px', display: 'flex', justifyContent: 'space-between', padding: '0 250px 0 250px'}}>
                    <div>
                        <Form style={{width: "480px"}}>
                            <FormGroup row>

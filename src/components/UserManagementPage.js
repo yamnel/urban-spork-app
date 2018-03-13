@@ -66,7 +66,7 @@ export class UserManagementPage extends React.Component {
                     {/*<Button color={'primary'}>Filter</Button>*/}
 
                     <FormGroup>
-                        <Input type={'text'} value={this.props.filters.text} onChange={this.onInputChange} placeholder={'Search For User'} />
+                        <Input type={'text'} value={this.props.filters.text} onChange={this.onInputChange} placeholder={'Search'} />
                     </FormGroup>
                 </div>
 

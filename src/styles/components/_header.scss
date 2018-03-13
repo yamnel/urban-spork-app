@@ -3,7 +3,7 @@
 }
 
 .header-top {
-    background-color: rgba(56, 64, 79, 0.4);
+    background-color: rgba(234, 255, 255, 0.49);
     display: flex;
     justify-content: space-between;
     padding: 0 $m-size 0 $m-size;
@@ -20,11 +20,35 @@
 }
 
 .logo-title {
-    color: #2dff12;
+    color: #aaffa2;
     text-shadow: 1px 1px grey;
 }
 
 .is-active {
+    border:lightgray;
+    background: rgba(149, 149, 156, 0.14);
     font-weight: bold;
-    color: blue;
+    color: #36c3ff;
+}
+
+.tab-content {
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    padding: 10px;
+}
+
+.nav-tabs {
+    margin-bottom: 0;
+    border: 1px solid #dee2e6;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+
+}
+
+.nav-link {
+    color: #36c3ff;
+}
+
+a:hover {
+    color: #36c3ff;
 }
