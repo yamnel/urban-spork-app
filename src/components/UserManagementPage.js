@@ -62,7 +62,7 @@ export class UserManagementPage extends React.Component {
         return (
             <div>
                 <div className={'user-management-nav'}>
-                    <Button to={"/create-user"} color={'success'} tag={Link}>Create User</Button>
+                    <Button onClick={() => this.props.history.push("/create-user")} color={'success'} >Create User</Button>
                     {/*<Button color={'primary'}>Filter</Button>*/}
 
                     <FormGroup>

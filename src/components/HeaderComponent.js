@@ -11,8 +11,8 @@ const HeaderComponent = () => (
         <header className={"header"}>
 
             <div className={"header-top"}>
-                <h1 className={"logo-title"}>Urban Spork Logo</h1>
-                <h3 style={{color: "grey", marginTop: "36px"}}>User Name & IMG</h3>
+                <h1 style={{lineHeight: '100px'}}  className={"logo-title"}>Logo Placeholder</h1>
+                <h2 style={{color: "grey", marginTop: "36px"}}>Image Placeholder <br/><span><h5>Name Placeholder</h5></span></h2>
             </div>
 
             <Nav tabs justified style={{marginTop: '10px'}}>
@@ -39,7 +39,7 @@ const HeaderComponent = () => (
                     <DropdownToggle caret nav>
                         Reports
                     </DropdownToggle>
-                    <DropdownMenu right nav>
+                    <DropdownMenu right>
                         <DropdownItem tag={RouterNavLink} to={"/reports/off-boarding-report"}>
                             Off-Boarding Report
                         </DropdownItem>

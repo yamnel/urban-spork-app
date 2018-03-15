@@ -48,6 +48,7 @@ export class UrbanSporkAPI {
                 'content-type': 'application/json'
             },
             method: 'PUT'
+            // mode: '*same-origin', // no-cors, cors, *same-origin
         }).then(response => {
             return response.json();
         });

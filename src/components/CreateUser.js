@@ -73,7 +73,7 @@ export default class CreateUser extends React.Component {
                            </FormGroup>
                        </Form>
 
-                       <Button style={{marginTop: "40px", marginLeft: "20px"}} to={"/users"} color={'success'} tag={Link}>Create User</Button>
+                       <Button style={{marginTop: "40px", marginLeft: "20px"}} onClick={() => this.props.history.push("/users")}  color={'success'}>Create User</Button>
                    </div>
 
 
