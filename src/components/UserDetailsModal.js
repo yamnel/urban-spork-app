@@ -23,6 +23,7 @@ class UserDetailsModal extends React.Component {
         this.setState({edit: true})
     };
 
+
     handleOnCancel = () => {
         if (this.state.edit) {
             this.setState({edit: false});
@@ -37,9 +38,24 @@ class UserDetailsModal extends React.Component {
     };
 
     handleOnSave = () => {
-        UrbanSporkAPI.updateUserDetails()
+        const data = {
+            FirstName: this.state.userData.firstName,
+            LastName: this.state.userData.lastName,
+            Position: this.state.userData.position,
+            Department: this.state.userData.department,
+            IsAdmin: this.state.userData.isAdmin,
+            Email: this.state.userData.email,
+            ForID: this.state.userData.id
+        };
+
+        console.log(data)
+        UrbanSporkAPI.updateUserDetails(data)
     };
 
+    handleOnDataChange = (userData) => {
+        this.setState({userData})
+        console.log(this.state)
+    };
 
     render() {
         return (
@@ -48,7 +64,7 @@ class UserDetailsModal extends React.Component {
                     <ModalHeader toggle={this.handleOnClose}>User Detail</ModalHeader>
                     <ModalBody>
                         <div>
-                            {this.state.userData? (this.state.edit? <EditUserDetail  userData={this.state.userData}/>: <StaticUserDetail userData={this.state.userData}/>):null}
+                            {this.state.userData? (this.state.edit? <EditUserDetail onDataChange={this.handleOnDataChange}  userData={this.state.userData}/>: <StaticUserDetail userData={this.state.userData}/>):null}
                         </div>
                     </ModalBody>
                     <ModalFooter>

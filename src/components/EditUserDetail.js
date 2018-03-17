@@ -5,22 +5,25 @@ import {Col, Form, FormGroup, Input, Label} from 'reactstrap';
 export default class EditUserDetailComponent extends React.Component {
     state = {...this.props.userData};
 
-    editedData = {...this.state}
+    // editedData = {...this.state};
 
-    handleOnChange = (e) => {
-        console.log(e.target)
-    };
     render() {
         return(
             <div>
                 <Form>
-
+                    {console.log(this.state)}
                     <FormGroup row>
                         <Label color={"muted"} sm={"3"} for={"firstName"}>
                             First Name:
                         </Label>
                         <Col sm={20}>
-                            <Input id={"firstName"} onChange={this.onInputChange} defaultValue={this.editedData.firstName}/>
+                            <Input
+                                id={"firstName"}
+                                   onChange={(e) => {
+                                       this.setState({firstName: e.target.value})
+                                       this.props.onDataChange(this.state)
+                            }}
+                                defaultValue={this.state.firstName}/>
                         </Col>
                     </FormGroup>
 
@@ -29,7 +32,14 @@ export default class EditUserDetailComponent extends React.Component {
                             Last Name:
                         </Label>
                         <Col sm={20}>
-                            <Input id={"lastName"} defaultValue={this.editedData.lastName}/>
+                            <Input
+                                id={"lastName"}
+                                defaultValue={this.state.lastName}
+                                onChange={(e) => {
+                                    this.setState({lastName: e.target.value})
+                                    this.props.onDataChange(this.state)
+                                }}
+                            />
                         </Col>
                     </FormGroup>
 
@@ -39,7 +49,16 @@ export default class EditUserDetailComponent extends React.Component {
                         </Label>
 
                         <Col sm={20}>
-                            <Input type="text" name="tile" id="tile" defaultValue={this.editedData.position}/>
+                            <Input
+                                type="text"
+                                name="tile"
+                                id="tile"
+                                defaultValue={this.state.position}
+                                onChange={(e) => {
+                                    this.setState({position: e.target.value})
+                                    this.props.onDataChange(this.state)
+                                }}
+                            />
                         </Col>
                     </FormGroup>
 
@@ -49,7 +68,16 @@ export default class EditUserDetailComponent extends React.Component {
                         </Label>
 
                         <Col sm={20}>
-                            <Input type="text" name="department" id="department" defaultValue={this.editedData.department}/>
+                            <Input
+                                type="text"
+                                name="department"
+                                id="department"
+                                defaultValue={this.state.department}
+                                onChange={(e) => {
+                                    this.setState({department: e.target.value})
+                                    this.props.onDataChange(this.state)
+                                }}
+                            />
                         </Col>
                     </FormGroup>
 
@@ -59,7 +87,15 @@ export default class EditUserDetailComponent extends React.Component {
                         </Label>
 
                         <Col sm={20}>
-                            <Input  type="email" name="email" id="email" defaultValue={this.editedData.email}/>
+                            <Input
+                                type="email"
+                                name="email"
+                                id="email"
+                                defaultValue={this.state.email}
+                                onChange={(e) => {
+                                    this.setState({email: e.target.value})
+                                    this.props.onDataChange(this.state)                                }}
+                            />
                         </Col>
                     </FormGroup>
                 </Form>
