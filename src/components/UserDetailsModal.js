@@ -45,7 +45,7 @@ class UserDetailsModal extends React.Component {
             Department: this.state.userData.department,
             IsAdmin: this.state.userData.isAdmin,
             Email: this.state.userData.email,
-            ForID: this.state.userData.id
+            ForID: this.state.userData.userId
         };
 
         console.log(data)
