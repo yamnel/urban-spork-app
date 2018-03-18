@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Input, Label} from "reactstrap";
+import {Button, FormGroup, Input, Label} from "reactstrap";
 
 const OffBoardingReportPartial = (props) => (
     <div>
@@ -10,8 +10,11 @@ const OffBoardingReportPartial = (props) => (
         <div className={'user-management-nav'} style={{justifyContent: 'space-around'}}>
             <Button color={'success'} onClick={props.handleOnClick}>User Report</Button>
 
-            <Input type={'text'} value={props.value} onChange={(e) => props.onInputChange(e.target.value)}
-                   placeholder={'Search for User'}/>
+            <FormGroup>
+                <Input type={'text'} value={props.value} onChange={(e) => props.onInputChange(e.target.value)}
+                       placeholder={'Search for User'}/>
+            </FormGroup>
+
         </div>
         <div>
             <Label for="permissions">Permissions:</Label>
