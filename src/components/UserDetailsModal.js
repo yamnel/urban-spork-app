@@ -39,22 +39,22 @@ class UserDetailsModal extends React.Component {
 
     handleOnSave = () => {
         const data = {
+            ForID: this.state.userData.userId,
             FirstName: this.state.userData.firstName,
             LastName: this.state.userData.lastName,
+            Email: this.state.userData.email,
             Position: this.state.userData.position,
             Department: this.state.userData.department,
-            IsAdmin: this.state.userData.isAdmin,
-            Email: this.state.userData.email,
-            ForID: this.state.userData.userId
+            IsAdmin: this.state.userData.isAdmin
         };
 
-        console.log(data)
         UrbanSporkAPI.updateUserDetails(data)
     };
 
-    handleOnDataChange = (userData) => {
-        this.setState({userData})
-        console.log(this.state)
+    handleOnDataChange = (data) => {
+        console.log('the data is ', data);
+        this.setState((prevState) => ({userData: {...prevState.userData, ...data}}));
+        console.log('The state after change is ', this.state)
     };
 
     render() {

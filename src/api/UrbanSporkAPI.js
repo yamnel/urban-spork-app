@@ -42,7 +42,7 @@ export class UrbanSporkAPI {
     static updateUserDetails(data) {
         return fetch('http://localhost:5000/api/user/update',{
             body: data,
-            cache: 'no-cache',
+            // cache: 'no-cache',
             credentials: 'same-origin',
             headers: {
                 'content-type': 'application/json'

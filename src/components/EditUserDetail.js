@@ -11,7 +11,7 @@ export default class EditUserDetailComponent extends React.Component {
         return(
             <div>
                 <Form>
-                    {console.log(this.state)}
+                    {/*{console.log(this.state)}*/}
                     <FormGroup row>
                         <Label color={"muted"} sm={"3"} for={"firstName"}>
                             First Name:
@@ -20,8 +20,8 @@ export default class EditUserDetailComponent extends React.Component {
                             <Input
                                 id={"firstName"}
                                    onChange={(e) => {
-                                       this.setState({firstName: e.target.value})
-                                       this.props.onDataChange(this.state)
+                                       // this.setState({firstName: e.target.value})
+                                       this.props.onDataChange({firstName: e.target.value})
                             }}
                                 defaultValue={this.state.firstName}/>
                         </Col>
@@ -36,8 +36,8 @@ export default class EditUserDetailComponent extends React.Component {
                                 id={"lastName"}
                                 defaultValue={this.state.lastName}
                                 onChange={(e) => {
-                                    this.setState({lastName: e.target.value})
-                                    this.props.onDataChange(this.state)
+                                    // this.setState({lastName: e.target.value})
+                                    this.props.onDataChange({lastName: e.target.value})
                                 }}
                             />
                         </Col>
@@ -55,8 +55,8 @@ export default class EditUserDetailComponent extends React.Component {
                                 id="tile"
                                 defaultValue={this.state.position}
                                 onChange={(e) => {
-                                    this.setState({position: e.target.value})
-                                    this.props.onDataChange(this.state)
+                                    // this.setState({position: e.target.value})
+                                    this.props.onDataChange({position: e.target.value})
                                 }}
                             />
                         </Col>
@@ -74,8 +74,8 @@ export default class EditUserDetailComponent extends React.Component {
                                 id="department"
                                 defaultValue={this.state.department}
                                 onChange={(e) => {
-                                    this.setState({department: e.target.value})
-                                    this.props.onDataChange(this.state)
+                                    // this.setState({department: e.target.value})
+                                    this.props.onDataChange({department: e.target.value})
                                 }}
                             />
                         </Col>
@@ -93,8 +93,8 @@ export default class EditUserDetailComponent extends React.Component {
                                 id="email"
                                 defaultValue={this.state.email}
                                 onChange={(e) => {
-                                    this.setState({email: e.target.value})
-                                    this.props.onDataChange(this.state)                                }}
+                                    // this.setState({email: e.target.value})
+                                    this.props.onDataChange({email: e.target.value})                                }}
                             />
                         </Col>
                     </FormGroup>

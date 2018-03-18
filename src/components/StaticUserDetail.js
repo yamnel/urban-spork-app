@@ -80,7 +80,7 @@ const StaticUserDetail = (props) => (
             */}
             <div>
                 <Label for="permissions">Permissions:</Label>
-                <Input type="select" name="permissions" id="permissions" multiple>
+                <Input type="select" name="permissions" id="permissions"  multiple>
                     {/*
                         This is a jumble of references, but the function I created above doesn't work on it...
                         so I am leaving it like this.
