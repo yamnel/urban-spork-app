@@ -13,8 +13,6 @@ export class UserManagementPage extends React.Component {
         modalIsOpen: false
     };
 
-    tableKey = 0;
-
     componentWillReceiveProps(nextProps) {
         this.setState({users: nextProps.users})
     }
@@ -28,12 +26,6 @@ export class UserManagementPage extends React.Component {
 
     ];
 
-
-
-    // componentDidMount() {
-    //     getUsersData();
-    //
-    // }
 
     openUserDetailsModal = (selectedUserData) => {
         this.setUserData(selectedUserData.id);
@@ -81,7 +73,7 @@ export class UserManagementPage extends React.Component {
                     <UserTable onRowClick={this.openUserDetailsModal} data={this.props.users} columns={this.columns}/>
                 </div>
 
-                <UserDetailsModal isOpen={this.state.modalIsOpen} toggle={this.toggleModalIsOpen}  setUserData={this.props.updateUser} userId={this.state.selectedUser}/>
+                <UserDetailsModal isOpen={this.state.modalIsOpen} toggle={this.toggleModalIsOpen} userId={this.state.selectedUser}/>
             </div>
         )
     }
@@ -97,9 +89,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch)  => ({
     setTextFilter: (text) => dispatch(setTextFilter(text)),
-    getUsersData: () => dispatch(getUsersData()),
-    updateUser: (data) => dispatch(editUser(data.id, data))
-    // getUserData: () => dispatch(getUsersData())
+    getUsersData: () => dispatch(getUsersData())
 });
 
 

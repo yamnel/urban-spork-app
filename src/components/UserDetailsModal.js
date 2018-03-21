@@ -10,9 +10,11 @@ class UserDetailsModal extends React.Component {
     state = {
         edit: false
     };
+
     handleOnEdit = () => {
         this.setState({edit: true})
     };
+
     handleOnCancel = () => {
         if (this.state.edit) {
             this.setState({edit: false});
@@ -20,10 +22,13 @@ class UserDetailsModal extends React.Component {
             this.props.toggle();
         }
     };
+
     handleOnClose = () => {
         this.setState({edit: false});
         this.props.toggle();
     };
+
+
     handleOnSave = () => {
         const data = {
             ForID: this.state.userData.userId,
@@ -37,11 +42,6 @@ class UserDetailsModal extends React.Component {
 
         UrbanSporkAPI.updateUserDetails(data)
             .then(this.setState({edit: false}))
-            // .then(this.props.setUserData(this.state.userData.userId, this.state.userData))
-
-        // UrbanSporkAPI.updateUserDetails(data)
-        //     .then(this.props.setUserData(this.state.userData.userId, this.state.userData))
-        //     .then(this.setState({edit: false}))
 
     };
 

@@ -44,15 +44,12 @@ export class UrbanSporkAPI extends React.Component{
     static updateUserDetails(data) {
         return fetch('http://localhost:5000/api/user/update',{
             body: JSON.stringify(data),
-            // cache: 'no-cache',
             credentials: 'same-origin',
             headers: {
                 'content-type': 'application/json'
             },
             method: 'PUT'
         }).then(response => {
-            this.props.getUsersData();
-
             return response.json();
         }).catch(error => {
             console.log(data);
