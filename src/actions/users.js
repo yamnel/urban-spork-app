@@ -21,8 +21,6 @@ const getUsersDataSuccess = (users) => ({
 });
 
 
-
-
 export const getUserFullData = (id) => (dispatch) => {
     return UrbanSporkAPI.getUserFullData(id)
 

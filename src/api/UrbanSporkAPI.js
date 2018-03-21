@@ -1,4 +1,8 @@
-export class UrbanSporkAPI {
+import React from "react";
+import {connect} from "react-redux";
+import {getUsersData} from "../actions/users";
+
+export class UrbanSporkAPI extends React.Component{
 
     static getAllUsers() {
         return fetch('http://localhost:5000/api/user/getusermanagementprojection').then(response => {
@@ -37,11 +41,9 @@ export class UrbanSporkAPI {
 
 
 
-
-
     static updateUserDetails(data) {
         return fetch('http://localhost:5000/api/user/update',{
-            body: data,
+            body: JSON.stringify(data),
             // cache: 'no-cache',
             credentials: 'same-origin',
             headers: {
@@ -49,13 +51,18 @@ export class UrbanSporkAPI {
             },
             method: 'PUT'
         }).then(response => {
+            this.props.getUsersData();
+
             return response.json();
         }).catch(error => {
             console.log(data);
             console.log(error);
         });
     }
-
 }
 
-export default UrbanSporkAPI;
+
+const mapDispatchToProps = (dispatch)  => ({
+    getUsersData: () => dispatch(getUsersData())
+});
+export default connect(undefined, mapDispatchToProps)(UrbanSporkAPI);

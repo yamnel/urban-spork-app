@@ -1,11 +1,11 @@
 import React from 'react';
-import UserTable from "./UserTable";
-import {Link} from 'react-router-dom';
-import {Button, FormGroup, Input} from 'reactstrap';
 import {connect} from "react-redux";
+import UserTable from "./UserTable";
+import {Button, FormGroup, Input} from 'reactstrap';
 import selectUsers from "../selectors/users";
 import {setTextFilter} from "../actions/filters";
 import UserDetailsModal from "./UserDetailsModal";
+import {editUser, getUsersData} from "../actions/users";
 
 export class UserManagementPage extends React.Component {
     // Last ID used stays in the state, I don't like it but it's a bug I need to fix later.
@@ -33,6 +33,10 @@ export class UserManagementPage extends React.Component {
     openUserDetailsModal = (selectedUserData) => {
         this.setUserData(selectedUserData.id);
         this.toggleModalIsOpen();
+
+        if (this.state.modalIsOpen) {
+            this.props.getUsersData();
+        }
 
         //proof that is stays in the old state
         // console.log(`The new state field selectedUserId is ${this.state.selectedUserId}`);
@@ -74,7 +78,7 @@ export class UserManagementPage extends React.Component {
                     <UserTable onRowClick={this.openUserDetailsModal} data={this.props.users} columns={this.columns}/>
                 </div>
 
-                <UserDetailsModal isOpen={this.state.modalIsOpen} toggle={this.toggleModalIsOpen} userId={this.state.selectedUser}/>
+                <UserDetailsModal isOpen={this.state.modalIsOpen} toggle={this.toggleModalIsOpen}  setUserData={this.props.updateUser} userId={this.state.selectedUser}/>
             </div>
         )
     }
@@ -90,6 +94,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch)  => ({
     setTextFilter: (text) => dispatch(setTextFilter(text)),
+    getUsersData: () => dispatch(getUsersData()),
+    updateUser: (data) => dispatch(editUser(data.id, data))
     // getUserData: () => dispatch(getUsersData())
 });
 
