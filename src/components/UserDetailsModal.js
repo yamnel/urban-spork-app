@@ -37,7 +37,7 @@ class UserDetailsModal extends React.Component {
 
         UrbanSporkAPI.updateUserDetails(data)
             .then(this.setState({edit: false}))
-            .then(this.props.setUserData(this.state.userData.userId, this.state.userData))
+            // .then(this.props.setUserData(this.state.userData.userId, this.state.userData))
 
         // UrbanSporkAPI.updateUserDetails(data)
         //     .then(this.props.setUserData(this.state.userData.userId, this.state.userData))

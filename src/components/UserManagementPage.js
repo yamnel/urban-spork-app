@@ -13,6 +13,11 @@ export class UserManagementPage extends React.Component {
         modalIsOpen: false
     };
 
+    tableKey = 0;
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({users: nextProps.users})
+    }
 
     columns = [
         // {accessor: 'id', Header: 'User ID'},
@@ -34,9 +39,7 @@ export class UserManagementPage extends React.Component {
         this.setUserData(selectedUserData.id);
         this.toggleModalIsOpen();
 
-        if (this.state.modalIsOpen) {
-            this.props.getUsersData();
-        }
+
 
         //proof that is stays in the old state
         // console.log(`The new state field selectedUserId is ${this.state.selectedUserId}`);
@@ -47,14 +50,15 @@ export class UserManagementPage extends React.Component {
     // };
 
 
-    toggleModalIsOpen = () => this.setState(() => ({modalIsOpen: !this.state.modalIsOpen}));
+    toggleModalIsOpen = () => {
 
+        this.setState(() => ({modalIsOpen: !this.state.modalIsOpen}));
 
-    // Where do I call this?
-    // unsetUserData = () => {
-    //     console.log('Should be Undef.');
-    //     this.setState(() => ({selectedUserId: undefined}))
-    // };
+        if (this.state.modalIsOpen) {
+            this.props.getUsersData();
+        }
+    };
+
 
     setUserData = (selectedUserId) => this.setState(() => ({selectedUser: selectedUserId}));
 
@@ -67,7 +71,6 @@ export class UserManagementPage extends React.Component {
             <div>
                 <div className={'user-management-nav'}>
                     <Button onClick={() => this.props.history.push("/create-user")} color={'success'} >Create User</Button>
-                    {/*<Button color={'primary'}>Filter</Button>*/}
 
                     <FormGroup>
                         <Input type={'text'} value={this.props.filters.text} onChange={this.onInputChange} placeholder={'Search'} />
