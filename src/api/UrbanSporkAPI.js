@@ -26,7 +26,19 @@ export class UrbanSporkAPI {
         });
     }
 
-
+    static addSystem(data) {
+        return fetch('http://localhost:5000/api/permission/create',{
+            body: data,
+            cache: 'no-cache',
+            credentials: 'same-origin',
+            headers: {
+                'content-type': 'application/json'
+            },
+            method: 'POST'
+        }).then(response => {
+            return response.json();
+        });
+    }
 
 
 

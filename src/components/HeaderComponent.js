@@ -2,6 +2,8 @@ import React from 'react';
 import {NavLink as RouterNavLink} from 'react-router-dom';
 import {Nav, NavItem, NavLink} from 'reactstrap';
 // Changed the name of reactstrap's Navlink to NavLinkStrap so as to avoid confusion.
+import FontAwesomeIcon from "@fortawesome/react-fontawesome/src/components/FontAwesomeIcon";
+import {faUserCircle} from "@fortawesome/fontawesome-free-solid/index.es";
 
 const HeaderComponent = () => (
     <div>
@@ -9,7 +11,7 @@ const HeaderComponent = () => (
 
             <div className={"header-top"}>
                 <h1 className={"logo-title"}>Urban Spork Logo</h1>
-                <h3 style={{color: "white", marginTop: "36px"}}>User Name & IMG</h3>
+                <h3 style={{color: "white", marginTop: "36px"}}>User Name <FontAwesomeIcon icon={faUserCircle}/></h3>
             </div>
 
             <Nav tabs justified style={{marginTop: '10px'}}>
