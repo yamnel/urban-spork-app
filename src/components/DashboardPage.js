@@ -44,33 +44,37 @@ export default class DashboardPage extends React.Component {
                 </div>
                 <div>
                     <Row>
-                        <Col xs="3">
-                            <Card body outline color="success">
-                                <img style={{width:320,
-                                            height:60,
-                                            objectFit: "fill"}}
-                                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Visual_Studio_2017_logo_and_wordmark.svg/320px-Visual_Studio_2017_logo_and_wordmark.svg.png"
-                                     alt="Visual Studio Professional Logo"/>
-                                <br/>
-                                <Row>
-                                    <Col sm={6}>
-                                        {/*<Col sm="5">*/}
-                                            <Card body style={{borderWidth: 2, borderColor: "#5cb85c"}}>
-                                                <CardTitle style={{textAlign: "center"}}>36</CardTitle>
-                                                <CardText style={{textAlign: "center"}}>Pending Requests</CardText>
-                                                <Button color="success">View</Button>{' '}
-                                            </Card>
-                                    </Col>
-                                    <Col/>
-                                    <Col sm={6}>
-                                        <Card body style={{borderWidth: 2, borderColor: "#000000"}}>
+                        {/*<Col xs="3">*/}
+                            <Col xs="3">
+                                <Card body outline color="success">
+                                    <img style={{width:320,
+                                        height:60,
+                                        objectFit: "fill"}}
+                                         src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Visual_Studio_2017_logo_and_wordmark.svg/320px-Visual_Studio_2017_logo_and_wordmark.svg.png"
+                                         alt="Slack"/>
+                                    <br/>
+                                    <CardGroup>
+                                        <Card body inverse color="success" style={{borderWidth: 2, borderColor: "#000000"}}>
                                             <CardTitle style={{textAlign: "center"}}>36</CardTitle>
-                                            <CardText style={{textAlign: "center"}}>Active Users     </CardText>
-                                            <Button color="info">View</Button>{' '}
+                                            <CardText style={{align: "center"}}>Pending Requests</CardText>
+                                            <Button outline style={{
+                                                borderColor: '#ffffff',
+                                                color: "#ffffff",
+                                                borderWidth: 3
+                                            }}>View</Button>{' '}
                                         </Card>
-                                    </Col>
-                                </Row>
-                            </Card>
+                                        <Card body inverse color="info" style={{borderWidth: 2, borderColor: "#000000"}}>
+                                            <CardTitle style={{textAlign: "center"}}>36</CardTitle>
+                                            <CardText style={{textAlign: "center"}}>Active Users</CardText>
+                                            <Button outline style={{
+                                                borderColor: '#ffffff',
+                                                color: "#ffffff",
+                                                borderWidth: 3
+                                            }}>View</Button>{' '}
+                                        </Card>
+                                    </CardGroup>
+                                </Card>
+
                             <br/>
                             <Card body outline color="success">
                                 <img style={{width:320,
