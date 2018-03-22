@@ -45,8 +45,9 @@ export default class DashboardPage extends React.Component {
                 <div>
                     <Row>
                         <Col xs="3">
-                            <Card body outline style=
+                            <Card body inverse style=
                                 {{
+                                    backgroundColor:"#f9f9f9",
                                     borderWidth: 1,
                                     borderColor: "#000000",
                                     borderLeftWidth:3,
@@ -71,8 +72,8 @@ export default class DashboardPage extends React.Component {
                                                         borderLeftWidth:3,
                                                         borderBottomWidth: 3
                                                     }}>
-                                                    <CardTitle style={{textAlign: "center"}}>15</CardTitle>
-                                                    <CardText style={{textAlign: "center"}}>Pending</CardText>
+                                                    <CardTitle style={{textAlign: "center", color: "#000000"}}>15</CardTitle>
+                                                    <CardText style={{textAlign: "center", color: "#000000"}}>Pending</CardText>
                                                     <Button color={"success"}>View</Button>{' '}
                                                 </Card>
                                             </Col>
@@ -84,8 +85,8 @@ export default class DashboardPage extends React.Component {
                                                         borderLeftWidth:3,
                                                         borderBottomWidth: 3
                                                     }}>
-                                                    <CardTitle style={{textAlign: "center"}}>23</CardTitle>
-                                                    <CardText style={{textAlign: "center"}}>Active Users</CardText>
+                                                    <CardTitle style={{textAlign: "center", color: "#000000"}}>23</CardTitle>
+                                                    <CardText style={{textAlign: "center", color: "#000000"}}>Active Users</CardText>
                                                     <Button color={"info"}>View</Button>{' '}
                                                 </Card>
                                             </Col>
@@ -93,8 +94,9 @@ export default class DashboardPage extends React.Component {
                                     </Col>
                                 </Card>
                             <br/>
-                            <Card body outline style=
+                            <Card body inverse style=
                                 {{
+                                    backgroundColor:"#f9f9f9",
                                     borderWidth: 1,
                                     borderColor: "#000000",
                                     borderLeftWidth:3,
@@ -119,8 +121,8 @@ export default class DashboardPage extends React.Component {
                                                     borderLeftWidth:3,
                                                     borderBottomWidth: 3
                                                 }}>
-                                                <CardTitle style={{textAlign: "center"}}>15</CardTitle>
-                                                <CardText style={{textAlign: "center"}}>Pending</CardText>
+                                                <CardTitle style={{textAlign: "center", color: "#000000"}}>15</CardTitle>
+                                                <CardText style={{textAlign: "center", color: "#000000"}}>Pending</CardText>
                                                 <Button color={"success"}>View</Button>{' '}
                                             </Card>
                                         </Col>
@@ -132,8 +134,8 @@ export default class DashboardPage extends React.Component {
                                                     borderLeftWidth:3,
                                                     borderBottomWidth: 3
                                                 }}>
-                                                <CardTitle style={{textAlign: "center"}}>23</CardTitle>
-                                                <CardText style={{textAlign: "center"}}>Active Users</CardText>
+                                                <CardTitle style={{textAlign: "center", color: "#000000"}}>23</CardTitle>
+                                                <CardText style={{textAlign: "center", color: "#000000"}}>Active Users</CardText>
                                                 <Button color={"info"}>View</Button>{' '}
                                             </Card>
                                         </Col>
@@ -143,8 +145,9 @@ export default class DashboardPage extends React.Component {
                         </Col>
 
                         <Col xs="3">
-                            <Card body outline style=
+                            <Card body inverse style=
                                 {{
+                                    backgroundColor:"#f9f9f9",
                                     borderWidth: 1,
                                     borderColor: "#000000",
                                     borderLeftWidth:3,
@@ -156,7 +159,7 @@ export default class DashboardPage extends React.Component {
                                              height:60,
                                              objectFit: "fill"
                                          }}
-                                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Visual_Studio_2017_logo_and_wordmark.svg/320px-Visual_Studio_2017_logo_and_wordmark.svg.png"
+                                     src="https://19386-presscdn-pagely.netdna-ssl.com/wp-content/uploads/2017/10/github-logo-1.png"
                                      alt="Slack"/>
                                 <br/>
                                 <Col md={12}>
@@ -169,8 +172,8 @@ export default class DashboardPage extends React.Component {
                                                     borderLeftWidth:3,
                                                     borderBottomWidth: 3
                                                 }}>
-                                                <CardTitle style={{textAlign: "center"}}>15</CardTitle>
-                                                <CardText style={{textAlign: "center"}}>Pending</CardText>
+                                                <CardTitle style={{textAlign: "center", color: "#000000"}}>15</CardTitle>
+                                                <CardText style={{textAlign: "center", color: "#000000"}}>Pending</CardText>
                                                 <Button color={"success"}>View</Button>{' '}
                                             </Card>
                                         </Col>
@@ -182,8 +185,8 @@ export default class DashboardPage extends React.Component {
                                                     borderLeftWidth:3,
                                                     borderBottomWidth: 3
                                                 }}>
-                                                <CardTitle style={{textAlign: "center"}}>23</CardTitle>
-                                                <CardText style={{textAlign: "center"}}>Active Users</CardText>
+                                                <CardTitle style={{textAlign: "center", color: "#000000"}}>23</CardTitle>
+                                                <CardText style={{textAlign: "center", color: "#000000"}}>Active Users</CardText>
                                                 <Button color={"info"}>View</Button>{' '}
                                             </Card>
                                         </Col>
@@ -191,8 +194,9 @@ export default class DashboardPage extends React.Component {
                                 </Col>
                             </Card>
                             <br/>
-                            <Card body outline style=
+                            <Card body inverse style=
                                 {{
+                                    backgroundColor:"#f9f9f9",
                                     borderWidth: 1,
                                     borderColor: "#000000",
                                     borderLeftWidth:3,
@@ -204,7 +208,7 @@ export default class DashboardPage extends React.Component {
                                              height:60,
                                              objectFit: "fill"
                                          }}
-                                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Visual_Studio_2017_logo_and_wordmark.svg/320px-Visual_Studio_2017_logo_and_wordmark.svg.png"
+                                     src="http://4.bp.blogspot.com/-HED88Q-SAEg/UAbb_w1DVxI/AAAAAAAAItU/miEPtzBgw80/s1600/Microsoft+Office+logo+2012.png"
                                      alt="Slack"/>
                                 <br/>
                                 <Col md={12}>
@@ -217,8 +221,8 @@ export default class DashboardPage extends React.Component {
                                                     borderLeftWidth:3,
                                                     borderBottomWidth: 3
                                                 }}>
-                                                <CardTitle style={{textAlign: "center"}}>15</CardTitle>
-                                                <CardText style={{textAlign: "center"}}>Pending</CardText>
+                                                <CardTitle style={{textAlign: "center", color: "#000000"}}>15</CardTitle>
+                                                <CardText style={{textAlign: "center", color: "#000000"}}>Pending</CardText>
                                                 <Button color={"success"}>View</Button>{' '}
                                             </Card>
                                         </Col>
@@ -230,8 +234,8 @@ export default class DashboardPage extends React.Component {
                                                     borderLeftWidth:3,
                                                     borderBottomWidth: 3
                                                 }}>
-                                                <CardTitle style={{textAlign: "center"}}>23</CardTitle>
-                                                <CardText style={{textAlign: "center"}}>Active Users</CardText>
+                                                <CardTitle style={{textAlign: "center", color: "#000000"}}>23</CardTitle>
+                                                <CardText style={{textAlign: "center", color: "#000000"}}>Active Users</CardText>
                                                 <Button color={"info"}>View</Button>{' '}
                                             </Card>
                                         </Col>
@@ -241,8 +245,9 @@ export default class DashboardPage extends React.Component {
                         </Col>
 
                         <Col xs="3">
-                            <Card body outline style=
+                            <Card body inverse style=
                                 {{
+                                    backgroundColor:"#f9f9f9",
                                     borderWidth: 1,
                                     borderColor: "#000000",
                                     borderLeftWidth:3,
@@ -254,7 +259,7 @@ export default class DashboardPage extends React.Component {
                                              height:60,
                                              objectFit: "fill"
                                          }}
-                                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Visual_Studio_2017_logo_and_wordmark.svg/320px-Visual_Studio_2017_logo_and_wordmark.svg.png"
+                                     src="https://www.fullstackpython.com/img/logos/jenkins.png"
                                      alt="Slack"/>
                                 <br/>
                                 <Col md={12}>
@@ -267,8 +272,8 @@ export default class DashboardPage extends React.Component {
                                                     borderLeftWidth:3,
                                                     borderBottomWidth: 3
                                                 }}>
-                                                <CardTitle style={{textAlign: "center"}}>15</CardTitle>
-                                                <CardText style={{textAlign: "center"}}>Pending</CardText>
+                                                <CardTitle style={{textAlign: "center", color: "#000000"}}>15</CardTitle>
+                                                <CardText style={{textAlign: "center", color: "#000000"}}>Pending</CardText>
                                                 <Button color={"success"}>View</Button>{' '}
                                             </Card>
                                         </Col>
@@ -280,8 +285,8 @@ export default class DashboardPage extends React.Component {
                                                     borderLeftWidth:3,
                                                     borderBottomWidth: 3
                                                 }}>
-                                                <CardTitle style={{textAlign: "center"}}>23</CardTitle>
-                                                <CardText style={{textAlign: "center"}}>Active Users</CardText>
+                                                <CardTitle style={{textAlign: "center", color: "#000000"}}>23</CardTitle>
+                                                <CardText style={{textAlign: "center", color: "#000000"}}>Active Users</CardText>
                                                 <Button color={"info"}>View</Button>{' '}
                                             </Card>
                                         </Col>
@@ -289,8 +294,9 @@ export default class DashboardPage extends React.Component {
                                 </Col>
                             </Card>
                             <br/>
-                            <Card body outline style=
+                            <Card body inverse style=
                                 {{
+                                    backgroundColor:"#f9f9f9",
                                     borderWidth: 1,
                                     borderColor: "#000000",
                                     borderLeftWidth:3,
@@ -302,7 +308,7 @@ export default class DashboardPage extends React.Component {
                                              height:60,
                                              objectFit: "fill"
                                          }}
-                                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Visual_Studio_2017_logo_and_wordmark.svg/320px-Visual_Studio_2017_logo_and_wordmark.svg.png"
+                                     src="https://wac-cdn.atlassian.com/dam/jcr:c20cf6d1-9568-4aba-9a16-dba24e1495de/Atlassian-blue-onecolor@2x-rgb.png"
                                      alt="Slack"/>
                                 <br/>
                                 <Col md={12}>
@@ -315,8 +321,8 @@ export default class DashboardPage extends React.Component {
                                                     borderLeftWidth:3,
                                                     borderBottomWidth: 3
                                                 }}>
-                                                <CardTitle style={{textAlign: "center"}}>15</CardTitle>
-                                                <CardText style={{textAlign: "center"}}>Pending</CardText>
+                                                <CardTitle style={{textAlign: "center", color: "#000000"}}>15</CardTitle>
+                                                <CardText style={{textAlign: "center", color: "#000000"}}>Pending</CardText>
                                                 <Button color={"success"}>View</Button>{' '}
                                             </Card>
                                         </Col>
@@ -328,8 +334,8 @@ export default class DashboardPage extends React.Component {
                                                     borderLeftWidth:3,
                                                     borderBottomWidth: 3
                                                 }}>
-                                                <CardTitle style={{textAlign: "center"}}>23</CardTitle>
-                                                <CardText style={{textAlign: "center"}}>Active Users</CardText>
+                                                <CardTitle style={{textAlign: "center", color: "#000000"}}>23</CardTitle>
+                                                <CardText style={{textAlign: "center", color: "#000000"}}>Active Users</CardText>
                                                 <Button color={"info"}>View</Button>{' '}
                                             </Card>
                                         </Col>
@@ -339,8 +345,9 @@ export default class DashboardPage extends React.Component {
                         </Col>
 
                         <Col xs="3">
-                            <Card body outline style=
+                            <Card body inverse style=
                                 {{
+                                    backgroundColor:"#f9f9f9",
                                     borderWidth: 1,
                                     borderColor: "#000000",
                                     borderLeftWidth:3,
@@ -352,8 +359,8 @@ export default class DashboardPage extends React.Component {
                                              height:60,
                                              objectFit: "fill"
                                          }}
-                                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Visual_Studio_2017_logo_and_wordmark.svg/320px-Visual_Studio_2017_logo_and_wordmark.svg.png"
-                                     alt="Slack"/>
+                                src="https://digitalscientists.com/system/images/1465/original/logo-hockeyapp-wide.png"
+                                 alt="Slack"/>
                                 <br/>
                                 <Col md={12}>
                                     <Row>
@@ -365,8 +372,8 @@ export default class DashboardPage extends React.Component {
                                                     borderLeftWidth:3,
                                                     borderBottomWidth: 3
                                                 }}>
-                                                <CardTitle style={{textAlign: "center"}}>15</CardTitle>
-                                                <CardText style={{textAlign: "center"}}>Pending</CardText>
+                                                <CardTitle style={{textAlign: "center", color: "#000000"}}>15</CardTitle>
+                                                <CardText style={{textAlign: "center", color: "#000000"}}>Pending</CardText>
                                                 <Button color={"success"}>View</Button>{' '}
                                             </Card>
                                         </Col>
@@ -378,8 +385,8 @@ export default class DashboardPage extends React.Component {
                                                     borderLeftWidth:3,
                                                     borderBottomWidth: 3
                                                 }}>
-                                                <CardTitle style={{textAlign: "center"}}>23</CardTitle>
-                                                <CardText style={{textAlign: "center"}}>Active Users</CardText>
+                                                <CardTitle style={{textAlign: "center", color: "#000000"}}>23</CardTitle>
+                                                <CardText style={{textAlign: "center", color: "#000000"}}>Active Users</CardText>
                                                 <Button color={"info"}>View</Button>{' '}
                                             </Card>
                                         </Col>
@@ -387,8 +394,9 @@ export default class DashboardPage extends React.Component {
                                 </Col>
                             </Card>
                             <br/>
-                            <Card body outline style=
+                            <Card body inverse style=
                                 {{
+                                    backgroundColor:"#f9f9f9",
                                     borderWidth: 1,
                                     borderColor: "#000000",
                                     borderLeftWidth:3,
@@ -400,7 +408,7 @@ export default class DashboardPage extends React.Component {
                                              height:60,
                                              objectFit: "fill"
                                          }}
-                                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Visual_Studio_2017_logo_and_wordmark.svg/320px-Visual_Studio_2017_logo_and_wordmark.svg.png"
+                                     src="https://cdn-images-1.medium.com/max/1600/1*AD9ZSLXKAhZ-_WomszsmPg.png"
                                      alt="Slack"/>
                                 <br/>
                                 <Col md={12}>
@@ -413,8 +421,8 @@ export default class DashboardPage extends React.Component {
                                                     borderLeftWidth:3,
                                                     borderBottomWidth: 3
                                                 }}>
-                                                <CardTitle style={{textAlign: "center"}}>15</CardTitle>
-                                                <CardText style={{textAlign: "center"}}>Pending</CardText>
+                                                <CardTitle style={{textAlign: "center", color: "#000000"}}>15</CardTitle>
+                                                <CardText style={{textAlign: "center", color: "#000000"}}>Pending</CardText>
                                                 <Button color={"success"}>View</Button>{' '}
                                             </Card>
                                         </Col>
@@ -426,8 +434,8 @@ export default class DashboardPage extends React.Component {
                                                     borderLeftWidth:3,
                                                     borderBottomWidth: 3
                                                 }}>
-                                                <CardTitle style={{textAlign: "center"}}>23</CardTitle>
-                                                <CardText style={{textAlign: "center"}}>Active Users</CardText>
+                                                <CardTitle style={{textAlign: "center", color: "#000000"}}>23</CardTitle>
+                                                <CardText style={{textAlign: "center", color: "#000000"}}>Active Users</CardText>
                                                 <Button color={"info"}>View</Button>{' '}
                                             </Card>
                                         </Col>
