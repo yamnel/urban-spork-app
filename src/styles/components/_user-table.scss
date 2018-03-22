@@ -1,3 +1,13 @@
 .ReactTable .rt-tr:hover .rt-td {
-    background: rgba(54, 195, 255, 0.5)
+    background: rgba($color-pagination-blue, 0.5);
+}
+
+
+.ReactTable .-pagination .-btn {
+    background: rgba($color-pagination-blue, 0.1);
+}
+
+.ReactTable .-pagination .-btn:not([disabled]):hover {
+    background: rgba($color-pagination-blue, 0.5);
+
 }
