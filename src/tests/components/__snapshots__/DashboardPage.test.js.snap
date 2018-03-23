@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`should render DashboardPage component correctly with no data 1`] = `
-<div>
-  <h1>
-    This is the Dashboard Page
-  </h1>
-</div>
-`;
