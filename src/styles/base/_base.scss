@@ -1,6 +1,6 @@
 html {
     //font-size: 62.5%;
-    padding: 0 150px 0 150px;
+    //padding: 0 150px 0 150px;
 }
 
 //body {
@@ -35,7 +35,6 @@ html {
 //}
 //
 .canvas {
-    margin: 0 $s-size $s-size $s-size;
     //background-color: rgba(56, 64, 79, 0.41);
 
 }
@@ -46,4 +45,7 @@ html {
 }
 
 .lower-canvas {
+    margin: 0 $s-size $s-size $s-size;
+    padding: 0 150px 0 150px;
+
 }

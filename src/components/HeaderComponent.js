@@ -15,7 +15,7 @@ const HeaderComponent = () => (
                 <h2 style={{color: "grey", marginTop: "36px"}}>Image Placeholder <br/><span><h5>Name Placeholder</h5></span></h2>
             </div>
 
-            <Nav tabs justified style={{marginTop: '10px'}}>
+            <Nav tabs justified>
                 <NavItem>
                     <NavLink to={"/"} exact={true} activeClassName={"is-active"} tag={RouterNavLink}>Home</NavLink>
                 </NavItem>
