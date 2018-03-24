@@ -70,3 +70,15 @@ a:hover {
 .dropdown.nav-item {
     max-width: 228px;
 }
+
+.dropdown-item:hover, .dropdown-item:focus {
+    background-color: rgba($color-pagination-testing, 0.1);
+}
+
+.dropdown-item.active, .dropdown-item:active {
+    background-color: $color-selected-background-testing;
+    text-decoration: none;
+    font-weight: bold;
+    color: $color-selected-buttons-testing;
+
+}
