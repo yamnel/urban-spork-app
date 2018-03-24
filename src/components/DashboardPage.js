@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {UserManagementPage} from "./UserManagementPage";
 import {Card, CardText, CardTitle, Button, CardGroup, Row, Col, CardColumns} from "reactstrap";
 import {faKey} from '@fortawesome/fontawesome-free-solid'
-import FontAwesomeIcon from "@fortawesome/react-fontawesome/src/components/FontAwesomeIcon";
+import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 import SystemDetailModal from './SystemDetailModal'
 
 export default class DashboardPage extends React.Component {
