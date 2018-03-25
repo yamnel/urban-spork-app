@@ -6737,6 +6737,12 @@ react-dropzone@^4.2.9:
     attr-accept "^1.0.3"
     prop-types "^15.5.7"
 
+react-filtered-multiselect@^0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/react-filtered-multiselect/-/react-filtered-multiselect-0.5.1.tgz#cf825395864159631c8615b6786ceebd6139f4ae"
+  dependencies:
+    prop-types "^15.5.7"
+
 react-modal@^3.1.12:
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/react-modal/-/react-modal-3.3.1.tgz#7355db196482da0c7fa1cbecccf2bdd9bc366b14"

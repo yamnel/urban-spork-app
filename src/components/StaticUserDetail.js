@@ -94,7 +94,7 @@ const StaticUserDetail = (props) => (
                     }
                     </Input>
 
-                <Button color="danger" style={{marginTop: "20px"}}>Edit Permissions</Button>
+                <Button color="danger" style={{marginTop: "20px"}} onClick={props.handleOnEditPermissions}>Edit Permissions</Button>
             </div>
         </div>
 
