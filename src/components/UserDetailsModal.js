@@ -3,19 +3,29 @@ import {Button, Modal, ModalBody, ModalFooter, ModalHeader} from 'reactstrap';
 import StaticUserDetail from './StaticUserDetail';
 import EditUserDetail from "./EditUserDetail";
 import UrbanSporkAPI from "../api/UrbanSporkAPI";
+import EditUserPermissions from "./EditUserPermissions";
 
 
 class UserDetailsModal extends React.Component {
 
     state = {
-        edit: false
+        edit: false,
+        permissionsModalIsOpen: false
     };
 
     handleOnEdit = () => {
         this.setState({edit: true})
     };
 
+
+    handleOnEditPermissions = () => {
+        this.setState({permissionsModalIsOpen: true})
+    };
+
+
     handleOnCancel = () => {
+        this.setState((prevState) => ({userData: prevState.originalData, editPermissions: false}));
+
         if (this.state.edit) {
             this.setState({edit: false});
         } else {
@@ -28,6 +38,8 @@ class UserDetailsModal extends React.Component {
         this.props.toggle();
     };
 
+
+    handlePersmissionsToggle = () => this.setState({permissionsModalIsOpen: !this.state.permissionsModalIsOpen});
 
     handleOnSave = () => {
         const data = {
@@ -54,7 +66,7 @@ class UserDetailsModal extends React.Component {
     componentWillReceiveProps(nextProps) {
         if (nextProps.isOpen) {
             const userData = UrbanSporkAPI.getUserFullData(nextProps.userId);
-            userData.then(data => this.setState({userData: data}))
+            userData.then(data => this.setState({userData: data, originalData: data}))
         }
     }
 
@@ -66,13 +78,38 @@ class UserDetailsModal extends React.Component {
                     <ModalBody>
                         <div>
                             {
-                                this.state.userData ? (
-                                    this.state.edit ? <EditUserDetail
-                                        onDataChange={this.handleOnDataChange}
-                                        userData={this.state.userData}
-                                    /> : <StaticUserDetail
-                                        userData={this.state.userData}/>
-                                ) : null
+                                // the check to see if we have the userData loaded needs to go first
+                                this.state.userData && (this.state.edit ?
+                                        <EditUserDetail
+                                            onDataChange={this.handleOnDataChange}
+                                            userData={this.state.userData}
+                                        />
+                                        :
+                                        <StaticUserDetail
+                                            userData={this.state.userData}
+                                            handleOnEditPermissions={this.handleOnEditPermissions}
+                                        />
+                                )
+                            }
+
+
+                            {
+                                this.state.userData && <Modal isOpen={this.state.permissionsModalIsOpen} toggle={this.handlePersmissionsToggle}>
+
+                                    <ModalHeader>User Permissions</ModalHeader>
+
+                                    <ModalBody>
+                                        <EditUserPermissions
+                                            userData={this.state.userData}
+                                        />
+                                    </ModalBody>
+
+                                    <ModalFooter>
+
+                                    </ModalFooter>
+
+
+                                </Modal>
                             }
                         </div>
                     </ModalBody>

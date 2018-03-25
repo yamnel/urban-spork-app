@@ -42,6 +42,7 @@
     "react-dates": "^16.3.0",
     "react-dom": "latest",
     "react-dropzone": "^4.2.9",
+    "react-filtered-multiselect": "^0.5.1",
     "react-modal": "^3.1.12",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
