@@ -8,7 +8,8 @@ import UrbanSporkAPI from "../api/UrbanSporkAPI";
 class UserDetailsModal extends React.Component {
 
     state = {
-        edit: false
+        edit: false,
+        editPermission: false
     };
 
     handleOnEdit = () => {
@@ -16,6 +17,8 @@ class UserDetailsModal extends React.Component {
     };
 
     handleOnCancel = () => {
+        this.setState((prevState) => ({userData: prevState.originalData}));
+
         if (this.state.edit) {
             this.setState({edit: false});
         } else {
@@ -54,7 +57,7 @@ class UserDetailsModal extends React.Component {
     componentWillReceiveProps(nextProps) {
         if (nextProps.isOpen) {
             const userData = UrbanSporkAPI.getUserFullData(nextProps.userId);
-            userData.then(data => this.setState({userData: data}))
+            userData.then(data => this.setState({userData: data, originalData: data}))
         }
     }
 
