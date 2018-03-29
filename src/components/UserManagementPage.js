@@ -62,7 +62,7 @@ export class UserManagementPage extends React.Component {
         return (
             <div>
                 <div className={'user-management-nav'}>
-                    <Button onClick={() => this.props.history.push("/create-user")} color={'success'} >Create User</Button>
+                    <Button onClick={() => this.props.history.push("/create-user")} color={'primary'} >Create User</Button>
 
                     <FormGroup>
                         <Input type={'text'} value={this.props.filters.text} onChange={this.onInputChange} placeholder={'Search'} />

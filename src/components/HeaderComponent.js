@@ -12,7 +12,7 @@ const HeaderComponent = () => (
 
             <div className={"header-top"}>
                 <h1 style={{lineHeight: '100px'}}  className={"logo-title"}>Logo Placeholder</h1>
-                <h2 style={{color: "grey", marginTop: "36px"}}>Image Placeholder <br/><span><h5>Name Placeholder</h5></span></h2>
+                <h2 style={{color: "#CBD4D2", marginTop: "36px"}}>Image Placeholder <br/><span><h5>Name Placeholder</h5></span></h2>
             </div>
 
             <Nav tabs justified>
