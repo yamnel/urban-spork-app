@@ -2,18 +2,17 @@ import React from 'react';
 import {Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 import {faCheckCircle} from '@fortawesome/fontawesome-free-solid'
 import FontAwesomeIcon from "@fortawesome/react-fontawesome/src/components/FontAwesomeIcon";
-import AddPosition from "./AddPosition";
+import AddDepartment from "./AddDepartment";
 import UrbanSporkAPI from "../api/UrbanSporkAPI";
 
 
-class PositionsModal extends React.Component {
+class DepartmentsModal extends React.Component {
 
 
     state = {
         edit: true,
-        addPositionsButton: false,
+        addDepartmentButton: false,
         department:"",
-        position:"",
     };
 
     handleOnCancel = () => {
@@ -34,43 +33,29 @@ class PositionsModal extends React.Component {
         this.setState({edit: false});
     };
 
-    titleUpdated = (data) => {
-        console.log("titleUpdated");
-        this.setState({position:data});
-        this.toggleAddButton();
-
+    toggleAddButton = (data) => {
+        this.setState({department:data});
+        data.length > 0 ? this.setState({addDepartmentButton: true}): this.setState({addDepartmentButton: false});
 
     };
 
-    toggleAddButton = () => {
-        console.log("The position Title: " + this.state.position);
-        console.log("The Department Selected: " + this.state.department);
-        this.state.position.length > 0 && this.state.department.length > 0 ? this.setState({addPositionsButton: true}): this.setState({addPositionsButton: false});
-    };
-
-
-    updateDepartment = (department) => {
-        console.log("updateDepartment");
-        this.setState({department:department.target.value});
-        this.toggleAddButton();
-    };
 
     render() {
         return (
             <div>
                 <Modal isOpen={this.props.isOpen} toggle={this.handleOnClose}>
-                    <ModalHeader toggle={this.handleOnClose}>Add Position</ModalHeader>
+                    <ModalHeader toggle={this.handleOnClose}>Add Department</ModalHeader>
                     <ModalBody>
                         <div>
                             {this.state.edit?
-                                <AddPosition DepartmentSelected = {this.updateDepartment} AddButton = {this.titleUpdated}/>:
-                                <h6><FontAwesomeIcon icon={faCheckCircle}/> {" "} The position with the title of {this.state.position}, was added to the {this.state.department} department!</h6>
+                                <AddDepartment AddButton = {this.toggleAddButton}/>:
+                                <h6><FontAwesomeIcon icon={faCheckCircle}/> {" "} The {this.state.department} department was successfully added!</h6>
                             }
                         </div>
                     </ModalBody>
                     <ModalFooter>
                         {this.state.edit?
-                            <Button color="success" onClick={this.handleOnSave} disabled={!this.state.addPositionsButton}
+                            <Button color="success" onClick={this.handleOnSave} disabled={!this.state.addDepartmentButton}
                                     active={!this.state.edit}>Add Department</Button>
                             :
                             <Button color="success" onClick={this.handleOnClose}
@@ -89,4 +74,4 @@ class PositionsModal extends React.Component {
     }
 }
 
-export default PositionsModal;
+export default DepartmentsModal;

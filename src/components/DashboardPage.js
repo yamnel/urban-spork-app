@@ -5,6 +5,9 @@ import {Card,CardImg,CardBody, Badge, Dropdown, DropdownToggle, DropdownItem, Dr
 import {faCog} from '@fortawesome/fontawesome-free-solid'
 import FontAwesomeIcon from "@fortawesome/react-fontawesome/src/components/FontAwesomeIcon";
 import SystemDetailModal from './SystemDetailModal'
+import DepartmentsModal from './DepartmentsModal'
+import PositionsModal from './PositionsModal'
+
 
 export default class DashboardPage extends React.Component {
 
@@ -49,7 +52,7 @@ export default class DashboardPage extends React.Component {
             }
         ];
         this.toggle = this.toggle.bind(this);
-        this.state = {data, modalIsOpen: false, dropdownOpen: false};
+        this.state = {data,PositionsModalIsOpen:false, DepartmentsModalIsOpen:false, SystemModalIsOpen: false, dropdownOpen: false};
     }
 
     toggle() {
@@ -57,6 +60,22 @@ export default class DashboardPage extends React.Component {
             dropdownOpen: !this.state.dropdownOpen
         });
     }
+
+    openPositionsModal = () => {
+        this.togglePositionsModal();
+    };
+
+    togglePositionsModal = () => this.setState(() => {
+        return ({PositionsModalIsOpen: !this.state.PositionsModalIsOpen});
+    });
+
+    openDepartmentsModal = () => {
+        this.toggleDepartmentsModal();
+    };
+
+    toggleDepartmentsModal = () => this.setState(() => {
+        return ({DepartmentsModalIsOpen: !this.state.DepartmentsModalIsOpen});
+    });
 
     openSystemDetailModal = () => {
         // this.setUserData(selectedUserData.id);
@@ -67,7 +86,7 @@ export default class DashboardPage extends React.Component {
     };
 
     toggleModalIsOpen = () => this.setState(() => {
-        return ({modalIsOpen: !this.state.modalIsOpen});
+        return ({SystemModalIsOpen: !this.state.SystemModalIsOpen});
     });
 
     render() {
@@ -136,15 +155,21 @@ export default class DashboardPage extends React.Component {
                         </Col>
                         <Col>
                             <br/>
-                            <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-                                <DropdownToggle background-color="success">
+                            <Dropdown direction="right" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+                                <DropdownToggle style={{
+                                    backgroundColor:"#546c66",
+                                }}>
                                     Settings {" "} <FontAwesomeIcon icon={faCog}/>
                                 </DropdownToggle>
-                                <DropdownMenu>
-                                    <DropdownItem header><b>Options</b>></DropdownItem>
+                                <DropdownMenu style={{
+                                    backgroundColor:"#f8fcf7",
+                                }}>
+                                    <DropdownItem header><b>Options</b></DropdownItem>
+                                    <DropdownItem divider />
+
                                     <DropdownItem onClick={this.openSystemDetailModal}>Add System</DropdownItem>
-                                    <DropdownItem>Add Department</DropdownItem>
-                                    <DropdownItem>Add Position</DropdownItem>
+                                    <DropdownItem onClick={this.openDepartmentsModal}>Add Department</DropdownItem>
+                                    <DropdownItem onClick={this.openPositionsModal}>Add Position</DropdownItem>
                                 </DropdownMenu>
                             </Dropdown>
                         </Col>
@@ -159,7 +184,9 @@ export default class DashboardPage extends React.Component {
 
                     </Row>
                 </div>
-                <SystemDetailModal isOpen={this.state.modalIsOpen} toggle={this.toggleModalIsOpen}/>
+                <PositionsModal isOpen={this.state.PositionsModalIsOpen} toggle={this.togglePositionsModal}/>
+                <DepartmentsModal isOpen={this.state.DepartmentsModalIsOpen} toggle={this.toggleDepartmentsModal}/>
+                <SystemDetailModal isOpen={this.state.SystemModalIsOpen} toggle={this.toggleModalIsOpen}/>
             </div>
         )
     };

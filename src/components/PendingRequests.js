@@ -48,7 +48,7 @@ export default class PendingRequests extends React.Component{
     };
 
     toggleModalIsOpen = () => {
-        this.setState({modalIsOpen: !this.state.modalIsOpen});
+        this.setState({SystemModalIsOpen: !this.state.SystemModalIsOpen});
     };
 
     setSelectedRequestData = (selectedRequestData) => this.setState({selectedRequestData: selectedRequestData});
@@ -69,7 +69,7 @@ export default class PendingRequests extends React.Component{
                 <div>
                     <UserTable onRowClick={this.openRequestDialogModal} columns={this.columns} data={this.state.requestData}/>
                 </div>
-                <PermissionRequestModal isOpen={this.state.modalIsOpen} toggle={this.toggleModalIsOpen} refreshData={this.getRequestData} requestData={this.state.selectedRequestData}/>
+                <PermissionRequestModal isOpen={this.state.SystemModalIsOpen} toggle={this.toggleModalIsOpen} refreshData={this.getRequestData} requestData={this.state.selectedRequestData}/>
             </div>
         )
     }

@@ -44,9 +44,9 @@ export class UserManagementPage extends React.Component {
 
     toggleModalIsOpen = () => {
 
-        this.setState(() => ({modalIsOpen: !this.state.modalIsOpen}));
+        this.setState(() => ({SystemModalIsOpen: !this.state.SystemModalIsOpen}));
 
-        if (this.state.modalIsOpen) {
+        if (this.state.SystemModalIsOpen) {
             this.props.getUsersData();
         }
     };
@@ -73,7 +73,7 @@ export class UserManagementPage extends React.Component {
                     <UserTable onRowClick={this.openUserDetailsModal} data={this.props.users} columns={this.columns}/>
                 </div>
 
-                <UserDetailsModal isOpen={this.state.modalIsOpen} toggle={this.toggleModalIsOpen} userId={this.state.selectedUser}/>
+                <UserDetailsModal isOpen={this.state.SystemModalIsOpen} toggle={this.toggleModalIsOpen} userId={this.state.selectedUser}/>
             </div>
         )
     }
