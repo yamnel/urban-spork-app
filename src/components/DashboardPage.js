@@ -91,7 +91,7 @@ export default class DashboardPage extends React.Component {
 
     render() {
         const systems = this.state.data.sort((a, b) => a.PendingRequests < b.PendingRequests).map((_System, index) => (
-           <Col key={index} md={4}>
+            <Col key={index} md={4}>
                 <Card style=
                           {{
                               backgroundColor:"#FFFFFF",
@@ -108,28 +108,28 @@ export default class DashboardPage extends React.Component {
                             <Row>
                                 <Col md={6}>
                                     <Card body inverse style=
-                                              {{
-                                                  borderWidth: 1,
-                                                  borderColor: "#28a745",
-                                                  borderLeftWidth:3,
-                                                  borderBottomWidth: 3
-                                              }}>
-                                            <CardText style={{textAlign: "center", color: "#000000"}}><b>Pending</b></CardText>
-                                            <Button outline color={"success"}>
-                                                View{" "} <Badge pill color="success">{_System.PendingRequests}</Badge>
-                                            </Button>
+                                        {{
+                                            borderWidth: 1,
+                                            borderColor: "#28a745",
+                                            borderLeftWidth:3,
+                                            borderBottomWidth: 3
+                                        }}>
+                                        <CardText style={{textAlign: "center", color: "#000000"}}><b>Pending</b></CardText>
+                                        <Button outline color={"success"} onClick={() => this.props.history.push("/requests")}>
+                                            View{" "} <Badge pill color="success">{_System.PendingRequests}</Badge>
+                                        </Button>
                                     </Card>
                                 </Col>
                                 <Col md={6}>
                                     <Card body inverse style=
-                                              {{
-                                                  borderWidth: 1,
-                                                  borderColor: "#17a2b8",
-                                                  borderLeftWidth:3,
-                                                  borderBottomWidth: 3
-                                              }}>
+                                        {{
+                                            borderWidth: 1,
+                                            borderColor: "#17a2b8",
+                                            borderLeftWidth:3,
+                                            borderBottomWidth: 3
+                                        }}>
                                         <CardText style={{textAlign: "center", color: "#000000"}}><b>Active</b></CardText>
-                                        <Button outline color={"info"} style={{align:"center"}}>
+                                        <Button outline onClick={() => this.props.history.push("/reports/system-report")} color={"info"} style={{align:"center"}}>
                                             View {" "} <Badge pill color="info">{_System.TotalUsers}</Badge>
                                         </Button>{' '}
                                     </Card>
@@ -138,7 +138,7 @@ export default class DashboardPage extends React.Component {
                         </Col>
                     </CardBody>
                 </Card>
-               <br/>
+                <br/>
             </Col>
 
         ));
@@ -179,7 +179,7 @@ export default class DashboardPage extends React.Component {
                 <div>
                     <Row>
 
-                            {systems}
+                        {systems}
 
 
                     </Row>
