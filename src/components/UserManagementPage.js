@@ -8,10 +8,13 @@ import UserDetailsModal from "./UserDetailsModal";
 import {editUser, getUsersData} from "../actions/users";
 
 export class UserManagementPage extends React.Component {
-    // Last ID used stays in the state, I don't like it but it's a bug I need to fix later.
     state = {
         modalIsOpen: false
     };
+
+    componentWillMount() {
+        this.props.getUsersData();
+    }
 
     componentWillReceiveProps(nextProps) {
         this.setState({users: nextProps.users})

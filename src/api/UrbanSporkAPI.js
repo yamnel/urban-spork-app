@@ -6,6 +6,7 @@ export class UrbanSporkAPI extends React.Component{
 
     static getAllUsers() {
         return fetch('http://localhost:5000/api/user/getusermanagementprojection').then(response => {
+            console.log('UserData gotten');
             return response.json();
         }).catch(error => {
             return error;
@@ -54,6 +55,23 @@ export class UrbanSporkAPI extends React.Component{
         }).catch(error => {
             console.log(data);
             console.log(error);
+        });
+    }
+
+
+    static createUser(data) {
+        return fetch('http://localhost:5000/api/user/createuser',{
+            body: JSON.stringify(data),
+            credentials: 'same-origin',
+            headers: {
+                'content-type': 'application/json'
+            },
+            method: 'POST'
+        }).then(response => {
+            return response.json();
+        }).catch(error => {
+            console.log('data', data);
+            console.log('error', error);
         });
     }
 }
