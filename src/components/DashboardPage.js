@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {UserManagementPage} from "./UserManagementPage";
 import {Card,CardImg,CardBody, Badge, Dropdown, DropdownToggle, DropdownItem, DropdownMenu, CardText, CardTitle, Button, CardGroup, Row, Col, CardColumns} from "reactstrap";
 import {faCog} from '@fortawesome/fontawesome-free-solid'
-import FontAwesomeIcon from "@fortawesome/react-fontawesome/src/components/FontAwesomeIcon";
+import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 import SystemDetailModal from './SystemDetailModal'
 import DepartmentsModal from './DepartmentsModal'
 import PositionsModal from './PositionsModal'

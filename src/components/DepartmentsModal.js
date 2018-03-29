@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 import {faCheckCircle} from '@fortawesome/fontawesome-free-solid'
-import FontAwesomeIcon from "@fortawesome/react-fontawesome/src/components/FontAwesomeIcon";
+import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 import AddDepartment from "./AddDepartment";
 import UrbanSporkAPI from "../api/UrbanSporkAPI";
 
