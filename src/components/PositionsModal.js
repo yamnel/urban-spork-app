@@ -12,8 +12,8 @@ class PositionsModal extends React.Component {
     state = {
         edit: true,
         addPositionsButton: false,
-        department:"",
-        position:"",
+        department: "",
+        position: "",
     };
 
     handleOnCancel = () => {
@@ -35,23 +35,27 @@ class PositionsModal extends React.Component {
     };
 
     titleUpdated = (data) => {
-        console.log("titleUpdated");
-        this.setState({position:data});
+        console.log("titleUpdated:  " + data);
+        this.setState((prevState)=> {
+            console.log('The position was', prevState.position);
+            console.log('The new data for the position is ', data);
+
+            return {position: data}
+        });
+
         this.toggleAddButton();
-
-
     };
 
     toggleAddButton = () => {
         console.log("The position Title: " + this.state.position);
         console.log("The Department Selected: " + this.state.department);
-        this.state.position.length > 0 && this.state.department.length > 0 ? this.setState({addPositionsButton: true}): this.setState({addPositionsButton: false});
+        this.state.position.length > 0 && this.state.department.length > 0 ? this.setState({addPositionsButton: true}) : this.setState({addPositionsButton: false});
     };
 
 
     updateDepartment = (department) => {
-        console.log("updateDepartment");
-        this.setState({department:department.target.value});
+        console.log(department.target.value);
+        this.setState({department: department.target.value});
         this.toggleAddButton();
     };
 
@@ -62,15 +66,18 @@ class PositionsModal extends React.Component {
                     <ModalHeader toggle={this.handleOnClose}>Add Position</ModalHeader>
                     <ModalBody>
                         <div>
-                            {this.state.edit?
-                                <AddPosition DepartmentSelected = {this.updateDepartment} AddButton = {this.titleUpdated}/>:
-                                <h6><FontAwesomeIcon icon={faCheckCircle}/> {" "} The position with the title of {this.state.position}, was added to the {this.state.department} department!</h6>
+                            {this.state.edit ?
+                                <AddPosition DepartmentSelected={this.updateDepartment}
+                                             AddButton={this.titleUpdated}/> :
+                                <h6><FontAwesomeIcon icon={faCheckCircle}/> {" "} The position with the title
+                                    of {this.state.position}, was added to the {this.state.department} department!</h6>
                             }
                         </div>
                     </ModalBody>
                     <ModalFooter>
-                        {this.state.edit?
-                            <Button color="success" onClick={this.handleOnSave} disabled={!this.state.addPositionsButton}
+                        {this.state.edit ?
+                            <Button color="success" onClick={this.handleOnSave}
+                                    disabled={!this.state.addPositionsButton}
                                     active={!this.state.edit}>Add Department</Button>
                             :
                             <Button color="success" onClick={this.handleOnClose}

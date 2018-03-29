@@ -12,7 +12,7 @@ export default class AddDepartment extends React.Component {
             InputPlaceholder: 'Enter department name',
         };
 
-       // this.onInputChange = this.onInputChange.bind(this);
+        // this.onInputChange = this.onInputChange.bind(this);
 
     }
 

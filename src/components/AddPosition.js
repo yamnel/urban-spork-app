@@ -14,6 +14,7 @@ export default class AddPosition extends React.Component {
         };
 
         this.onInputChange = this.onInputChange.bind(this);
+        this.updateDepartment = this.updateDepartment.bind(this);
 
     }
 
@@ -25,7 +26,7 @@ export default class AddPosition extends React.Component {
     };
 
     updateDepartment = (department) => {
-        console.log("updateDepartment");
+
         this.props.DepartmentSelected(department);
 
     };
