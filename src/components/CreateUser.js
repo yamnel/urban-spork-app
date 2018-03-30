@@ -1,6 +1,6 @@
 import React from 'react';
 import UrbanSporkAPI from "../api/UrbanSporkAPI";
-import {Col, Form, FormGroup, Input, Label, Button} from "reactstrap";
+import {Col, Form, FormGroup, Input, Label, Button, Row} from "reactstrap";
 
 
 export default class CreateUser extends React.Component {
@@ -35,8 +35,8 @@ export default class CreateUser extends React.Component {
             IsActive: true,
         };
 
-        const userCreated =  UrbanSporkAPI.createUser(payload);
-        userCreated.then(() => this.props.history.push("/users"))
+        UrbanSporkAPI.createUser(payload).then(() => this.props.history.push("/users"))
+
 
     };
 
@@ -107,7 +107,11 @@ export default class CreateUser extends React.Component {
                            </FormGroup>
                        </Form>
 
-                       <Button style={{marginTop: "40px", marginLeft: "20px"}} onClick={this.handleOnUserCreation}  color={'success'}>Create User</Button>
+                       <Row>
+                           <Button style={{marginTop: "40px", marginLeft: "20px"}} onClick={this.handleOnUserCreation}  color={'success'}>Create User</Button>
+                           <Button style={{marginTop: "40px", marginLeft: "20px"}} onClick={() => this.props.history.push("/users")}  color={'secondary'}>Cancel</Button>
+
+                       </Row>
                    </div>
                 </div>
 
