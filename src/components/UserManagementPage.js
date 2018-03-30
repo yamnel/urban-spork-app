@@ -29,6 +29,13 @@ export class UserManagementPage extends React.Component {
 
     ];
 
+    styles = {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        textAlign: 'center'
+    };
+
 
     openUserDetailsModal = (selectedUserData) => {
         this.setUserData(selectedUserData.id);
@@ -64,6 +71,9 @@ export class UserManagementPage extends React.Component {
     render() {
         return (
             <div>
+                <div style={this.styles}>
+                    <h1>User Management</h1>
+                </div>
                 <div className={'user-management-nav'}>
                     <Button onClick={() => this.props.history.push("/create-user")} color={'primary'} >Create User</Button>
 

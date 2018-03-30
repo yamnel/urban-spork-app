@@ -11,7 +11,9 @@ const HeaderComponent = () => (
         <header className={"header"}>
 
             <div className={"header-top"}>
-                <h1 style={{lineHeight: '100px'}}  className={"logo-title"}>Logo Placeholder</h1>
+                <div>
+                    <img src="https://lh5.googleusercontent.com/5yUqqCc49p0weuecN5bsYh6EzyJOQkWHwDfcn6lkz4SMFSS-ftrF6f83AWirU_xhq-aMsADZWUD7cqobdQrW=w2586-h2072-rw" width="210" height="80"/>
+                </div>
                 <h2 style={{color: "#CBD4D2", marginTop: "36px"}}>Image Placeholder <br/><span><h5>Name Placeholder</h5></span></h2>
             </div>
 
