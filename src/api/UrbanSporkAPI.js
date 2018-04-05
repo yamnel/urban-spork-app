@@ -4,8 +4,10 @@ import {getUsersData} from "../actions/users";
 
 export class UrbanSporkAPI extends React.Component{
 
+    url = 'http://localhost:5000/api/';
+    
     static getAllUsers() {
-        return fetch('http://localhost:5000/api/user/getusermanagementprojection').then(response => {
+        return fetch(`${this.url}user/getusermanagementprojection`).then(response => {
             console.log('UserData gotten');
             return response.json();
         }).catch(error => {
@@ -13,9 +15,9 @@ export class UrbanSporkAPI extends React.Component{
         });
     }
 
-    // http://localhost:5000/api/user/id/6da06fc4-02cb-4ce3-b63f-112596fe6bff
+    // ${this.url}user/id/6da06fc4-02cb-4ce3-b63f-112596fe6bff
     static getUserFullData(id) {
-        return fetch(`http://localhost:5000/api/user/id/${id}`).then(response => {
+        return fetch(`${this.url}user/id/${id}`).then(response => {
             return response.json();
         }).catch(error => {
             return error;
@@ -23,7 +25,7 @@ export class UrbanSporkAPI extends React.Component{
     }
 
     static getPendingRequests() {
-        return fetch('http://localhost:5000/api/permission/getpendingrequests').then(response => {
+        return fetch(`${this.url}permission/getpendingrequests`).then(response => {
             return response.json();
         }).catch(error => {
             console.log(error);
@@ -32,7 +34,7 @@ export class UrbanSporkAPI extends React.Component{
     }
 
     static getAproverActivity() {
-        return fetch('http://localhost:5000/api/user/getapproveractivity').then(response => {
+        return fetch(`${this.url}user/getapproveractivity`).then(response => {
             return response.json();
         }).catch(error => {
             console.log(error);
@@ -43,7 +45,7 @@ export class UrbanSporkAPI extends React.Component{
 
 
     static updateUserDetails(data) {
-        return fetch('http://localhost:5000/api/user/update',{
+        return fetch(`${this.url}user/update`,{
             body: JSON.stringify(data),
             credentials: 'same-origin',
             headers: {
@@ -60,7 +62,7 @@ export class UrbanSporkAPI extends React.Component{
 
 
     static createUser(data) {
-        return fetch('http://localhost:5000/api/user/createuser',{
+        return fetch(`${this.url}user/createuser`,{
             body: JSON.stringify(data),
             credentials: 'same-origin',
             headers: {
