@@ -13,6 +13,7 @@ import OffBoardingReport from "../components/OffBoardingReport";
 import SystemReport from "../components/SystemReport";
 import SystemActivityReport from "../components/SystemActivityReport";
 import ApproverActivityReport from "../components/ApproverActivityReport";
+import UserDetailComponent from "../components/UserDetailComponent";
 
 
 const AppRouter = () => (
@@ -23,8 +24,14 @@ const AppRouter = () => (
                 <Switch>
                     <Route path={"/"} component={DashboardPage} exact={true}/>
                     <Route path="/users" component={UserManagementPage}/>
-                    <Route path="/requests" component={PendingRequests}/>
+
+                    {/*<Route path="/requests" component={PendingRequests}/>*/}
                     <Route path={"/create-user"} component={CreateUser}/>
+
+                    <Route
+                        path={"/user-detail/:id"}
+                        component={UserDetailComponent}
+                    />
 
                     <Route path={"/reports/off-boarding-report"} component={OffBoardingReport}/>
                     <Route path={"/reports/system-report"} component={SystemReport}/>

@@ -6,10 +6,10 @@ import selectUsers from "../selectors/users";
 import {setTextFilter} from "../actions/filters";
 import UserDetailsModal from "./UserDetailsModal";
 import {editUser, getUsersData} from "../actions/users";
+import UserDetailComponent from "./UserDetailComponent";
 
 export class UserManagementPage extends React.Component {
     state = {
-        modalIsOpen: false
     };
 
     componentWillMount() {
@@ -37,28 +37,14 @@ export class UserManagementPage extends React.Component {
     };
 
 
-    openUserDetailsModal = (selectedUserData) => {
-        this.setUserData(selectedUserData.id);
-        this.toggleModalIsOpen();
+    openUserDetail = (selectedUserData) => {
 
+        this.setUserData(selectedUserData.id);
+        this.props.history.push({pathname: `/user-detail/${selectedUserData.id}`});
 
 
         //proof that is stays in the old state
         // console.log(`The new state field selectedUserId is ${this.state.selectedUserId}`);
-    };
-
-    // onCreateUserClick = () =>{
-    //
-    // };
-
-
-    toggleModalIsOpen = () => {
-
-        this.setState(() => ({SystemModalIsOpen: !this.state.SystemModalIsOpen}));
-
-        if (this.state.SystemModalIsOpen) {
-            this.props.getUsersData();
-        }
     };
 
 
@@ -71,7 +57,7 @@ export class UserManagementPage extends React.Component {
     render() {
         return (
             <div>
-                <div style={this.styles}>
+                <div className={'titles'}>
                     <h1>User Management</h1>
                 </div>
                 <div className={'user-management-nav'}>
@@ -83,10 +69,9 @@ export class UserManagementPage extends React.Component {
                 </div>
 
                 <div>
-                    <UserTable onRowClick={this.openUserDetailsModal} data={this.props.users} columns={this.columns}/>
+                    <UserTable onRowClick={this.openUserDetail} data={this.props.users} columns={this.columns}/>
                 </div>
 
-                <UserDetailsModal isOpen={this.state.SystemModalIsOpen} toggle={this.toggleModalIsOpen} userId={this.state.selectedUser}/>
             </div>
         )
     }
