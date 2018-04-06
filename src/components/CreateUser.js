@@ -70,12 +70,12 @@ export default class CreateUser extends React.Component {
                            </FormGroup>
 
                            <FormGroup row>
-                               <Label for="title" sm={"3"}>
+                               <Label for="position" sm={"3"}>
                                    Title:
                                </Label>
 
                                <Col sm={20}>
-                                   <Input type="text" name="tile" id="tile" onChange={e => this.handleOnChange(e)}/>
+                                   <Input type="text" name="position" id="position" onChange={e => this.handleOnChange(e)}/>
                                </Col>
                            </FormGroup>
 
