@@ -18,9 +18,9 @@ class UserDetailsModal extends React.Component {
     };
 
 
-    handleOnEditPermissions = () => {
-        this.setState({permissionsModalIsOpen: true})
-    };
+    // handleOnEditPermissions = () => {
+    //     this.setState({permissionsModalIsOpen: true})
+    // };
 
 
     handleOnCancel = () => {
