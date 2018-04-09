@@ -100,11 +100,15 @@ export default class DashboardPage extends React.Component {
 
     componentDidMount = () => {
         console.log('example Component mounted');
+        this.getDashboardData();
+
+    };
+
+    getDashboardData = () => {
         let Data = UrbanSporkAPI.getSystemDashboard();
         Data.then(data => {
             this.setState({data: data})
         });
-
     };
 
     toggle() {
@@ -290,33 +294,7 @@ export default class DashboardPage extends React.Component {
                     <br/>
                     {/*top row */}
                     <Row style={{height: 50}}>
-                        <Col md={4}>
 
-                        </Col>
-                        <Col md={5}>
-
-                        </Col>
-                        <Col md={3} align="right">
-                            <br/>
-                            <Dropdown direction="right" isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-                                <DropdownToggle style={{
-                                    backgroundColor: "#546c66",
-                                }}>
-                                    Settings {" "} <FontAwesomeIcon icon={faCog}/>
-                                </DropdownToggle>
-                                <DropdownMenu style={{
-                                    backgroundColor: "#f8fcf7",
-                                }}>
-                                    <DropdownItem header><b>Options</b></DropdownItem>
-                                    <DropdownItem divider/>
-
-                                    <DropdownItem onClick={this.openSystemDetailModal}>Add System</DropdownItem>
-                                    <DropdownItem onClick={this.openDepartmentsModal}>Add Department</DropdownItem>
-                                    <DropdownItem onClick={this.openPositionsModal}>Add Position</DropdownItem>
-                                </DropdownMenu>
-                            </Dropdown>
-                        </Col>
-                        <br/>
                     </Row>
                 </div>
                 <div>
@@ -327,7 +305,7 @@ export default class DashboardPage extends React.Component {
                                 {/*<h1 align="center">Systems</h1>*/}
                                 {/*<hr width={250} color="#000000"/>*/}
                                 <Scroll
-                                    style={{height: 600, width: 300}}
+                                    style={{height: 500, width: 300}}
                                 >
                                     <Row>
                                         <Col>
@@ -339,17 +317,14 @@ export default class DashboardPage extends React.Component {
                             </Col>
                         </div>
                         <Col md={8}>
-                            <PendingRequests/>
+                            <PendingRequests getDashboard={this.getDashboardData}/>
                         </Col>
                         <Col md={1}>
                         </Col>
 
                     </Row>
                 </div>
-                <PositionsModal departments={this.state.Departments} isOpen={this.state.PositionsModalIsOpen}
-                                toggle={this.togglePositionsModal}/>
-                <DepartmentsModal isOpen={this.state.DepartmentsModalIsOpen} toggle={this.toggleDepartmentsModal}/>
-                <SystemDetailModal isOpen={this.state.SystemModalIsOpen} toggle={this.toggleModalIsOpen}/>
+
             </div>
         )
     };
