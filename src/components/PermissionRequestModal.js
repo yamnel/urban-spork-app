@@ -68,8 +68,6 @@ class PermissionRequestModal extends React.Component {
             </div>
         );
     }
-
-
 }
 
 export default PermissionRequestModal;

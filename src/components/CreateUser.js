@@ -1,6 +1,7 @@
 import React from 'react';
 import UrbanSporkAPI from "../api/UrbanSporkAPI";
 import {Col, Form, FormGroup, Input, Label, Button, Row} from "reactstrap";
+import FilteredMultiSelect from 'react-filtered-multiselect'
 
 
 export default class CreateUser extends React.Component {

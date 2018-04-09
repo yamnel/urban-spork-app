@@ -25,7 +25,7 @@ const Options = (props) => (
         <DropdownMenu>
             <DropdownItem header>Options</DropdownItem>
             <DropdownItem disabled={props.isAdmin}>Make Admin</DropdownItem>
-            <DropdownItem>Off-Board</DropdownItem>
+            <DropdownItem>Off-Board Report</DropdownItem>
             <DropdownItem>Deactivate</DropdownItem>
         </DropdownMenu>
     </UncontrolledDropdown>
