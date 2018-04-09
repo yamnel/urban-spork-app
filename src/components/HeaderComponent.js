@@ -12,7 +12,7 @@ const HeaderComponent = () => (
 
             <div className={"header-top"}>
                 <div style={{paddingTop: '20px'}}>
-                    <img src="https://lh5.googleusercontent.com/5yUqqCc49p0weuecN5bsYh6EzyJOQkWHwDfcn6lkz4SMFSS-ftrF6f83AWirU_xhq-aMsADZWUD7cqobdQrW=w2586-h2072-rw" width="210" height="80"/>
+                    <img src="https://i.imgur.com/G7zI6wH.png" width="210" height="80"/>
                 </div>
                 <h2 style={{color: "#CBD4D2", marginTop: "36px"}}>Image Placeholder <br/><span><h5>Name Placeholder</h5></span></h2>
             </div>
@@ -28,9 +28,9 @@ const HeaderComponent = () => (
                 </NavItem>
 
 
-                <NavItem>
-                    <NavLink to={"/requests"} activeClassName={"is-active"} tag={RouterNavLink} style={{whiteSpace: 'nowrap'}}>Pending Requests</NavLink>
-                </NavItem>
+                {/*<NavItem>*/}
+                    {/*<NavLink to={"/requests"} activeClassName={"is-active"} tag={RouterNavLink} style={{whiteSpace: 'nowrap'}}>Pending Requests</NavLink>*/}
+                {/*</NavItem>*/}
 
 
                 {/*<NavItem>*/}

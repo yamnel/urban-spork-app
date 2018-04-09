@@ -67,7 +67,15 @@ export class UrbanSporkAPI extends React.Component{
         });
     }
 
-
+    // TODO: This is not working, talk to Stephen/Tyler(s) about it.
+    static getOffBoardingReport(id) {
+        return fetch(`http://localhost:5000/api/user/offboard/${id}`).then(response => {
+            return response.json();
+        }).catch(error => {
+            console.log(error);
+            return [];
+        });
+    }
 
     static updateUserDetails(data) {
         return fetch('http://localhost:5000/api/user/update',{

@@ -80,21 +80,31 @@ const StaticUserDetail = (props) => (
             */}
             <div>
                 <Label for="permissions">Permissions:</Label>
-                <Input type="select" name="permissions" id="permissions"  multiple>
-                    {/*
-                        This is a jumble of references, but the function I created above doesn't work on it...
-                        so I am leaving it like this.
-                    */}
-                    {
-                        Object.keys(props.userData.permissionList).map((permission, i) => {
-                            if (props.userData.permissionList[permission].permissionStatus !== 'Revoked') {
-                                return <option key={i} value={i} id={permission}>{props.userData.permissionList[permission].permissionName}</option>;
-                            }
-                        })
-                    }
-                    </Input>
+                {
+                    /**
+                     THE FOLLOWING CODE IS A BIT HARD TO FOLLOW, SO I AM ADDING THIS COMMENT
+                     **/
+                    // I turn this permission Objects into an array of objects & check it's length
+                    // if the length is greater than 0 ( if there are permissions to show )
+                    // I map them over and as long as the permission is not marked as 'revoked',
+                    // I add it as a new `option` of the input field.
 
-                <Button color="danger" style={{marginTop: "20px"}} onClick={props.handleOnEditPermissions}>Edit Permissions</Button>
+                    Object.keys(props.userData.permissionList).length > 0 ?
+
+                    <Input type="select" name="permissions" id="permissions"  multiple>
+                        {
+                            Object.keys(props.userData.permissionList).map((permission, i) => {
+                                if (props.userData.permissionList[permission].permissionStatus !== 'Revoked') {
+                                    return <option key={i} value={i} id={permission}>{props.userData.permissionList[permission].permissionName}</option>;
+                                }
+                            })
+                        }
+                    </Input> :
+                        // If there are no permissions
+                        <p>No permissions for this user.</p>
+                }
+
+                {/*<Button color="danger" style={{marginTop: "20px"}} onClick={props.handleOnEditPermissions}>Edit Permissions</Button>*/}
             </div>
         </div>
 

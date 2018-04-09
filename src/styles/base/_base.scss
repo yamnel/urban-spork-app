@@ -39,6 +39,13 @@ body {
 //    outline: none;
 //}
 //
+.titles {
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
 .canvas {
     min-width: 810px;
 }
