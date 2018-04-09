@@ -1,8 +1,9 @@
 import React from 'react';
 import {Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
+import {connect} from "react-redux";
 // import StaticUserDetail from './StaticUserDetail';
 // import EditUserDetail from "./EditUserDetail";
-// import UrbanSporkAPI from "../api/UrbanSporkAPI";
+import UrbanSporkAPI from "../api/UrbanSporkAPI";
 
 
 class PermissionRequestModal extends React.Component {
@@ -33,16 +34,56 @@ class PermissionRequestModal extends React.Component {
     };
 
     handleOnGrantReguest = () => {
-        // UrbanSporkAPI.updateUserDetails()
-        this.props.refreshData();
+
+        let payload = {
+            ForId: this.props.requestData.forId,
+            ById: this.props.managerId ,
+            PermissionsToGrant:{
+                [this.props.requestData.permissionId]:{
+                    EventType:"GrantPermission",
+                    IsPending:true,
+                    Reason:"Need Access",
+                    RequestedBy:this.props.requestData.byId,
+                    RequestedFor:this.props.requestData.forId,
+                }
+            }
+
+        };
+        console.log(payload);
+        UrbanSporkAPI.grantPermission(payload).then(()=> {
+                this.props.refreshData();
+                this.props.refreshDashboard();
+        }
+
+        );
         this.props.toggle();
 
     };
 
     handleOnDenyReguest = () => {
-        // UrbanSporkAPI.updateUserDetails()
-        this.props.refreshData();
+        let payload = {
+        ForId: this.props.requestData.forId,
+        ById: this.props.managerId ,
+        PermissionsToDeny:{
+            [this.props.requestData.permissionId]:{
+                EventType:"DenyPermission",
+                IsPending:true,
+                Reason:"Need Access",
+                RequestedBy:this.props.requestData.byId,
+                RequestedFor:this.props.requestData.forId,
+            }
+        }
+
+    };
+        console.log(payload);
+        UrbanSporkAPI.denyPermission(payload).then(()=> {
+                this.props.refreshData();
+                this.props.refreshDashboard();
+            }
+
+        );
         this.props.toggle();
+
 
     };
 
@@ -69,5 +110,9 @@ class PermissionRequestModal extends React.Component {
         );
     }
 }
-
-export default PermissionRequestModal;
+const mapStateToProps = (state) => {
+    return {
+        managerId: state.manager
+    }
+};
+export default connect(mapStateToProps)(PermissionRequestModal);
