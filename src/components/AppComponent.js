@@ -15,11 +15,11 @@ class AppComponent extends React.Component{
     };
 
 
-    accessGranted = (managerId = 23) => {
+    accessGranted = (managerId = '928956b8-6dba-4878-bb96-e91f98b0ffed') => {
         // this.setState(() => ({allowAccess: true, managerId}));
 
         this.props.getUserData();
-        this.props.setManagerId(parseInt(managerId));
+        this.props.setManagerId(managerId);
     };
 
 
