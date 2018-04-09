@@ -3,14 +3,18 @@ import {Col, Form, FormGroup, Input, Label} from 'reactstrap';
 
 
 
+
+
 export default class AddPosition extends React.Component {
 
-    constructor(){
+    constructor(props){
         super();
+
+
 
         this.state = {
             InputPlaceholder: 'Enter title of position',
-            department:"",
+            Departments: props.departments,
         };
 
         this.onInputChange = this.onInputChange.bind(this);
@@ -32,6 +36,15 @@ export default class AddPosition extends React.Component {
     };
 
     render() {
+
+        const AllDepartments = this.state.Departments.map((Department, index) => (
+
+            <option key={index} >{Department.name}</option>
+
+        ));
+        console.log(this.state.Departments);
+
+
         return(
             <div>
                 <Form>
@@ -56,11 +69,8 @@ export default class AddPosition extends React.Component {
 
                         <Col md={6}>
                             <Input type="select"  id="SelectDepartment" onChange={e => {this.updateDepartment(e)}}>
-                                <option></option>
-                                <option>Warehouse</option>
-                                <option>Marketing</option>
-                                <option>Human Resource</option>
-                                <option>Complaints</option>
+                                {AllDepartments}
+
                             </Input>
                         </Col>
 

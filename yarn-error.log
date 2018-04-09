@@ -1,17 +1,17 @@
 Arguments: 
-  /usr/local/Cellar/node/9.4.0/bin/node /usr/local/bin/yarn add free-solid
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js install react-scrollbars --save
 
 PATH: 
-  /Library/Frameworks/Python.framework/Versions/3.6/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/usr/local/share/dotnet:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Applications/Xamarin Workbooks.app/Contents/SharedSupport/path-bin
+  C:\Program Files (x86)\Intel\iCLS Client\;C:\ProgramData\Oracle\Java\javapath;C:\Program Files\Intel\iCLS Client\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Users\Tyler\.dnx\bin;C:\Program Files\Microsoft DNX\Dnvm\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\Program Files\MySQL\MySQL Utilities 1.6\;C:\Users\Tyler\hadoop\bin;C:\Users\Tyler\spark-2.1.0-bin-hadoop2.7\bin;C:\Program Files (x86)\scala\bin;C:\Program Files\Git\cmd;C:\Program Files\apache-maven-3.3.9\bin;C:\Program Files\PuTTY\;C:\cygwin\bin;C:\Program Files\dotnet\;C:\Program Files (x86)\Microsoft SQL Server\Client SDK\ODBC\130\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\140\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\140\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\140\Tools\Binn\ManagementStudio\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\130\Tools\Binn\;C:\Program Files\Microsoft SQL Server\140\Tools\Binn\;C:\Program Files\Microsoft SQL Server\140\DTS\Binn\;C:\PostgreSQL\pg10\bin;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files\TortoiseGit\bin;C:\Program Files (x86)\Yarn\bin\;C:\Program Files\nodejs\;c:\Program Files\Intel\WiFi\bin\;c:\Program Files\Common Files\Intel\WirelessCommon\;C:\Users\Tyler\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Heroku\bin;C:\apache-maven-3.3.9\bin;C:\Users\Tyler\Desktop\XboxController;C:\Users\Tyler\AppData\Local\Yarn\bin;C:\Users\Tyler\AppData\Roaming\npm
 
 Yarn version: 
   1.5.1
 
 Node version: 
-  9.4.0
+  9.9.0
 
 Platform: 
-  darwin x64
+  win32 x64
 
 npm manifest: 
   {
@@ -31,6 +31,7 @@ npm manifest:
     "author": "",
     "license": "ISC",
     "dependencies": {
+      "@fortawesome/fontawesome": "^1.1.4",
       "@fortawesome/fontawesome-free-solid": "^5.0.8",
       "@fortawesome/react-fontawesome": "^0.0.18",
       "babel-cli": "^6.26.0",
@@ -56,6 +57,8 @@ npm manifest:
       "react-addons-shallow-compare": "^15.6.2",
       "react-dates": "^16.3.0",
       "react-dom": "latest",
+      "react-dropzone": "^4.2.9",
+      "react-filtered-multiselect": "^0.5.1",
       "react-modal": "^3.1.12",
       "react-redux": "^5.0.7",
       "react-router-dom": "^4.2.2",
@@ -115,6 +118,12 @@ Lockfile:
   "@fortawesome/fontawesome-free-solid@^5.0.8":
     version "5.0.8"
     resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-free-solid/-/fontawesome-free-solid-5.0.8.tgz#2890639d57dc16e2a90bb847c41770e38f72e432"
+    dependencies:
+      "@fortawesome/fontawesome-common-types" "^0.1.3"
+  
+  "@fortawesome/fontawesome@^1.1.4":
+    version "1.1.4"
+    resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome/-/fontawesome-1.1.4.tgz#03065638046206c2226e103b550196934c75be9b"
     dependencies:
       "@fortawesome/fontawesome-common-types" "^0.1.3"
   
@@ -488,6 +497,12 @@ Lockfile:
   attempt-x@^1.1.0, attempt-x@^1.1.1:
     version "1.1.3"
     resolved "https://registry.yarnpkg.com/attempt-x/-/attempt-x-1.1.3.tgz#9ac844c75bca2c4e9e30d8d5c01f41eeb481a8b7"
+  
+  attr-accept@^1.0.3:
+    version "1.1.2"
+    resolved "https://registry.yarnpkg.com/attr-accept/-/attr-accept-1.1.2.tgz#6836bfe054e4ef1ee3076fdde56cec9bb3ffead6"
+    dependencies:
+      core-js "^2.5.0"
   
   autoprefixer@^6.3.1:
     version "6.7.7"
@@ -6608,7 +6623,7 @@ Lockfile:
       has "^1.0.1"
       object.assign "^4.1.0"
   
-  prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.8, prop-types@^15.6.0:
+  prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@^15.6.0:
     version "15.6.1"
     resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.1.tgz#36644453564255ddda391191fb3a125cbdf654ca"
     dependencies:
@@ -6809,6 +6824,19 @@ Lockfile:
       loose-envify "^1.1.0"
       object-assign "^4.1.1"
       prop-types "^15.6.0"
+  
+  react-dropzone@^4.2.9:
+    version "4.2.9"
+    resolved "https://registry.yarnpkg.com/react-dropzone/-/react-dropzone-4.2.9.tgz#98156ce4d4cb018f7c5099eeb2eaff6dc21836fd"
+    dependencies:
+      attr-accept "^1.0.3"
+      prop-types "^15.5.7"
+  
+  react-filtered-multiselect@^0.5.1:
+    version "0.5.1"
+    resolved "https://registry.yarnpkg.com/react-filtered-multiselect/-/react-filtered-multiselect-0.5.1.tgz#cf825395864159631c8615b6786ceebd6139f4ae"
+    dependencies:
+      prop-types "^15.5.7"
   
   react-modal@^3.1.12:
     version "3.3.1"
@@ -9135,11 +9163,10 @@ Lockfile:
       untildify "^3.0.2"
 
 Trace: 
-  Error: Couldn't find package "free-solid" on the "npm" registry.
-      at new MessageError (/usr/local/lib/node_modules/yarn/lib/cli.js:186:110)
-      at NpmResolver.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:51625:15)
+  Error: `install` has been replaced with `add` to add new dependencies. Run "yarn add react-scrollbars" instead.
+      at new MessageError (C:\Program Files (x86)\Yarn\lib\cli.js:186:110)
+      at Object.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:21987:13)
       at Generator.next (<anonymous>)
-      at step (/usr/local/lib/node_modules/yarn/lib/cli.js:98:30)
-      at /usr/local/lib/node_modules/yarn/lib/cli.js:109:13
+      at step (C:\Program Files (x86)\Yarn\lib\cli.js:98:30)
+      at C:\Program Files (x86)\Yarn\lib\cli.js:109:13
       at <anonymous>
-      at process._tickCallback (internal/process/next_tick.js:160:7)
