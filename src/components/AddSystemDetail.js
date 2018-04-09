@@ -17,13 +17,6 @@ export default class AddSystemDetailComponent extends React.Component {
     // };
 
     handleAddSystem = () => {
-        this.refs.dropzone.open();
-    };
-
-    onDrop = (files) => {
-        this.setState({
-            files: files
-        });
     };
 
     render() {
@@ -49,13 +42,12 @@ export default class AddSystemDetailComponent extends React.Component {
                     </FormGroup>
 
                     <FormGroup row>
+                        <Label color={"muted"} sm={"3"} for={"systemDescription"}>
+                            System Logo URL:
+                        </Label>
                         <Col sm={20}>
-                            <Dropzone ref="dropzone" onDrop={this.onDrop}>
-                                <div><br/><br/>Click the "Add Logo" button to upload an image here!</div>
-                            </Dropzone>
-                            <Button color="info" onClick={this.handleAddSystem}>Add System Logo</Button>
+                            <Input id={"systemLogo"}/>
                         </Col>
-
                     </FormGroup>
                 </Form>
             </div>

@@ -8,6 +8,7 @@ import HeaderComponent from '../components/HeaderComponent';
 import UserManagementPage from '../components/UserManagementPage';
 import PendingRequests from '../components/PendingRequests';
 import CreateUser from "../components/CreateUser";
+import Company from "../components/Company";
 // Reports
 import OffBoardingReport from "../components/OffBoardingReport";
 import SystemReport from "../components/SystemReport";
@@ -37,6 +38,7 @@ const AppRouter = () => (
                     <Route path={"/reports/system-report"} component={SystemReport}/>
                     <Route path={"/reports/system-activity-report"} component={SystemActivityReport}/>
                     <Route path={"/reports/approver-activity-report"} component={ApproverActivityReport}/>
+                    <Route path={"/company"} component={Company}/>
 
                     {/*
                     This needs to be the last component route
