@@ -29,8 +29,13 @@ class DepartmentsModal extends React.Component {
     };
 
     handleOnSave = () => {
-        // UrbanSporkAPI.addDepartment();
+        let newDepartment = {
+            Name:this.state.department,
+        };
+
+         UrbanSporkAPI.addDepartment(newDepartment);
         this.setState({edit: false});
+        this.forceUpdate();
     };
 
     toggleAddButton = (data) => {
