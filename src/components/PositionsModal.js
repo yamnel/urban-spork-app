@@ -3,8 +3,6 @@ import {Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 import {faCheckCircle} from '@fortawesome/fontawesome-free-solid'
 import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 import AddPosition from "./AddPosition";
-import UrbanSporkAPI from "../api/UrbanSporkAPI";
-
 
 class PositionsModal extends React.Component {
 
@@ -14,7 +12,11 @@ class PositionsModal extends React.Component {
         addPositionsButton: false,
         department: "",
         position: "",
+
     };
+
+
+
 
     handleOnCancel = () => {
         if (!this.state.edit) {
@@ -30,7 +32,7 @@ class PositionsModal extends React.Component {
     };
 
     handleOnSave = () => {
-        // UrbanSporkAPI.addDepartment();
+
         this.setState({edit: false});
     };
 
@@ -68,7 +70,7 @@ class PositionsModal extends React.Component {
                         <div>
                             {this.state.edit ?
                                 <AddPosition DepartmentSelected={this.updateDepartment}
-                                             AddButton={this.titleUpdated}/> :
+                                             AddButton={this.titleUpdated} departments={this.props.departments}/> :
                                 <h6><FontAwesomeIcon icon={faCheckCircle}/> {" "} The position with the title
                                     of {this.state.position}, was added to the {this.state.department} department!</h6>
                             }
@@ -78,7 +80,7 @@ class PositionsModal extends React.Component {
                         {this.state.edit ?
                             <Button color="success" onClick={this.handleOnSave}
                                     disabled={!this.state.addPositionsButton}
-                                    active={!this.state.edit}>Add Department</Button>
+                                    active={!this.state.edit}>Add Position</Button>
                             :
                             <Button color="success" onClick={this.handleOnClose}
                                     active={this.state.edit}>Done</Button>
