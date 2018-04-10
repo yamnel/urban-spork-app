@@ -5,6 +5,7 @@ import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 import SystemDetailModal from './SystemDetailModal'
 import DepartmentsModal from './DepartmentsModal'
 import PositionsModal from './PositionsModal'
+import SystemModal from "./SystemModal";
 
 export default class Company extends React.Component {
 
@@ -58,7 +59,11 @@ export default class Company extends React.Component {
                             <hr width={500} color="#000000"/>
                         </Col>
                     </Row>
-                    <Row>
+                    <Row style =
+                            {{
+                                alignContent: "center"
+                            }}>
+                        {/*<Col/>*/}
                         <Col sm={3}>
                             <Card body onClick={this.openSystemDetailModal} className="text-center"
                                   style=
@@ -139,12 +144,12 @@ export default class Company extends React.Component {
                     </Row>
                 </div>
 
-                <PositionsModal isOpen={this.state.PositionsModalIsOpen}
-                                toggle={this.togglePositionsModal}/>
+                {/*<PositionsModal isOpen={this.state.PositionsModalIsOpen}*/}
+                                {/*toggle={this.togglePositionsModal}/>*/}
 
                 <DepartmentsModal isOpen={this.state.DepartmentsModalIsOpen} toggle={this.toggleDepartmentsModal}/>
 
-                <SystemDetailModal isOpen={this.state.SystemModalIsOpen} toggle={this.toggleModalIsOpen}/>
+                <SystemModal isOpen={this.state.SystemModalIsOpen} toggle={this.toggleModalIsOpen}/>
             </div>
         )
     }

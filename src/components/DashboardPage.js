@@ -117,15 +117,6 @@ export default class DashboardPage extends React.Component {
         this.togglePositionsModal();
     };
 
-    togglePositionsModal = () => this.setState(() => {
-        const Departments = UrbanSporkAPI.getDepartments();
-        Departments.then(data => {
-            this.setState({Departments: data})
-
-        })
-            .then(() => (this.setState({PositionsModalIsOpen: !this.state.PositionsModalIsOpen})));
-    });
-
     openDepartmentsModal = () => {
         this.toggleDepartmentsModal();
     };

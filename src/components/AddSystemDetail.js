@@ -1,6 +1,7 @@
 import React from 'react';
 import {Col, Form, FormGroup, Input, Label, Button} from 'reactstrap';
 import Dropzone from 'react-dropzone'
+import UrbanSporkAPI from "../api/UrbanSporkAPI";
 
 
 export default class AddSystemDetailComponent extends React.Component {
@@ -15,9 +16,6 @@ export default class AddSystemDetailComponent extends React.Component {
     // handleOnChange = (e) => {
     //     console.log(e.target)
     // };
-
-    handleAddSystem = () => {
-    };
 
     render() {
         return(

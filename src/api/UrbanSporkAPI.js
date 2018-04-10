@@ -113,7 +113,6 @@ export class UrbanSporkAPI extends React.Component{
     static addDepartment(data) {
         return fetch('http://localhost:5000/api/department/create',{
             body: JSON.stringify(data),
-            credentials: 'same-origin',
             headers: {
                 'content-type': 'application/json'
             },
@@ -121,6 +120,23 @@ export class UrbanSporkAPI extends React.Component{
         }).then(response => {
             return response.json();
         }).catch(error => {
+
+            console.log('data', data);
+            console.log('error', error);
+        });
+    }
+
+    static addSystem(data) {
+        return fetch('http://localhost:5000/api/permission/create',{
+            body: JSON.stringify(data),
+            headers: {
+                'content-type': 'application/json'
+            },
+            method: 'POST'
+        }).then(response => {
+            return response.json();
+        }).catch(error => {
+
             console.log('data', data);
             console.log('error', error);
         });

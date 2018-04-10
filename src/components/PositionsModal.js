@@ -15,9 +15,6 @@ class PositionsModal extends React.Component {
 
     };
 
-
-
-
     handleOnCancel = () => {
         if (!this.state.edit) {
             this.setState({edit: false});
