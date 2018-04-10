@@ -49,7 +49,35 @@ export class UrbanSporkAPI extends React.Component{
         });
     }
 
-    static getSystemActivityReport(systemID){
+    static getSystemsActivity() {
+        return fetch('http://localhost:5000/api/user/getSystemActivityProjection').then(response => {
+            return response.json();
+        }).catch(error => {
+            console.log(error);
+            return [];
+        });
+    }
+
+    static getSystemActivityReport(payload) {
+        return fetch(`http://localhost:5000/api/user/getSystemActivityProjection?PermissionId=${payload.PermissionId}`).then(response => {
+            return response.json();
+        }).catch(error => {
+            console.log(error);
+            return [];
+        });
+    }
+
+
+    static getSystemsDropDown() {
+        return fetch('http://localhost:5000/api/permission/getSystemDropdown').then(response => {
+            return response.json();
+        }).catch(error => {
+            console.log(error);
+            return [];
+        });
+    }
+
+    static getSystemReport(systemID){
         return fetch(`http://localhost:5000/api/user/getSystemReport?PermissionId=${systemID.PermissionId}`).then(response => {
             return response.json();
         }).catch(error => {
