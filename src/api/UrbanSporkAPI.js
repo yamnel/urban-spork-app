@@ -77,6 +77,15 @@ export class UrbanSporkAPI extends React.Component{
         });
     }
 
+    static getAdminDropDown() {
+        return fetch('http://localhost:5000/api/permission/getSystemDropdown').then(response => {
+            return response.json();
+        }).catch(error => {
+            console.log(error);
+            return [];
+        });
+    }
+
     static getSystemReport(systemID){
         return fetch(`http://localhost:5000/api/user/getSystemReport?PermissionId=${systemID.PermissionId}`).then(response => {
             return response.json();
@@ -86,8 +95,17 @@ export class UrbanSporkAPI extends React.Component{
         });
     }
 
-    static getAproverActivity() {
+    static getApproverActivity() {
         return fetch('http://localhost:5000/api/user/getapproveractivity').then(response => {
+            return response.json();
+        }).catch(error => {
+            console.log(error);
+            return [];
+        });
+    }
+
+    static getApproverActivityReport(payload) {
+        return fetch(`http://localhost:5000/api/user/getapproveractivity?ApproverId=${payload.ApproverId}`).then(response => {
             return response.json();
         }).catch(error => {
             console.log(error);
