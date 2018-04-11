@@ -6,6 +6,7 @@ import LogInPage from "./LogInPage";
 import {getUsersData} from "../actions/users";
 import {setManagerId} from "../actions/manager";
 import {getAllPermissions} from "../actions/permissions";
+import NonAdminView from "./NonAdminView";
 
 
 class AppComponent extends React.Component{
@@ -13,6 +14,7 @@ class AppComponent extends React.Component{
     state = {
         logIn: true,
         isAdmin: undefined,
+        isNonAdmin: undefined,
         allowAccess: true,
         managerId: undefined
     };
@@ -27,9 +29,21 @@ class AppComponent extends React.Component{
     };
 
 
-    isAdmin = (b) =>{
-        this.setState({isAdmin: b});
-        this.setState({logIn: false})
+    isAdmin = (b) => {
+        console.log(b);
+
+        if (b == "true") {
+            console.log("Admin User");
+            this.setState({isAdmin: true});
+            this.setState({isNonAdmin: false});
+            this.setState({logIn: false});
+        } else {
+            console.log("Non-Admin User");
+
+            this.setState({isNonAdmin: true});
+            this.setState({isAdmin: false});
+            this.setState({logIn: false});
+        }
     };
 
 
@@ -40,6 +54,7 @@ class AppComponent extends React.Component{
                 {}
                 {this.state.logIn  && <LogInPage isAdmin={this.isAdmin}/> }
                 {this.state.isAdmin && ( <AppRouter grantAccess={this.accessGranted()} /> )}
+                {this.state.isNonAdmin && (<NonAdminView/>)}
                 {/*{this.accessGranted()}*/}
                 {/*{this.state.allowAccess? ( <AppRouter /> ) : ( <LogInPage accessGranted={this.accessGranted}/>)}*/}
             </div>
