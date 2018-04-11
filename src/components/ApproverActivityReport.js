@@ -27,7 +27,7 @@ export default class ApproverActivityReport extends React.Component {
         {accessor: 'permissionName', Header: 'System'},
         {accessor: 'truncatedEventType', Header: 'Activity'},
         {accessor: 'forFullName', Header: 'For'},
-        {accessor: 'byFullName', Header: 'By'},
+        {accessor: 'approverFullName', Header: 'By'},
         {
             accessor: 'timestamp',
             Header: 'Date',
@@ -49,7 +49,7 @@ export default class ApproverActivityReport extends React.Component {
 
 
     getAdminDropDown = () => {
-        const Admins = UrbanSporkAPI.getAdminDropDown();
+        const Admins = UrbanSporkAPI.getApproverDropDown();
         Admins.then(data => this.setState({AdminList: data})).catch(() => this.setState({AdminList: []}));
     };
 
@@ -143,7 +143,7 @@ export default class ApproverActivityReport extends React.Component {
     render() {
         const AllAdmins = this.state.AdminList.map((Admin, index) => (
 
-            <option value={Admin.ApproverId} key={index} >{Admin.fullName}</option>
+            <option value={Admin.id} key={index} >{Admin.name}</option>
 
         ));
         return (
