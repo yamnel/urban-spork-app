@@ -2,9 +2,6 @@ import React from 'react';
 import {Col, Form, FormGroup, Input, Label} from 'reactstrap';
 
 
-
-
-
 export default class AddPosition extends React.Component {
 
     constructor(props){
