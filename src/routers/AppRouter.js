@@ -14,7 +14,7 @@ import SystemReport from "../components/SystemReport";
 import SystemActivityReport from "../components/SystemActivityReport";
 import ApproverActivityReport from "../components/ApproverActivityReport";
 import UserDetailComponent from "../components/UserDetailComponent";
-
+import NonAdminView from "../components/NonAdminView";
 
 const AppRouter = () => (
     <BrowserRouter>
@@ -22,7 +22,7 @@ const AppRouter = () => (
             <HeaderComponent/>
             <div className={"lower-canvas"}>
                 <Switch>
-                    <Route path={"/"} component={DashboardPage} exact={true}/>
+                    <Route path={"/"} component={NonAdminView} exact={true}/>
                     <Route path="/users" component={UserManagementPage}/>
 
                     {/*<Route path="/requests" component={PendingRequests}/>*/}
