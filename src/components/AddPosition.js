@@ -24,8 +24,7 @@ export default class AddPosition extends React.Component {
 
     updateDepartment = (department) => {
 
-        this.props.DepartmentSelected(department);
-
+        this.props.DepartmentSelected(department);ß
     };
 
     getAllDepartments = () => {
@@ -47,9 +46,8 @@ export default class AddPosition extends React.Component {
                                 Position Title:
                             </Label>
                         </Col>
-
                         <Col md={8}>
-                            <Input placeholder={this.state.InputPlaceholder} id={"Title"} onChange={evt => {this.onInputChange(evt)}}/>
+                            <Input placeholder={this.state.InputPlaceholder} id={"Title"} onChange={e => {this.onInputChange(e)}}/>
                         </Col>
                     </FormGroup>
                     <br/>

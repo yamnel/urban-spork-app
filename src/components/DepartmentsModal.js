@@ -35,7 +35,7 @@ class DepartmentsModal extends React.Component {
             Name:this.state.department,
         };
 
-         UrbanSporkAPI.addDepartment(newDepartment);
+        UrbanSporkAPI.addDepartment(newDepartment);
 
         this.setState({edit: false});
         this.forceUpdate();
@@ -59,13 +59,11 @@ class DepartmentsModal extends React.Component {
     };
 
     updateDepartment = (department) => {
-        console.log(department);
         this.setState({department: department});
         this.toggleAddButton(department);
     };
 
     updateDepartmentForRemove = (department) => {
-        console.log('Department is: '+department);
         this.setState({department: department});
         this.toggleAddButton(department);
     };

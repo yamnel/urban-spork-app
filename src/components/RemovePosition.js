@@ -10,52 +10,65 @@ export default class RemovePosition extends React.Component {
         this.state = {
             InputPlaceholder: 'Enter title of position',
             Departments: props.department,
-            Positions: []
+            Positions: [],
+            PositionId: ""
         };
 
         this.onInputChange = this.onInputChange.bind(this);
         this.updateDepartment = this.updateDepartment.bind(this);
     }
 
-
     onInputChange = (data) => {
-        console.log("onInputChange");
         this.props.AddButton(data.target.value);
 
     };
 
-    updatePositionList = (department) => {
+    handleOnPositionChange = (e) => {
+        const selectedOptionIndex =  e.target.options.selectedIndex;
+        const option = e.target.options[selectedOptionIndex];
+        this.props.positionId(option.id);
+        this.props.position(e.target.value);
+    }
 
-        return UrbanSporkAPI.getPositionByDepartment(department);
-    };
-
-    updateDepartment = (department) => {
-
-        this.props.DepartmentSelected(department);
-        let positions = this.updatePositionList(department);
-
-        positions.then(() => {
-        this.setState({Positions: positions})
-        });
-    };
+    // updatePositionList = (department) => {
+    //     return UrbanSporkAPI.getPositionByDepartment(department.target.value);
+    // };
 
     updateDepartment = (department) => {
 
         this.props.DepartmentSelected(department);
-        let positions = this.updatePositionList(department);
+        // let positions = this.updatePositionList(department);
 
-        positions.then(() => {
-            this.setState({Positions: positions})
+        let positions = UrbanSporkAPI.getPositionByDepartment(department.target.value);
+
+
+        positions.then((positions) => {
+            this.setState({Positions: positions}),
+            this.getAllPositions
         });
+    };
+
+    getAllPositions = () => {
+
+        let positionList = this.state.Positions.map((Position, index) => (
+
+            <option id={Position.id} key={index + 1} >{Position.positionName}</option>
+
+        ));
+
+        positionList.unshift(<option key={0} ></option>)
+        return positionList;
     };
 
     getAllDepartments = () => {
 
-        return this.state.Departments.map((Department, index) => (
-
-            <option key={index} >{Department.name}</option>
-
+        let options = this.state.Departments.map((Department, index) => (
+            <option key={index + 1} >{Department.name}</option>
         ));
+
+        options.unshift(<option key={0} ></option>)
+
+        return options
     };
 
     render() {
@@ -79,20 +92,18 @@ export default class RemovePosition extends React.Component {
                     </FormGroup>
                     <br/>
                     <FormGroup row>
-                        <Col md={4}>
+                        <Col md={6}>
                             <Label color={"muted"}  for={"Title"}>
                                 Position Title:
                             </Label>
                         </Col>
 
-                        <Col md={8}>
-
                             <Col md={6}>
-                                <Input type="select"  id="SelectPosition" onChange={e => {this.updateDepartment(e)}}>
-                                    {this.state.Positions}
+                                <Input type="select"  id="SelectPosition" onChange={e => {this.handleOnPositionChange(e)}}>
+                                    {this.getAllPositions()}
                                 </Input>
                             </Col>
-                        </Col>
+
                     </FormGroup>
                 </Form>
             </div>

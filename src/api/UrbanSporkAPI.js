@@ -179,24 +179,22 @@ export class UrbanSporkAPI extends React.Component{
     }
 
     static removePosition(data) {
-        return fetch('http://localhost:5000/api/position/remove',{
-            body: JSON.stringify(data),
+        return fetch(`http://localhost:5000/api/position/remove?id=${data}`, {
             credentials: 'same-origin',
-            headers: {
+                headers: {
                 'content-type': 'application/json'
             },
             method: 'PUT'
         }).then(response => {
             return response.json();
         }).catch(error => {
-
-            console.log('data', data);
-            console.log('error', error);
+            console.log(error);
+            return [];
         });
     }
 
     static getPositionByDepartment(department) {
-        return fetch(`http://localhost:5000/api/position/getByDepartment?name=${department.name}`).then(response => {
+        return fetch(`http://localhost:5000/api/position/getByDepartment?name=${department}`).then(response => {
             return response.json();
         }).catch(error => {
             console.log(error);

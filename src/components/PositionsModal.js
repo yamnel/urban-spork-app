@@ -13,11 +13,11 @@ class PositionsModal extends React.Component {
 
         this.state = {
             edit: true,
-            addPositions: props.addPositions,
+            addPositions: props.addPosition,
             addPositionsButton: false,
             department: "",
-            position: "",
-
+            positionId: "",
+            position: ""
         };
     }
 
@@ -32,12 +32,19 @@ class PositionsModal extends React.Component {
     handleOnClose = () => {
         this.props.toggle();
         this.setState({edit: true});
-        this.props.addPositions(true)
+        this.props.addPosition(true);
     };
 
-    handleOnSave = () => {
+    handleOnAdd = () => {
 
         this.createPosition();
+
+        this.setState({edit: false});
+    };
+
+    handleOnRemove = () => {
+
+        this.removePosition();
 
         this.setState({edit: false});
     };
@@ -52,12 +59,12 @@ class PositionsModal extends React.Component {
         UrbanSporkAPI.addPosition(request);
     };
 
-    titleUpdated = (data) => {
-        console.log("titleUpdated:  " + data);
-        this.setState((prevState)=> {
-            console.log('The position was', prevState.position);
-            console.log('The new data for the position is ', data);
+    removePosition= () => {
+        UrbanSporkAPI.removePosition(this.state.positionId);
+    };
 
+    titleUpdated = (data) => {
+        this.setState((prevState)=> {
             return {position: data}
         });
 
@@ -65,11 +72,10 @@ class PositionsModal extends React.Component {
     };
 
     toggleAddButton = () => {
-        console.log("The position Title: " + this.state.position);
-        console.log("The Department Selected: " + this.state.department);
-        this.state.position.length > 0 && this.state.department.length > 0 ? this.setState({addPositionsButton: true}) : this.setState({addPositionsButton: false});
+        (!this.state.positionId.length && this.state.department.length > 0) ?
+            this.setState({addPositionsButton: true})
+            : this.setState({addPositionsButton: false});
     };
-
 
     updateDepartment = (department) => {
         console.log(department.target.value);
@@ -77,28 +83,42 @@ class PositionsModal extends React.Component {
         this.toggleAddButton();
     };
 
+    updatePositionId = (positionId) => {
+        console.log(positionId);
+        this.setState({positionId: positionId});
+    }
+
+    updatePosition = (positionTitle) => {
+        console.log(positionTitle);
+        this.setState({position: positionTitle});
+        this.toggleAddButton();
+    }
+
     render() {
         return (
             <div>
                 <Modal isOpen={this.props.isOpen} toggle={this.handleOnClose}>
-                    <ModalHeader toggle={this.handleOnClose}>Position</ModalHeader>
+                    <ModalHeader toggle={this.handleOnClose}>{this.props.addPosition? "Add ":"Remove "}Position</ModalHeader>
                     <ModalBody>
                         <div>
                             {this.state.edit ?
-                                (this.state.addPositions ? <AddPosition DepartmentSelected={this.updateDepartment}
-                                             AddButton={this.titleUpdated} department={this.props.departments}/> :
-                                    <RemovePosition DepartmentSelected={this.updateDepartment}
-                                                 AddButton={this.titleUpdated} department={this.props.departments}/>) :
+                                ((this.state.addPosition === true) ?
+                                    <AddPosition DepartmentSelected={this.updateDepartment}
+                                             AddButton={this.titleUpdated} department={this.props.departments}/>:<RemovePosition DepartmentSelected={this.updateDepartment}
+                                                 AddButton={this.titleUpdated} department={this.props.departments}
+                                                    positionId={this.updatePositionId}
+                                                 position={this.updatePosition}/>) :
                                 <h6><FontAwesomeIcon icon={faCheckCircle}/> {" "} The position with the title
-                                    of {this.state.position}, was added to the {this.state.department} department!</h6>
+                                    of {this.state.position}, was {this.state.addPositions ? "added to " : "removed from "} the {this.state.department} department!</h6>
                             }
                         </div>
                     </ModalBody>
                     <ModalFooter>
                         {this.state.edit ?
-                            <Button color="success" onClick={this.handleOnSave}
+                            <Button color={this.props.addPosition ? "success" : "danger"}
+                                    onClick={this.props.addPosition ? this.handleOnAdd : this.handleOnRemove}
                                     disabled={!this.state.addPositionsButton}
-                                    active={!this.state.edit}>Add Position</Button>
+                                    active={!this.state.edit}>{this.props.addPosition? "Add ":"Remove "} Position</Button>
                             :
                             <Button color="success" onClick={this.handleOnClose}
                                     active={this.state.edit}>Done</Button>
