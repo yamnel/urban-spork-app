@@ -1,10 +1,12 @@
 import React from 'react';
 import {Button, Col, Form, FormGroup, Input, Label} from "reactstrap";
+import UrbanSporkAPI from '../api/UrbanSporkAPI';
 
 
 export default class LogInPage extends React.Component {
     state = {
-        admin: false
+        admin: false,
+        LogginList: [],
     };
 
     styles = {
@@ -14,20 +16,29 @@ export default class LogInPage extends React.Component {
         paddingTop: '300px'
     };
 
+    componentWillMount() {
+        this.getLogginDropDown();
+    };
+
+    getLogginDropDown = () => {
+        const Admins = UrbanSporkAPI.getLogginDropDown();
+        Admins.then(data => this.setState({LogginList: data})).catch(() => this.setState({LogginList: []}));
+    };
 
     onSelectHandle = (e) => {
-        const selected = e.target.options.selectedIndex;
-
-        if (e.target.options[selected].id === "1") {
-            this.setState({admin: true});
-
-        } else {
-            this.setState({admin: false});
-        }
+        const selected = e.target.value;
+        console.log(selected);
+        this.setState({admin:selected})
     };
 
     render() {
+        const LogginUsers = this.state.LogginList.map((User, index) => (
+
+            <option style={User.isAdmin? {color:"#FF0000"}: {color:"#000000"} } value={User.isAdmin} key={index} >{User.fullName}</option>
+
+        ));
         return (
+
             <div>
                 <Form style={this.styles} inline>
                     <FormGroup>
@@ -35,8 +46,7 @@ export default class LogInPage extends React.Component {
                         <Col>
                             <Input onChange={(e) => this.onSelectHandle(e)} type={'select'} name="adminSelector" id="adminSelector">
                                 <option/>
-                                <option id={1}>Admin</option>
-                                <option id={2}>Non-Admin</option>
+                                {LogginUsers}
                             </Input>
                         </Col>
 

@@ -95,6 +95,15 @@ export class UrbanSporkAPI extends React.Component {
         });
     }
 
+    static getLogginDropDown() {
+        return fetch('http://localhost:5000/api/user/getloginusers').then(response => {
+            return response.json();
+        }).catch(error => {
+            console.log(error);
+            return [];
+        });
+    }
+
     static getApproverDropDown() {
         return fetch('http://localhost:5000/api/user/getApproverList').then(response => {
             return response.json();
