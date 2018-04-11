@@ -124,7 +124,7 @@ export default class CreateUser extends React.Component {
                                         Last Name:
                                     </Label>
                                     <Col sm={20}>
-                                        <Input id={"lastName"} name={"lastName"}
+                                        <Input required id={"lastName"} name={"lastName"}
                                                onChange={e => this.handleOnChange(e)}/>
                                     </Col>
                                 </FormGroup>

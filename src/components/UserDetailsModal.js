@@ -10,7 +10,8 @@ class UserDetailsModal extends React.Component {
 
     state = {
         edit: false,
-        permissionsModalIsOpen: false
+        permissionsModalIsOpen: false,
+        selectedPermissions: [],
     };
 
     handleOnEdit = () => {
@@ -66,7 +67,24 @@ class UserDetailsModal extends React.Component {
     componentWillReceiveProps(nextProps) {
         if (nextProps.isOpen) {
             const userData = UrbanSporkAPI.getUserFullData(nextProps.userId);
-            userData.then(data => this.setState({userData: data, originalData: data}))
+            userData
+                .then(data => {
+                    this.setState({userData: data, originalData: data});
+
+
+                    return Object.keys(props.userData.permissionList).map((permission, i) => {
+                        if (props.userData.permissionList[permission].permissionStatus === 'Granted') {
+                            return {
+                                permissionID: permission,
+                                permissionName: props.userData.permissionList[permission].permissionName,
+                            }
+                        }
+                    })
+                })
+                .then((selectedPermissions) => {
+
+                    this.setState({selectedPermissions})
+                })
         }
     }
 
