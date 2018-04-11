@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import AppRouter from "../routers/AppRouter";
 import LogInPage from "./LogInPage";
 import {getUsersData} from "../actions/users";
-import {setManagerId} from "../actions/manager";
+import {setManagerName, setManagerId} from "../actions/manager";
 import {getAllPermissions} from "../actions/permissions";
 import NonAdminView from "./NonAdminView";
 
@@ -20,17 +20,19 @@ class AppComponent extends React.Component{
     };
 
 
-    accessGranted = (managerId = '928956b8-6dba-4878-bb96-e91f98b0ffed') => {
+    accessGranted = () => {
         // this.setState(() => ({allowAccess: true, managerId}));
         console.log('called the store functions');
         this.props.getUserData();
-        this.props.setManagerId(managerId);
         this.props.getAllPermissions();
     };
 
 
-    isAdmin = (b) => {
+    isAdmin = (b, id, name) => {
         console.log(b);
+
+        this.props.setManagerId(id);
+        this.props.setManagerName(name);
 
         if (b == "true") {
             console.log("Admin User");
@@ -66,6 +68,7 @@ class AppComponent extends React.Component{
 const mapDispatchToProps = (dispatch)  => ({
     getUserData: () => dispatch(getUsersData()),
     setManagerId: (id) => dispatch(setManagerId(id)),
+    setManagerName: (name) => dispatch(setManagerName(name)),
     getAllPermissions: () => dispatch(getAllPermissions()),
 });
 

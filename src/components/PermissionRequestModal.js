@@ -112,7 +112,7 @@ class PermissionRequestModal extends React.Component {
 }
 const mapStateToProps = (state) => {
     return {
-        managerId: state.manager
+        managerId: state.manager.id
     }
 };
 export default connect(mapStateToProps)(PermissionRequestModal);

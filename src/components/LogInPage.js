@@ -27,14 +27,20 @@ export default class LogInPage extends React.Component {
 
     onSelectHandle = (e) => {
         const selected = e.target.value;
-        console.log(selected);
-        this.setState({admin:selected})
+        console.dir(e.target);
+        const selectedId = e.target.options[e.target.options.selectedIndex].id;
+        const selectedName = e.target.options[e.target.options.selectedIndex].text;
+        console.log(selectedName);
+
+        this.setState({id: selectedId});
+        this.setState({name: selectedName});
+        this.setState({admin: selected});
     };
 
     render() {
         const LogginUsers = this.state.LogginList.map((User, index) => (
 
-            <option style={User.isAdmin? {color:"#FF0000"}: {color:"#000000"} } value={User.isAdmin} key={index} >{User.fullName}</option>
+            <option  id={User.userId} style={User.isAdmin? {color:"#FF0000"}: {color:"#000000"} } value={User.isAdmin} key={index} >{User.fullName}</option>
 
         ));
         return (
@@ -52,7 +58,7 @@ export default class LogInPage extends React.Component {
 
                     </FormGroup>
                     {' '}
-                    <Button onClick={()=> this.props.isAdmin(this.state.admin)}>Submit</Button>
+                    <Button onClick={()=> this.props.isAdmin(this.state.admin, this.state.id, this.state.name)}>Submit</Button>
                 </Form>
             </div>
         )
