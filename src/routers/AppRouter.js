@@ -22,7 +22,7 @@ const AppRouter = () => (
             <HeaderComponent/>
             <div className={"lower-canvas"}>
                 <Switch>
-                    <Route path={"/"} component={NonAdminView} exact={true}/>
+                    <Route path={"/"} component={DashboardPage} exact={true}/>
                     <Route path="/users" component={UserManagementPage}/>
 
                     {/*<Route path="/requests" component={PendingRequests}/>*/}
