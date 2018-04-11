@@ -14,7 +14,7 @@ import SystemReport from "../components/SystemReport";
 import SystemActivityReport from "../components/SystemActivityReport";
 import ApproverActivityReport from "../components/ApproverActivityReport";
 import UserDetailComponent from "../components/UserDetailComponent";
-
+import NonAdminView from "../components/NonAdminView";
 
 const AppRouter = () => (
     <BrowserRouter>
@@ -33,7 +33,7 @@ const AppRouter = () => (
                         component={UserDetailComponent}
                     />
 
-                    <Route path={"/reports/off-boarding-report"} component={OffBoardingReport}/>
+                    
                     <Route path={"/reports/system-report"} component={SystemReport}/>
                     <Route path={"/reports/system-activity-report"} component={SystemActivityReport}/>
                     <Route path={"/reports/approver-activity-report"} component={ApproverActivityReport}/>
