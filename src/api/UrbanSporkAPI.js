@@ -2,15 +2,25 @@ import React from "react";
 import {connect} from "react-redux";
 import {getUsersData} from "../actions/users";
 
-export class UrbanSporkAPI extends React.Component{
+export class UrbanSporkAPI extends React.Component {
 
     static getAllUsers() {
-        return fetch('http://localhost:5000/api/user/getusermanagementprojection').then(response => {
-            console.log('UserData gotten');
-            return response.json();
-        }).catch(error => {
-            return error;
-        });
+        return fetch('http://localhost:5000/api/user/getusermanagementprojection')
+            .then(response => {
+                console.log('UserData gotten');
+                return response.json();
+            }).catch(error => {
+                return error;
+            });
+    }
+
+    static getAllPermissions() {
+        return fetch('http://localhost:5000/api/permission/getSystemDropdown')
+            .then(response => {
+                return response.json();
+            }).catch(error => {
+                return error;
+            });
     }
 
     // http://localhost:5000/api/user/id/6da06fc4-02cb-4ce3-b63f-112596fe6bff
@@ -132,7 +142,7 @@ export class UrbanSporkAPI extends React.Component{
     }
 
     static updateUserDetails(data) {
-        return fetch('http://localhost:5000/api/user/update',{
+        return fetch('http://localhost:5000/api/user/update', {
             body: JSON.stringify(data),
             credentials: 'same-origin',
             headers: {
@@ -148,7 +158,7 @@ export class UrbanSporkAPI extends React.Component{
     }
 
     static grantPermission(data) {
-        return fetch('http://localhost:5000/api/user/grantPermissions',{
+        return fetch('http://localhost:5000/api/user/grantPermissions', {
             body: JSON.stringify(data),
             credentials: 'same-origin',
             headers: {
@@ -164,7 +174,7 @@ export class UrbanSporkAPI extends React.Component{
     }
 
     static denyPermission(data) {
-        return fetch('http://localhost:5000/api/user/denyPermissions',{
+        return fetch('http://localhost:5000/api/user/denyPermissions', {
             body: JSON.stringify(data),
             credentials: 'same-origin',
             headers: {
@@ -197,7 +207,7 @@ export class UrbanSporkAPI extends React.Component{
 
 
     static createUser(data) {
-        return fetch('http://localhost:5000/api/user/createuser',{
+        return fetch('http://localhost:5000/api/user/createuser', {
             body: JSON.stringify(data),
             credentials: 'same-origin',
             headers: {
@@ -213,7 +223,7 @@ export class UrbanSporkAPI extends React.Component{
     }
 
     static addDepartment(data) {
-        return fetch('http://localhost:5000/api/department/create',{
+        return fetch('http://localhost:5000/api/department/create', {
             body: JSON.stringify(data),
             credentials: 'same-origin',
             headers: {
@@ -230,7 +240,7 @@ export class UrbanSporkAPI extends React.Component{
 }
 
 
-const mapDispatchToProps = (dispatch)  => ({
+const mapDispatchToProps = (dispatch) => ({
     getUsersData: () => dispatch(getUsersData())
 });
 export default connect(undefined, mapDispatchToProps)(UrbanSporkAPI);

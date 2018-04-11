@@ -1,31 +1,29 @@
 import React from 'react';
-import {Form, FormGroup, Input, Label, Button} from "reactstrap";
+import {Button, Col, Form, FormGroup, Input, Label} from "reactstrap";
 
 
 export default class LogInPage extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     state = {
-        managerId: undefined
+        admin: false
     };
 
     styles = {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center',
+        // alignItems: 'center',
         paddingTop: '300px'
     };
 
-    handleOnCLick = () => {
-        if (this.state.managerId === '23') {
-            this.props.accessGranted(this.state.managerId);
-        }
-    };
 
-    handleOnChange = (e) => {
-        this.setState({managerId: e.target.value});
+    onSelectHandle = (e) => {
+        const selected = e.target.options.selectedIndex;
+
+        if (e.target.options[selected].id === "1") {
+            this.setState({admin: true});
+
+        } else {
+            this.setState({admin: false});
+        }
     };
 
     render() {
@@ -33,16 +31,18 @@ export default class LogInPage extends React.Component {
             <div>
                 <Form style={this.styles} inline>
                     <FormGroup>
-                        <Label for="exampleEmail" hidden>Email</Label>
-                        <Input type="email" name="email" id="exampleEmail" placeholder="Email"/>
+                        <Label for="adminSelector">Select User</Label>
+                        <Col>
+                            <Input onChange={(e) => this.onSelectHandle(e)} type={'select'} name="adminSelector" id="adminSelector">
+                                <option/>
+                                <option id={1}>Admin</option>
+                                <option id={2}>Non-Admin</option>
+                            </Input>
+                        </Col>
+
                     </FormGroup>
                     {' '}
-                    <FormGroup>
-                        <Label for="examplePassword" hidden>Password</Label>
-                        <Input onChange={this.handleOnChange} type="password" name="password" id="examplePassword" placeholder="Password" />
-                    </FormGroup>
-                    {' '}
-                    <Button onClick={this.handleOnCLick}>Submit</Button>
+                    <Button onClick={()=> this.props.isAdmin(this.state.admin)}>Submit</Button>
                 </Form>
             </div>
         )

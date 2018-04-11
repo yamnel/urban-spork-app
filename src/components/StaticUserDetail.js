@@ -94,7 +94,7 @@ const StaticUserDetail = (props) => (
                     <Input type="select" name="permissions" id="permissions"  multiple>
                         {
                             Object.keys(props.userData.permissionList).map((permission, i) => {
-                                if (props.userData.permissionList[permission].permissionStatus !== 'Revoked') {
+                                if (props.userData.permissionList[permission].permissionStatus === 'Granted') {
                                     return <option key={i} value={i} id={permission}>{props.userData.permissionList[permission].permissionName}</option>;
                                 }
                             })
