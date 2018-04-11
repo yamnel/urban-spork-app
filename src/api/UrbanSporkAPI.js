@@ -77,8 +77,8 @@ export class UrbanSporkAPI extends React.Component{
         });
     }
 
-    static getAdminDropDown() {
-        return fetch('http://localhost:5000/api/permission/getSystemDropdown').then(response => {
+    static getApproverDropDown() {
+        return fetch('http://localhost:5000/api/user/getApproverList').then(response => {
             return response.json();
         }).catch(error => {
             console.log(error);
