@@ -57,11 +57,21 @@ export default class Company extends React.Component {
         return ({PositionsModalIsOpen: !this.state.PositionsModalIsOpen});
     });
 
-    openDepartmentsModal = () => {
+    openAddDepartmentsModal = () => {
         var payload = this.getDepartments();
 
         payload.then(data => {
-            this.setState({departments: data})
+            this.setState({departments: data}),
+            this.setState({addDepartment: true})
+        }).then(() => this.toggleDepartmentsModal())
+    };
+
+    openRemoveDepartmentsModal = () => {
+        var payload = this.getDepartments();
+
+        payload.then(data => {
+            this.setState({departments: data}),
+            this.setState({addDepartment: false})
         }).then(() => this.toggleDepartmentsModal())
     };
 
@@ -173,12 +183,12 @@ export default class Company extends React.Component {
                                         <Row>
                                             <Col md={6}>
                                    <span>
-                                       <Button color={"success"}  onClick={this.openDepartmentsModal}>Add New</Button>
+                                       <Button color={"success"}  onClick={this.openAddDepartmentsModal}>Add New</Button>
                                    </span>
                                             </Col>
                                             <Col md={6}>
                                       <span>
-                                          <Button color={"danger"}  onClick={this.openDepartmentsModal}>Remove</Button>
+                                          <Button color={"danger"}  onClick={this.openRemoveDepartmentsModal}>Remove</Button>
                                       </span>
                                             </Col>
                                         </Row>

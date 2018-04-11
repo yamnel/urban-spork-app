@@ -13,7 +13,8 @@ class DepartmentsModal extends React.Component {
     state = {
         edit: true,
         addDepartmentButton: false,
-        department:""
+        departmentToAdd:"",
+        departmentToRemove:""
     };
 
     handleOnCancel = () => {
@@ -29,18 +30,24 @@ class DepartmentsModal extends React.Component {
         this.setState({edit: true});
     };
 
-    handleOnSave = () => {
-        // let newDepartment = {
-        //     Name:this.state.department,
-        // };
-        //
-        //  UrbanSporkAPI.addDepartment(newDepartment);
+    handleOnAdd = () => {
+        let newDepartment = {
+            Name:this.state.department,
+        };
+
+         UrbanSporkAPI.addDepartment(newDepartment);
+
+        this.setState({edit: false});
+        this.forceUpdate();
+    };
+
+    handleOnRemove = () => {
 
         let department = {
             Name:this.state.department,
         };
 
-         UrbanSporkAPI.removeDepartmentByName(department);
+        UrbanSporkAPI.removeDepartmentByName(department);
         this.setState({edit: false});
         this.forceUpdate();
     };
@@ -52,33 +59,42 @@ class DepartmentsModal extends React.Component {
     };
 
     updateDepartment = (department) => {
-        console.log(department.target.value);
-        this.setState({department: department.target.value});
-        this.toggleAddButton();
+        console.log(department);
+        this.setState({department: department});
+        this.toggleAddButton(department);
     };
 
-// {/*<AddDepartment AddButton = {this.toggleAddButton}/>:*/}
-
+    updateDepartmentForRemove = (department) => {
+        console.log('Department is: '+department);
+        this.setState({department: department});
+        this.toggleAddButton(department);
+    };
 
     render() {
         return (
             <div>
                 <Modal isOpen={this.props.isOpen} toggle={this.handleOnClose}>
-                    <ModalHeader toggle={this.handleOnClose}>Add Department</ModalHeader>
+                    <ModalHeader toggle={this.handleOnClose}>{this.props.addDepartment ? "Add":"Remove"} Department</ModalHeader>
                     <ModalBody>
                         <div>
                             {this.state.edit?
-
-                                <RemoveDepartment DepartmentSelected={this.updateDepartment}
-                                             AddButton={this.titleUpdated} department={this.props.department}/> :
-                                <h6><FontAwesomeIcon icon={faCheckCircle}/> {" "} The {this.state.department} department was successfully added!</h6>
+                                (this.props.addDepartment ?
+                                    <AddDepartment updateDepartment={this.updateDepartment}
+                                                   AddButton={this.titleUpdated} department={this.props.department}/>
+                                    :
+                                <RemoveDepartment DepartmentSelected={this.updateDepartmentForRemove}
+                                             AddButton={this.titleUpdated} department={this.props.department}/>):
+                                <h6><FontAwesomeIcon icon={faCheckCircle}/> {" "} The {this.state.department}{' '}
+                                 department was successfully {this.props.addDepartment? "added":"removed"}!</h6>
                             }
                         </div>
                     </ModalBody>
                     <ModalFooter>
                         {this.state.edit?
-                            <Button color="success" onClick={this.handleOnSave} disabled={!this.state.addDepartmentButton}
-                                    active={!this.state.edit}>Add Department</Button>
+                            <Button color={this.props.addDepartment? "success":"danger"}
+                                    onClick={this.props.addDepartment? this.handleOnAdd : this.handleOnRemove}
+                                    disabled={!this.state.addDepartmentButton}
+                                    active={!this.state.edit}>{this.props.addDepartment? "Add":"Remove"} Department</Button>
                             :
                             <Button color="success" onClick={this.handleOnClose}
                                     active={this.state.edit}>Done</Button>
@@ -87,8 +103,6 @@ class DepartmentsModal extends React.Component {
                         <Button color="secondary" onClick={this.handleOnCancel}
                                 active={this.state.edit}>Cancel</Button>
                         }{' '}
-
-
                     </ModalFooter>
                 </Modal>
             </div>

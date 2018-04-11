@@ -39,6 +39,16 @@ export default class RemovePosition extends React.Component {
         });
     };
 
+    updateDepartment = (department) => {
+
+        this.props.DepartmentSelected(department);
+        let positions = this.updatePositionList(department);
+
+        positions.then(() => {
+            this.setState({Positions: positions})
+        });
+    };
+
     getAllDepartments = () => {
 
         return this.state.Departments.map((Department, index) => (
@@ -78,7 +88,7 @@ export default class RemovePosition extends React.Component {
                         <Col md={8}>
 
                             <Col md={6}>
-                                <Input type="select"  id="SelectDepartment" onChange={e => {this.updateDepartment(e)}}>
+                                <Input type="select"  id="SelectPosition" onChange={e => {this.updateDepartment(e)}}>
                                     {this.state.Positions}
                                 </Input>
                             </Col>

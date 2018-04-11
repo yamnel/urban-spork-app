@@ -11,15 +11,11 @@ export default class AddDepartment extends React.Component {
         this.state = {
             InputPlaceholder: 'Enter department name',
         };
-
-        // this.onInputChange = this.onInputChange.bind(this);
-
     }
 
 
-    onInputChange = (data) => {
-        this.props.AddButton(data.target.value);
-
+    onInputChange = (e) => {
+        this.props.updateDepartment(e.target.value);
     };
 
     render() {
@@ -34,7 +30,7 @@ export default class AddDepartment extends React.Component {
                         </Col>
 
                         <Col md={6} >
-                            <Input placeholder={this.state.InputPlaceholder} id={"Name"} onChange={evt => {this.onInputChange(evt)}}/>
+                            <Input placeholder={this.state.InputPlaceholder} id={"Name"} onChange={e => {this.onInputChange(e)}}/>
                         </Col>
                     </FormGroup>
 

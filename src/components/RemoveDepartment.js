@@ -1,5 +1,6 @@
 import React from 'react';
 import {Col, Form, FormGroup, Input, Label} from 'reactstrap';
+import UrbanSporkAPI from '../api/UrbanSporkAPI';
 
 export default class RemoveDepartments extends React.Component {
 
@@ -10,9 +11,6 @@ export default class RemoveDepartments extends React.Component {
             InputPlaceholder: 'Enter title of position',
             Departments: props.department,
         };
-
-        this.onInputChange = this.onInputChange.bind(this);
-        this.updateDepartment = this.updateDepartment.bind(this);
     }
 
 
@@ -22,10 +20,9 @@ export default class RemoveDepartments extends React.Component {
 
     };
 
-    updateDepartment = (department) => {
-
-        this.props.DepartmentSelected(department);
-
+    updateDepartmentField = (department) => {
+        console.log(department.target.value)
+        this.props.DepartmentSelected(department.target.value);
     };
 
     getAllDepartments = () => {
@@ -49,7 +46,7 @@ export default class RemoveDepartments extends React.Component {
                         </Col>
 
                         <Col md={6}>
-                            <Input type="select"  id="SelectDepartment" onChange={e => {this.updateDepartment(e)}}>
+                            <Input type="select"  id="SelectDepartment" onChange={e => {this.updateDepartmentField(e)}}>
                                 {this.getAllDepartments()}
 
                             </Input>

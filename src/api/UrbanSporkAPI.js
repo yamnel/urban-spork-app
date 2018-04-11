@@ -128,7 +128,7 @@ export class UrbanSporkAPI extends React.Component{
     }
 
     static removeDepartmentByName(data) {
-        return fetch('http://localhost:5000/api/department/remove',{
+        return fetch('http://localhost:5000/api/department/removeByName',{
             body: JSON.stringify(data),
             credentials: 'same-origin',
             headers: {
