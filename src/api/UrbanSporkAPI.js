@@ -113,6 +113,7 @@ export class UrbanSporkAPI extends React.Component{
     static addDepartment(data) {
         return fetch('http://localhost:5000/api/department/create',{
             body: JSON.stringify(data),
+            credentials: 'same-origin',
             headers: {
                 'content-type': 'application/json'
             },
@@ -126,9 +127,27 @@ export class UrbanSporkAPI extends React.Component{
         });
     }
 
+    static removeDepartmentByName(data) {
+        return fetch('http://localhost:5000/api/department/remove',{
+            body: JSON.stringify(data),
+            credentials: 'same-origin',
+            headers: {
+                'content-type': 'application/json'
+            },
+            method: 'PUT'
+        }).then(response => {
+            return response.json();
+        }).catch(error => {
+
+            console.log('data', data);
+            console.log('error', error);
+        });
+    }
+
     static addSystem(data) {
         return fetch('http://localhost:5000/api/permission/create',{
             body: JSON.stringify(data),
+            credentials: 'same-origin',
             headers: {
                 'content-type': 'application/json'
             },
@@ -139,6 +158,49 @@ export class UrbanSporkAPI extends React.Component{
 
             console.log('data', data);
             console.log('error', error);
+        });
+    }
+
+    static addPosition(data) {
+        return fetch('http://localhost:5000/api/position/create',{
+            body: JSON.stringify(data),
+            credentials: 'same-origin',
+            headers: {
+                'content-type': 'application/json'
+            },
+            method: 'POST'
+        }).then(response => {
+            return response.json();
+        }).catch(error => {
+
+            console.log('data', data);
+            console.log('error', error);
+        });
+    }
+
+    static removePosition(data) {
+        return fetch('http://localhost:5000/api/position/remove',{
+            body: JSON.stringify(data),
+            credentials: 'same-origin',
+            headers: {
+                'content-type': 'application/json'
+            },
+            method: 'PUT'
+        }).then(response => {
+            return response.json();
+        }).catch(error => {
+
+            console.log('data', data);
+            console.log('error', error);
+        });
+    }
+
+    static getPositionByDepartment(department) {
+        return fetch(`http://localhost:5000/api/position/getByDepartment?name=${department.name}`).then(response => {
+            return response.json();
+        }).catch(error => {
+            console.log(error);
+            return [];
         });
     }
 }

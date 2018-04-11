@@ -4,6 +4,7 @@ import {faCheckCircle} from '@fortawesome/fontawesome-free-solid'
 import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 import AddDepartment from "./AddDepartment";
 import UrbanSporkAPI from "../api/UrbanSporkAPI";
+import RemoveDepartment from "./RemoveDepartment";
 
 
 class DepartmentsModal extends React.Component {
@@ -12,7 +13,7 @@ class DepartmentsModal extends React.Component {
     state = {
         edit: true,
         addDepartmentButton: false,
-        department:"",
+        department:""
     };
 
     handleOnCancel = () => {
@@ -29,11 +30,17 @@ class DepartmentsModal extends React.Component {
     };
 
     handleOnSave = () => {
-        let newDepartment = {
+        // let newDepartment = {
+        //     Name:this.state.department,
+        // };
+        //
+        //  UrbanSporkAPI.addDepartment(newDepartment);
+
+        let department = {
             Name:this.state.department,
         };
 
-         UrbanSporkAPI.addDepartment(newDepartment);
+         UrbanSporkAPI.removeDepartmentByName(department);
         this.setState({edit: false});
         this.forceUpdate();
     };
@@ -44,6 +51,14 @@ class DepartmentsModal extends React.Component {
 
     };
 
+    updateDepartment = (department) => {
+        console.log(department.target.value);
+        this.setState({department: department.target.value});
+        this.toggleAddButton();
+    };
+
+// {/*<AddDepartment AddButton = {this.toggleAddButton}/>:*/}
+
 
     render() {
         return (
@@ -53,7 +68,9 @@ class DepartmentsModal extends React.Component {
                     <ModalBody>
                         <div>
                             {this.state.edit?
-                                <AddDepartment AddButton = {this.toggleAddButton}/>:
+
+                                <RemoveDepartment DepartmentSelected={this.updateDepartment}
+                                             AddButton={this.titleUpdated} department={this.props.department}/> :
                                 <h6><FontAwesomeIcon icon={faCheckCircle}/> {" "} The {this.state.department} department was successfully added!</h6>
                             }
                         </div>

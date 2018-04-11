@@ -3,17 +3,23 @@ import {Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 import {faCheckCircle} from '@fortawesome/fontawesome-free-solid'
 import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 import AddPosition from "./AddPosition";
+import UrbanSporkAPI from '../api/UrbanSporkAPI';
+import RemovePosition from "./RemovePosition";
 
 class PositionsModal extends React.Component {
 
+    constructor(props) {
+        super();
 
-    state = {
-        edit: true,
-        addPositionsButton: false,
-        department: "",
-        position: "",
+        this.state = {
+            edit: true,
+            addPositions: props.addPositions,
+            addPositionsButton: false,
+            department: "",
+            position: "",
 
-    };
+        };
+    }
 
     handleOnCancel = () => {
         if (!this.state.edit) {
@@ -26,11 +32,24 @@ class PositionsModal extends React.Component {
     handleOnClose = () => {
         this.props.toggle();
         this.setState({edit: true});
+        this.props.addPositions(true)
     };
 
     handleOnSave = () => {
 
+        this.createPosition();
+
         this.setState({edit: false});
+    };
+
+    createPosition= () => {
+
+        var request = {
+            PositionName: this.state.position,
+            DepartmentName: this.state.department
+        };
+
+        UrbanSporkAPI.addPosition(request);
     };
 
     titleUpdated = (data) => {
@@ -62,12 +81,14 @@ class PositionsModal extends React.Component {
         return (
             <div>
                 <Modal isOpen={this.props.isOpen} toggle={this.handleOnClose}>
-                    <ModalHeader toggle={this.handleOnClose}>Add Position</ModalHeader>
+                    <ModalHeader toggle={this.handleOnClose}>Position</ModalHeader>
                     <ModalBody>
                         <div>
                             {this.state.edit ?
-                                <AddPosition DepartmentSelected={this.updateDepartment}
-                                             AddButton={this.titleUpdated} departments={this.props.departments}/> :
+                                (this.state.addPositions ? <AddPosition DepartmentSelected={this.updateDepartment}
+                                             AddButton={this.titleUpdated} department={this.props.departments}/> :
+                                    <RemovePosition DepartmentSelected={this.updateDepartment}
+                                                 AddButton={this.titleUpdated} department={this.props.departments}/>) :
                                 <h6><FontAwesomeIcon icon={faCheckCircle}/> {" "} The position with the title
                                     of {this.state.position}, was added to the {this.state.department} department!</h6>
                             }

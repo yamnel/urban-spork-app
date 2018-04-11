@@ -52,23 +52,10 @@ class SystemModal extends React.Component {
         };
 
         UrbanSporkAPI.addSystem(newSystem)
-            .then( (response)=>{
-                if(response.status === 200){
-                    console.log("thennnnnnnnn", response);
+            .then(() => {
                     this.setState({edit: false})
                     this.setState({systemName: "", systemLogoURL: "", systemDescription: ""});
-                }
-                else{
-                    console.log("elseeeee")
-                    this.setState({edit: false})
-                    this.setState({systemName: "", systemLogoURL: "", systemDescription: ""});
-                }
-
-
-            })
-            .catch(
-                alert("Error!!!")
-            );
+               });
 
         // this.forceUpdate();
 
@@ -92,7 +79,7 @@ class SystemModal extends React.Component {
     };
 
     componentDidUpdate(){
-        const fields = this.state.systemLogoURL.length > 0 && this.state.systemDescription.length > 0 && this.state.systemName.length > 0;
+        const fields = this.state.systemDescription.length > 0 && this.state.systemName.length > 0;
 
         console.log('fields ', fields);
         console.log('butt ', this.state.addSystemButton);

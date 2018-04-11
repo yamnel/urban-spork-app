@@ -1,7 +1,8 @@
 import React from 'react';
 import {Col, Form, FormGroup, Input, Label} from 'reactstrap';
+import UrbanSporkAPI from '../api/UrbanSporkAPI';
 
-export default class AddPosition extends React.Component {
+export default class RemovePosition extends React.Component {
 
     constructor(props){
         super();
@@ -9,6 +10,7 @@ export default class AddPosition extends React.Component {
         this.state = {
             InputPlaceholder: 'Enter title of position',
             Departments: props.department,
+            Positions: []
         };
 
         this.onInputChange = this.onInputChange.bind(this);
@@ -22,10 +24,19 @@ export default class AddPosition extends React.Component {
 
     };
 
+    updatePositionList = (department) => {
+
+        return UrbanSporkAPI.getPositionByDepartment(department);
+    };
+
     updateDepartment = (department) => {
 
         this.props.DepartmentSelected(department);
+        let positions = this.updatePositionList(department);
 
+        positions.then(() => {
+        this.setState({Positions: positions})
+        });
     };
 
     getAllDepartments = () => {
@@ -42,18 +53,6 @@ export default class AddPosition extends React.Component {
             <div>
                 <Form>
                     <FormGroup row>
-                        <Col md={4}>
-                            <Label color={"muted"}  for={"Title"}>
-                                Position Title:
-                            </Label>
-                        </Col>
-
-                        <Col md={8}>
-                            <Input placeholder={this.state.InputPlaceholder} id={"Title"} onChange={evt => {this.onInputChange(evt)}}/>
-                        </Col>
-                    </FormGroup>
-                    <br/>
-                    <FormGroup row>
                         <Col md={6}>
                             <Label for="SelectDepartment">
                                 Select Department
@@ -68,7 +67,23 @@ export default class AddPosition extends React.Component {
                         </Col>
 
                     </FormGroup>
+                    <br/>
+                    <FormGroup row>
+                        <Col md={4}>
+                            <Label color={"muted"}  for={"Title"}>
+                                Position Title:
+                            </Label>
+                        </Col>
 
+                        <Col md={8}>
+
+                            <Col md={6}>
+                                <Input type="select"  id="SelectDepartment" onChange={e => {this.updateDepartment(e)}}>
+                                    {this.state.Positions}
+                                </Input>
+                            </Col>
+                        </Col>
+                    </FormGroup>
                 </Form>
             </div>
         )

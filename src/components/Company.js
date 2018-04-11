@@ -1,22 +1,56 @@
 import React from 'react';
-import {Card, CardBody, CardText, CardTitle, Row, Col} from 'reactstrap';
-import {faUniversalAccess, faBuilding, faCogs} from '@fortawesome/fontawesome-free-solid'
+import {Badge, Button, Card, CardBody, CardText, CardTitle, Row, Col} from 'reactstrap';
+import {faUniversalAccess, faBuilding, faCogs, faIdBadge} from '@fortawesome/fontawesome-free-solid'
 import FontAwesomeIcon from "@fortawesome/react-fontawesome";
-import SystemDetailModal from './SystemDetailModal'
+import UrbanSporkAPI from "../api/UrbanSporkAPI";
 import DepartmentsModal from './DepartmentsModal'
 import PositionsModal from './PositionsModal'
 import SystemModal from "./SystemModal";
+import {faTasks} from "@fortawesome/fontawesome-free-solid/index.es";
 
 export default class Company extends React.Component {
 
     constructor(props) {
         super(props);
 
-        this.state = {PositionsModalIsOpen:false, DepartmentsModalIsOpen:false, SystemModalIsOpen: false};
+        this.state = {
+            addPositions: true,
+            addDepartment: true,
+            PositionsModalIsOpen:false,
+            DepartmentsModalIsOpen:false,
+            SystemModalIsOpen: false,
+            departments: []
+        };
     }
 
-    openPositionsModal = () => {
-        this.togglePositionsModal();
+    getDepartments = () => {
+        return  UrbanSporkAPI.getDepartments();
+    };
+
+    openAddPositionsModal = () => {
+
+        var payload = this.getDepartments();
+
+        payload.then(data => {
+            this.setState({departments: data}),
+            this.setState({addPositions: true})
+        }).then(() => this.togglePositionsModal())
+    };
+
+    openRemovePositionsModal = () => {
+
+        console.log("Get Departments was called");
+
+        var payload = this.getDepartments();
+
+
+        payload.then(data => {
+            this.setState({departments: data}),
+            this.setState({addPositions: false})
+        }).then(() =>
+
+            this.togglePositionsModal()
+        )
     };
 
     togglePositionsModal = () => this.setState(() => {
@@ -24,7 +58,11 @@ export default class Company extends React.Component {
     });
 
     openDepartmentsModal = () => {
-        this.toggleDepartmentsModal();
+        var payload = this.getDepartments();
+
+        payload.then(data => {
+            this.setState({departments: data})
+        }).then(() => this.toggleDepartmentsModal())
     };
 
     toggleDepartmentsModal = () => this.setState(() => {
@@ -44,16 +82,20 @@ export default class Company extends React.Component {
         return ({SystemModalIsOpen: !this.state.SystemModalIsOpen});
     });
 
+    styles = {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        textAlign: 'center',
+        height: 100
+    };
+
     render() {
 
         return(
             <div>
-                <div style={{alignContent: "center"}}>
-                    <Row style =
-                             {{
-                                 height: 100,
-                                 alignContent: "center"
-                             }}>
+                <div >
+                    <Row style={this.styles}>
                         <Col sm="8">
                             <h1 align="center">Company Management</h1>
                             <hr width={500} color="#000000"/>
@@ -65,7 +107,7 @@ export default class Company extends React.Component {
                             }}>
                         {/*<Col/>*/}
                         <Col sm={3}>
-                            <Card body onClick={this.openSystemDetailModal} className="text-center"
+                            <Card body className="text-center"
                                   style=
                                       {{
                                           borderWidth: 1,
@@ -85,13 +127,28 @@ export default class Company extends React.Component {
 
                                 <CardTitle>Manage Systems</CardTitle>
 
-                                <CardText>Click here to manage Systems.</CardText>
+                                <CardBody>
+                                    <Col md={12}>
+                                        <Row>
+                                            <Col md={6}>
+                                   <span>
+                                       <Button color={"success"}  onClick={this.openSystemDetailModal}>Add New</Button>
+                                   </span>
+                                            </Col>
+                                            <Col md={6}>
+                                      <span>
+                                          <Button color={"danger"}  onClick={this.openSystemDetailModal}>Remove</Button>
+                                      </span>
+                                            </Col>
+                                        </Row>
+                                    </Col>
+                                </CardBody>
 
                             </Card>
                         </Col>
 
                         <Col sm={3}>
-                            <Card body onClick={this.openDepartmentsModal} className="text-center"
+                            <Card body className="text-center"
                                   style=
                                       {{
                                           borderWidth: 1,
@@ -111,13 +168,28 @@ export default class Company extends React.Component {
 
                                 <CardTitle>Manage Departments</CardTitle>
 
-                                <CardText>Click here to manage Departments.</CardText>
+                                <CardBody>
+                                    <Col md={12}>
+                                        <Row>
+                                            <Col md={6}>
+                                   <span>
+                                       <Button color={"success"}  onClick={this.openDepartmentsModal}>Add New</Button>
+                                   </span>
+                                            </Col>
+                                            <Col md={6}>
+                                      <span>
+                                          <Button color={"danger"}  onClick={this.openDepartmentsModal}>Remove</Button>
+                                      </span>
+                                            </Col>
+                                        </Row>
+                                    </Col>
+                                </CardBody>
 
                             </Card>
                         </Col>
 
                         <Col sm={3}>
-                            <Card body onClick={this.openPositionsModal} className="text-center"
+                            <Card body  className="text-center"
                                   style=
                                       {{
                                           borderWidth: 1,
@@ -128,7 +200,7 @@ export default class Company extends React.Component {
 
                                 <CardBody>
 
-                                    <FontAwesomeIcon icon={faUniversalAccess}  size="10x"
+                                    <FontAwesomeIcon icon={faIdBadge}  size="10x"
                                                      style={{
                                                          color: "#0066cc"
                                                      }}/>
@@ -137,17 +209,78 @@ export default class Company extends React.Component {
 
                                 <CardTitle>Manage Positions</CardTitle>
 
-                                <CardText>Click here to manage Positions.</CardText>
+                                <CardBody>
+                                    <Col md={12}>
+                                        <Row>
+                                            <Col md={6}>
+                                   <span>
+                                       <Button color={"success"}  onClick={this.openAddPositionsModal}>Add New</Button>
+                                   </span>
+                                            </Col>
+                                            <Col md={6}>
+                                      <span>
+                                          <Button color={"danger"}  onClick={this.openRemovePositionsModal}>Remove</Button>
+                                      </span>
+                                            </Col>
+                                        </Row>
+                                    </Col>
+                                </CardBody>
+
+                            </Card>
+                        </Col>
+
+                        <Col sm={3}>
+                            <Card body className="text-center"
+                                  style=
+                                      {{
+                                          borderWidth: 1,
+                                          borderColor: "#00bdff",
+                                          borderLeftWidth:3,
+                                          borderBottomWidth: 3
+                                      }}>
+
+                                <CardBody>
+
+                                    <FontAwesomeIcon icon={faTasks}  size="10x"
+                                                     style={{
+                                                         color: "#00bdff"
+                                                     }}/>
+
+                                </CardBody>
+
+                                <CardTitle>Manage Templates</CardTitle>
+
+                                <CardBody>
+                                    <Col md={12}>
+                                        <Row>
+                                            <Col md={6}>
+                                   <span>
+                                       <Button color={"success"}  onClick={this.openDepartmentsModal}>Add New</Button>
+                                   </span>
+                                            </Col>
+                                            <Col md={6}>
+                                      <span>
+                                          <Button color={"danger"}  onClick={this.openDepartmentsModal}>Remove</Button>
+                                      </span>
+                                            </Col>
+                                        </Row>
+                                    </Col>
+                                </CardBody>
 
                             </Card>
                         </Col>
                     </Row>
                 </div>
 
-                {/*<PositionsModal isOpen={this.state.PositionsModalIsOpen}*/}
-                                {/*toggle={this.togglePositionsModal}/>*/}
+                <PositionsModal departments={this.state.departments}
+                                isOpen={this.state.PositionsModalIsOpen}
+                                toggle={this.togglePositionsModal}
+                                addPosition={this.state.addPositions}/>
 
-                <DepartmentsModal isOpen={this.state.DepartmentsModalIsOpen} toggle={this.toggleDepartmentsModal}/>
+                <DepartmentsModal isOpen={this.state.DepartmentsModalIsOpen}
+                                  toggle={this.toggleDepartmentsModal}
+                                  department={this.state.departments}
+                                  addDepartment={this.state.addDepartment}/>
 
                 <SystemModal isOpen={this.state.SystemModalIsOpen} toggle={this.toggleModalIsOpen}/>
             </div>

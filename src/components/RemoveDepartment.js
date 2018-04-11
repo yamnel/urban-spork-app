@@ -1,7 +1,7 @@
 import React from 'react';
 import {Col, Form, FormGroup, Input, Label} from 'reactstrap';
 
-export default class AddPosition extends React.Component {
+export default class RemoveDepartments extends React.Component {
 
     constructor(props){
         super();
@@ -41,18 +41,6 @@ export default class AddPosition extends React.Component {
         return(
             <div>
                 <Form>
-                    <FormGroup row>
-                        <Col md={4}>
-                            <Label color={"muted"}  for={"Title"}>
-                                Position Title:
-                            </Label>
-                        </Col>
-
-                        <Col md={8}>
-                            <Input placeholder={this.state.InputPlaceholder} id={"Title"} onChange={evt => {this.onInputChange(evt)}}/>
-                        </Col>
-                    </FormGroup>
-                    <br/>
                     <FormGroup row>
                         <Col md={6}>
                             <Label for="SelectDepartment">
