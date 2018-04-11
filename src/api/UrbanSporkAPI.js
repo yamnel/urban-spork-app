@@ -67,6 +67,14 @@ export class UrbanSporkAPI extends React.Component{
         });
     }
 
+    static getRequestsByID(payload) {
+        return fetch(`http://localhost:5000/api/permission/getPendingRequestsById?id=${payload.UserID}`).then(response => {
+            return response.json();
+        }).catch(error => {
+            console.log(error);
+            return [];
+        });
+    }
 
     static getSystemsDropDown() {
         return fetch('http://localhost:5000/api/permission/getSystemDropdown').then(response => {
@@ -139,6 +147,22 @@ export class UrbanSporkAPI extends React.Component{
 
     static denyPermission(data) {
         return fetch('http://localhost:5000/api/user/denyPermissions',{
+            body: JSON.stringify(data),
+            credentials: 'same-origin',
+            headers: {
+                'content-type': 'application/json'
+            },
+            method: 'PUT'
+        }).then(response => {
+            return response.json();
+        }).catch(error => {
+            console.log(data);
+            console.log(error);
+        });
+    }
+
+    static requestPermission(data) {
+        return fetch('http://localhost:5000/api/user/requestPermissions',{
             body: JSON.stringify(data),
             credentials: 'same-origin',
             headers: {

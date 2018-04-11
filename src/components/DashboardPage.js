@@ -30,15 +30,10 @@ export default class DashboardPage extends React.Component {
 
     constructor(props) {
         super(props);
-
-        this.toggle = this.toggle.bind(this);
         this.state = {
             data: [],
             ReportResults: [],
-            PositionsModalIsOpen: false,
-            DepartmentsModalIsOpen: false,
-            SystemModalIsOpen: false,
-            dropdownOpen: false,
+
         };
     }
 
@@ -55,44 +50,6 @@ export default class DashboardPage extends React.Component {
         });
     };
 
-    toggle() {
-        this.setState({
-            dropdownOpen: !this.state.dropdownOpen
-        });
-    }
-
-    openPositionsModal = () => {
-        this.togglePositionsModal();
-    };
-
-    togglePositionsModal = () => this.setState(() => {
-        const Departments = UrbanSporkAPI.getDepartments();
-        Departments.then(data => {
-            this.setState({Departments: data})
-
-        })
-            .then(() => (this.setState({PositionsModalIsOpen: !this.state.PositionsModalIsOpen})));
-    });
-
-    openDepartmentsModal = () => {
-        this.toggleDepartmentsModal();
-    };
-
-    toggleDepartmentsModal = () => this.setState(() => {
-        return ({DepartmentsModalIsOpen: !this.state.DepartmentsModalIsOpen});
-    });
-
-    openSystemDetailModal = () => {
-        // this.setUserData(selectedUserData.id);
-        this.toggleModalIsOpen();
-
-        //proof that is stays in the old state
-        // console.log(`The new state field selectedUserId is ${this.state.selectedUserId}`);
-    };
-
-    toggleModalIsOpen = () => this.setState(() => {
-        return ({SystemModalIsOpen: !this.state.SystemModalIsOpen});
-    });
 
     getReport = (ID) => {
         let payload = {
@@ -103,11 +60,6 @@ export default class DashboardPage extends React.Component {
             EnablePaging: false,
         };
         return UrbanSporkAPI.getSystemReport(payload);
-        // const ReportData = UrbanSporkAPI.getSystemActivityReport(payload);
-        // ReportData.then(data => {
-        //     this.setState({ReportResults: data})
-        // })
-        // this.formatReport();
     };
 
     formatReport = () => {
