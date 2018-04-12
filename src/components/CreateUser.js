@@ -75,7 +75,7 @@ export default class CreateUser extends React.Component {
         textAlign: 'center'
     };
 
-    handleOnCancel = () => this.props.history.push("/users");
+    handleOnCancel = () => this.props.history.push("/users");f
 
     handleOnChange = (e) => {
         this.setState({[e.target.name]: e.target.value});

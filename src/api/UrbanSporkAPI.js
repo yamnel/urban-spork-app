@@ -113,6 +113,15 @@ export class UrbanSporkAPI extends React.Component {
         });
     }
 
+    static getUserHistory(userID){
+        return fetch(`http://localhost:5000/api/user/getUserHistory?UserId=${userID}`).then(response => {
+            return response.json();
+        }).catch(error => {
+            console.log(error);
+            return [];
+        });
+    }
+
     static getSystemReport(systemID){
         return fetch(`http://localhost:5000/api/user/getSystemReport?PermissionId=${systemID.PermissionId}`).then(response => {
             return response.json();
