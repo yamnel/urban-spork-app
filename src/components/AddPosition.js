@@ -17,7 +17,6 @@ export default class AddPosition extends React.Component {
 
 
     onInputChange = (data) => {
-        console.log("onInputChange");
         this.props.AddButton(data.target.value);
 
     };

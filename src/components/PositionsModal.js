@@ -78,18 +78,15 @@ class PositionsModal extends React.Component {
     };
 
     updateDepartment = (department) => {
-        console.log(department.target.value);
         this.setState({department: department.target.value});
         this.toggleAddButton();
     };
 
     updatePositionId = (positionId) => {
-        console.log(positionId);
         this.setState({positionId: positionId});
     }
 
     updatePosition = (positionTitle) => {
-        console.log(positionTitle);
         this.setState({position: positionTitle});
         this.toggleAddButton();
     }

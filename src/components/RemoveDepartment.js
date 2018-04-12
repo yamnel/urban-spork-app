@@ -1,17 +1,13 @@
 import React from 'react';
 import {Col, Form, FormGroup, Input, Label} from 'reactstrap';
-import UrbanSporkAPI from '../api/UrbanSporkAPI';
 
 export default class RemoveDepartments extends React.Component {
 
-    constructor(props){
-        super();
 
-        this.state = {
-            InputPlaceholder: 'Enter title of position',
-            Departments: props.department,
+       state = {
+            Departments: this.props.departments,
         };
-    }
+
 
 
     onInputChange = (data) => {
@@ -21,17 +17,20 @@ export default class RemoveDepartments extends React.Component {
     };
 
     updateDepartmentField = (department) => {
-        console.log(department.target.value)
         this.props.DepartmentSelected(department.target.value);
     };
 
     getAllDepartments = () => {
 
-        return this.state.Departments.map((Department, index) => (
+        let options =  this.state.Departments.map((Department, index) => (
 
-            <option key={index} >{Department.name}</option>
+            <option key={index + 1} >{Department.name}</option>
 
         ));
+
+        options.unshift(<option key={0} ></option>)
+
+        return options
     };
 
     render() {

@@ -81,10 +81,6 @@ class SystemModal extends React.Component {
     componentDidUpdate(){
         const fields = this.state.systemDescription.length > 0 && this.state.systemName.length > 0;
 
-        console.log('fields ', fields);
-        console.log('butt ', this.state.addSystemButton);
-
-
         if(fields && this.state.addSystemButton === false){
 
             this.setState({addSystemButton: fields})
@@ -93,8 +89,6 @@ class SystemModal extends React.Component {
         if(fields === false && this.state.addSystemButton === true){
             this.setState({addSystemButton: false})
         }
-
-        console.log('componenDidUpdate was called ONCE')
     }
 
     render() {

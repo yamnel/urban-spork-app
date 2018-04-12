@@ -1,12 +1,12 @@
 import React from 'react';
-import {Badge, Button, Card, CardBody, CardText, CardTitle, Row, Col} from 'reactstrap';
-import {faUniversalAccess, faBuilding, faCogs, faIdBadge} from '@fortawesome/fontawesome-free-solid'
-import FontAwesomeIcon from "@fortawesome/react-fontawesome";
+import {Row, Col} from 'reactstrap';
+import {faBuilding, faCogs, faIdBadge, faTasks} from '@fortawesome/fontawesome-free-solid'
 import UrbanSporkAPI from "../api/UrbanSporkAPI";
-import DepartmentsModal from './DepartmentsModal'
-import PositionsModal from './PositionsModal'
+import DepartmentsModal from './DepartmentsModal';
+import PositionsModal from './PositionsModal';
+import TemplateModal from './TemplateModal';
 import SystemModal from "./SystemModal";
-import {faTasks} from "@fortawesome/fontawesome-free-solid/index.es";
+import CompanyCard from'./CompanyCard';
 
 export default class Company extends React.Component {
 
@@ -16,20 +16,19 @@ export default class Company extends React.Component {
         this.state = {
             addPositions: true,
             addDepartment: true,
+            addTemplate: true,
             PositionsModalIsOpen:false,
             DepartmentsModalIsOpen:false,
             SystemModalIsOpen: false,
-            departments: []
+            TemplateModalIsOpen: false,
+            departments: [],
+            templates: []
         };
     }
 
-    getDepartments = () => {
-        return  UrbanSporkAPI.getDepartments();
-    };
-
     openAddPositionsModal = () => {
 
-        var payload = this.getDepartments();
+        var payload = UrbanSporkAPI.getDepartments();
 
         payload.then(data => {
             this.setState({departments: data}),
@@ -39,9 +38,7 @@ export default class Company extends React.Component {
 
     openRemovePositionsModal = () => {
 
-        console.log("Get Departments was called");
-
-        var payload = this.getDepartments();
+        var payload = UrbanSporkAPI.getDepartments();
 
 
         payload.then(data => {
@@ -58,7 +55,7 @@ export default class Company extends React.Component {
     });
 
     openAddDepartmentsModal = () => {
-        var payload = this.getDepartments();
+        var payload = UrbanSporkAPI.getDepartments();
 
         payload.then(data => {
             this.setState({departments: data}),
@@ -67,7 +64,7 @@ export default class Company extends React.Component {
     };
 
     openRemoveDepartmentsModal = () => {
-        var payload = this.getDepartments();
+        var payload = UrbanSporkAPI.getDepartments();
 
         payload.then(data => {
             this.setState({departments: data}),
@@ -79,13 +76,30 @@ export default class Company extends React.Component {
         return ({DepartmentsModalIsOpen: !this.state.DepartmentsModalIsOpen});
     });
 
+    openAddTemplateModal = () => {
+        var payload = UrbanSporkAPI.getTemplates();
+
+        payload.then(data => {
+            this.setState({templates: data}),
+                this.setState({addTemplate: true})
+        }).then(() => this.toggleTemplateModal())
+    };
+
+    openRemoveTemplateModal = () => {
+        var payload = UrbanSporkAPI.getTemplates();
+
+        payload.then(data => {
+            this.setState({templates: data}),
+                this.setState({addTemplate: false})
+        }).then(() => this.toggleTemplateModal())
+    };
+
+    toggleTemplateModal = () => this.setState(() => {
+        return ({TemplateModalIsOpen: !this.state.TemplateModalIsOpen});
+    });
+
     openSystemDetailModal = () => {
-
-        // this.setUserData(selectedUserData.id);
         this.toggleModalIsOpen();
-
-        //proof that is stays in the old state
-        // console.log(`The new state field selectedUserId is ${this.state.selectedUserId}`);
     };
 
     toggleModalIsOpen = () => this.setState(() => {
@@ -111,173 +125,29 @@ export default class Company extends React.Component {
                             <hr width={500} color="#000000"/>
                         </Col>
                     </Row>
-                    <Row style =
-                            {{
-                                alignContent: "center"
-                            }}>
-                        {/*<Col/>*/}
+                    <Row style = {{ alignContent: "center" }}>
                         <Col sm={3}>
-                            <Card body className="text-center"
-                                  style=
-                                      {{
-                                          borderWidth: 1,
-                                          borderColor: "#28a745",
-                                          borderLeftWidth:3,
-                                          borderBottomWidth: 3
-                                      }}>
-
-                                <CardBody>
-
-                                    <FontAwesomeIcon icon={faCogs} size="10x"
-                                                     style={{
-                                                         color: "#28a745"
-                                                     }}/>
-
-                                </CardBody>
-
-                                <CardTitle>Manage Systems</CardTitle>
-
-                                <CardBody>
-                                    <Col md={12}>
-                                        <Row>
-                                            <Col md={6}>
-                                   <span>
-                                       <Button color={"success"}  onClick={this.openSystemDetailModal}>Add New</Button>
-                                   </span>
-                                            </Col>
-                                            <Col md={6}>
-                                      <span>
-                                          <Button color={"danger"}  onClick={this.openSystemDetailModal}>Remove</Button>
-                                      </span>
-                                            </Col>
-                                        </Row>
-                                    </Col>
-                                </CardBody>
-
-                            </Card>
+                            <CompanyCard cardTitle={"Manage Systems"} color={"#28a745"}
+                                         fontAwesomeIcon={faCogs} addButtonOnClick={this.openSystemDetailModal}
+                                         removeButtonOnClick={this.openSystemDetailModal}/>
                         </Col>
 
                         <Col sm={3}>
-                            <Card body className="text-center"
-                                  style=
-                                      {{
-                                          borderWidth: 1,
-                                          borderColor: "#9933ff",
-                                          borderLeftWidth:3,
-                                          borderBottomWidth: 3
-                                      }}>
-
-                                <CardBody>
-
-                                    <FontAwesomeIcon icon={faBuilding}  size="10x"
-                                                     style={{
-                                                         color: "#9933ff"
-                                                     }}/>
-
-                                </CardBody>
-
-                                <CardTitle>Manage Departments</CardTitle>
-
-                                <CardBody>
-                                    <Col md={12}>
-                                        <Row>
-                                            <Col md={6}>
-                                   <span>
-                                       <Button color={"success"}  onClick={this.openAddDepartmentsModal}>Add New</Button>
-                                   </span>
-                                            </Col>
-                                            <Col md={6}>
-                                      <span>
-                                          <Button color={"danger"}  onClick={this.openRemoveDepartmentsModal}>Remove</Button>
-                                      </span>
-                                            </Col>
-                                        </Row>
-                                    </Col>
-                                </CardBody>
-
-                            </Card>
+                            <CompanyCard cardTitle={"Manage Departments"} color={"#9933ff"}
+                                         fontAwesomeIcon={faBuilding} addButtonOnClick={this.openAddDepartmentsModal}
+                                         removeButtonOnClick={this.openRemoveDepartmentsModal}/>
                         </Col>
 
                         <Col sm={3}>
-                            <Card body  className="text-center"
-                                  style=
-                                      {{
-                                          borderWidth: 1,
-                                          borderColor: "#0066cc",
-                                          borderLeftWidth:3,
-                                          borderBottomWidth: 3
-                                      }}>
-
-                                <CardBody>
-
-                                    <FontAwesomeIcon icon={faIdBadge}  size="10x"
-                                                     style={{
-                                                         color: "#0066cc"
-                                                     }}/>
-
-                                </CardBody>
-
-                                <CardTitle>Manage Positions</CardTitle>
-
-                                <CardBody>
-                                    <Col md={12}>
-                                        <Row>
-                                            <Col md={6}>
-                                   <span>
-                                       <Button color={"success"}  onClick={this.openAddPositionsModal}>Add New</Button>
-                                   </span>
-                                            </Col>
-                                            <Col md={6}>
-                                      <span>
-                                          <Button color={"danger"}  onClick={this.openRemovePositionsModal}>Remove</Button>
-                                      </span>
-                                            </Col>
-                                        </Row>
-                                    </Col>
-                                </CardBody>
-
-                            </Card>
+                            <CompanyCard cardTitle={"Manage Positions"} color={"#0066cc"}
+                                         fontAwesomeIcon={faIdBadge} addButtonOnClick={this.openAddPositionsModal}
+                                         removeButtonOnClick={this.openRemovePositionsModal}/>
                         </Col>
 
                         <Col sm={3}>
-                            <Card body className="text-center"
-                                  style=
-                                      {{
-                                          borderWidth: 1,
-                                          borderColor: "#00bdff",
-                                          borderLeftWidth:3,
-                                          borderBottomWidth: 3
-                                      }}>
-
-                                <CardBody>
-
-                                    <FontAwesomeIcon icon={faTasks}  size="10x"
-                                                     style={{
-                                                         color: "#00bdff"
-                                                     }}/>
-
-                                </CardBody>
-
-                                <CardTitle>Manage Templates</CardTitle>
-
-                                <CardBody>
-                                    <Col md={12}>
-                                        <Row>
-                                            <Col md={6}>
-                                   <span>
-                                       <Button color={"success"}  onClick={this.openDepartmentsModal}>Add New</Button>
-                                   </span>
-                                            </Col>
-                                            <Col md={6}>
-                                      <span>
-                                          <Button color={"danger"}  onClick={this.openDepartmentsModal}>Remove</Button>
-                                      </span>
-                                            </Col>
-                                        </Row>
-                                    </Col>
-                                </CardBody>
-
-                            </Card>
+                            <CompanyCard cardTitle={"Manage Templates"} color={"#00bdff"}
+                                         fontAwesomeIcon={faTasks} addButtonOnClick={this.openAddTemplateModal}
+                                         removeButtonOnClick={this.openRemoveTemplateModal}/>
                         </Col>
                     </Row>
                 </div>
@@ -289,10 +159,16 @@ export default class Company extends React.Component {
 
                 <DepartmentsModal isOpen={this.state.DepartmentsModalIsOpen}
                                   toggle={this.toggleDepartmentsModal}
-                                  department={this.state.departments}
+                                  departments={this.state.departments}
                                   addDepartment={this.state.addDepartment}/>
 
-                <SystemModal isOpen={this.state.SystemModalIsOpen} toggle={this.toggleModalIsOpen}/>
+                <SystemModal isOpen={this.state.SystemModalIsOpen}
+                             toggle={this.toggleModalIsOpen}/>
+
+                <TemplateModal isOpen={this.state.TemplateModalIsOpen}
+                                  toggle={this.toggleTemplateModal}
+                                  templates={this.state.templates}
+                                  addTemplate={this.state.addTemplate}/>
             </div>
         )
     }

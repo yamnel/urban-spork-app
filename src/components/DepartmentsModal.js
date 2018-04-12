@@ -1,6 +1,6 @@
 import React from 'react';
 import {Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
-import {faCheckCircle} from '@fortawesome/fontawesome-free-solid'
+import {faCheckCircle} from '@fortawesome/fontawesome-free-solid';
 import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 import AddDepartment from "./AddDepartment";
 import UrbanSporkAPI from "../api/UrbanSporkAPI";
@@ -9,12 +9,10 @@ import RemoveDepartment from "./RemoveDepartment";
 
 class DepartmentsModal extends React.Component {
 
-
     state = {
         edit: true,
         addDepartmentButton: false,
-        departmentToAdd:"",
-        departmentToRemove:""
+        departments: ""
     };
 
     handleOnCancel = () => {
@@ -32,7 +30,7 @@ class DepartmentsModal extends React.Component {
 
     handleOnAdd = () => {
         let newDepartment = {
-            Name:this.state.department,
+            Name:this.state.departments,
         };
 
         UrbanSporkAPI.addDepartment(newDepartment);
@@ -44,7 +42,7 @@ class DepartmentsModal extends React.Component {
     handleOnRemove = () => {
 
         let department = {
-            Name:this.state.department,
+            Name:this.state.departments,
         };
 
         UrbanSporkAPI.removeDepartmentByName(department);
@@ -53,18 +51,18 @@ class DepartmentsModal extends React.Component {
     };
 
     toggleAddButton = (data) => {
-        this.setState({department:data});
+        this.setState({departments:data});
         data.length > 0 ? this.setState({addDepartmentButton: true}): this.setState({addDepartmentButton: false});
 
     };
 
     updateDepartment = (department) => {
-        this.setState({department: department});
+        this.setState({departments: department});
         this.toggleAddButton(department);
     };
 
     updateDepartmentForRemove = (department) => {
-        this.setState({department: department});
+        this.setState({departments: department});
         this.toggleAddButton(department);
     };
 
@@ -78,11 +76,11 @@ class DepartmentsModal extends React.Component {
                             {this.state.edit?
                                 (this.props.addDepartment ?
                                     <AddDepartment updateDepartment={this.updateDepartment}
-                                                   AddButton={this.titleUpdated} department={this.props.department}/>
+                                                   AddButton={this.titleUpdated} department={this.props.departments}/>
                                     :
                                 <RemoveDepartment DepartmentSelected={this.updateDepartmentForRemove}
-                                             AddButton={this.titleUpdated} department={this.props.department}/>):
-                                <h6><FontAwesomeIcon icon={faCheckCircle}/> {" "} The {this.state.department}{' '}
+                                             AddButton={this.titleUpdated} departments={this.props.departments}/>):
+                                <h6><FontAwesomeIcon icon={faCheckCircle}/> {" "} The {this.state.departments}{' '}
                                  department was successfully {this.props.addDepartment? "added":"removed"}!</h6>
                             }
                         </div>

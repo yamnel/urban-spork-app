@@ -40,6 +40,15 @@ export class UrbanSporkAPI extends React.Component{
         });
     }
 
+    static getTemplates() {
+        return fetch('http://localhost:5000/api/permission/getTemplates').then(response => {
+            return response.json();
+        }).catch(error => {
+            console.log(error);
+            return [];
+        });
+    }
+
     static getSystemDashboard() {
         return fetch('http://localhost:5000/api/user/getSystemDashboard').then(response => {
             return response.json();
@@ -199,6 +208,23 @@ export class UrbanSporkAPI extends React.Component{
         }).catch(error => {
             console.log(error);
             return [];
+        });
+    }
+
+    static removeTemplate(data) {
+        return fetch('http://localhost:5000/api/permission/deletePermissionTemplate',{
+            body: JSON.stringify(data),
+            credentials: 'same-origin',
+            headers: {
+                'content-type': 'application/json'
+            },
+            method: 'PUT'
+        }).then(response => {
+            return response.json();
+        }).catch(error => {
+
+            console.log('data', data);
+            console.log('error', error);
         });
     }
 }
