@@ -4,30 +4,61 @@ import {connect} from "react-redux";
 import AppRouter from "../routers/AppRouter";
 import LogInPage from "./LogInPage";
 import {getUsersData} from "../actions/users";
-import {setManagerId} from "../actions/manager";
+import {setManagerName, setManagerId} from "../actions/manager";
+import {getAllPermissions} from "../actions/permissions";
+import NonAdminView from "./NonAdminView";
 
 
 class AppComponent extends React.Component{
 
     state = {
+        logIn: true,
+        isAdmin: undefined,
+        isNonAdmin: undefined,
         allowAccess: true,
         managerId: undefined
     };
 
 
-    accessGranted = (managerId = 23) => {
+    accessGranted = () => {
         // this.setState(() => ({allowAccess: true, managerId}));
-
+        console.log('called the store functions');
         this.props.getUserData();
-        this.props.setManagerId(parseInt(managerId));
+        this.props.getAllPermissions();
     };
+
+
+    isAdmin = (b, id, name) => {
+        console.log(b);
+
+        this.props.setManagerId(id);
+        this.props.setManagerName(name);
+
+        if (b == "true") {
+            console.log("Admin User");
+            this.setState({isAdmin: true});
+            this.setState({isNonAdmin: false});
+            this.setState({logIn: false});
+        } else {
+            console.log("Non-Admin User");
+
+            this.setState({isNonAdmin: true});
+            this.setState({isAdmin: false});
+            this.setState({logIn: false});
+        }
+    };
+
 
 
     render() {
         return (
             <div>
-                {this.accessGranted()}
-                {this.state.allowAccess? ( <AppRouter /> ) : ( <LogInPage accessGranted={this.accessGranted}/>)}
+                {}
+                {this.state.logIn  && <LogInPage isAdmin={this.isAdmin}/> }
+                {this.state.isAdmin && ( <AppRouter grantAccess={this.accessGranted()} /> )}
+                {this.state.isNonAdmin && (<NonAdminView/>)}
+                {/*{this.accessGranted()}*/}
+                {/*{this.state.allowAccess? ( <AppRouter /> ) : ( <LogInPage accessGranted={this.accessGranted}/>)}*/}
             </div>
         )
     }
@@ -36,7 +67,9 @@ class AppComponent extends React.Component{
 
 const mapDispatchToProps = (dispatch)  => ({
     getUserData: () => dispatch(getUsersData()),
-    setManagerId: (id) => dispatch(setManagerId(id))
+    setManagerId: (id) => dispatch(setManagerId(id)),
+    setManagerName: (name) => dispatch(setManagerName(name)),
+    getAllPermissions: () => dispatch(getAllPermissions()),
 });
 
 export default connect(undefined,mapDispatchToProps)(AppComponent)

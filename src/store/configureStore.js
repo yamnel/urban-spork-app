@@ -2,6 +2,7 @@ import {applyMiddleware, combineReducers, compose, createStore} from 'redux';
 import usersReducer from '../reducers/users';
 import filtersReducer from '../reducers/filters';
 import managerReducer from '../reducers/manager';
+import permissionsReducer from '../reducers/permissions';
 import thunk from 'redux-thunk';
 
 
@@ -12,7 +13,9 @@ export default () => {
         combineReducers({
             manager: managerReducer,
             users: usersReducer,
-            filters: filtersReducer
+            filters: filtersReducer,
+            permissions: permissionsReducer
+
         }),
 
         composeEnhancers(applyMiddleware(thunk))
