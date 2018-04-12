@@ -15,7 +15,14 @@ class SystemDetailModal extends React.Component {
     }
 
     state = {
-        edit: true
+        edit: true,
+        addSystemButton: false,
+        system:
+            {
+                name:"",
+                description:"",
+                logoURL:""
+            },
     };
 
     handleOnCancel = () => {
@@ -32,8 +39,15 @@ class SystemDetailModal extends React.Component {
     };
 
     handleOnSave = () => {
-        // UrbanSporkAPI.addSystem();
+        let newSystem = {
+            Name: this.state.system.name,
+            Description: this.state.system.description,
+            Image: this.state.system.logoURL
+        };
+
+        UrbanSporkAPI.addSystem(newSystem);
         this.setState({edit: false});
+        this.forceUpdate();
     };
 
 
@@ -46,7 +60,7 @@ class SystemDetailModal extends React.Component {
                         <div>
                             {this.state.edit?
                                 <EditSystemDetail/>:
-                                <StaticSystemDetail/>}
+                                <StaticSystemDetail props={this.state.system}/>}
                         </div>
                     </ModalBody>
                     <ModalFooter>

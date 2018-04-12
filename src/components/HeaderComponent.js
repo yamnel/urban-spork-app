@@ -28,6 +28,11 @@ const HeaderComponent = () => (
                     </NavItem>
                 }
 
+                <NavItem>
+                    <NavLink to={`/company`} activeClassName={"is-active"} tag={RouterNavLink}
+                             style={{whiteSpace: 'nowrap'}}>Company</NavLink>
+                </NavItem>
+
                 {/*<NavItem>*/}
                 {/*<NavLink to={"/requests"} activeClassName={"is-active"} tag={RouterNavLink} style={{whiteSpace: 'nowrap'}}>Pending Requests</NavLink>*/}
                 {/*</NavItem>*/}

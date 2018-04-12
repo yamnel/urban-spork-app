@@ -1,6 +1,7 @@
 import React from 'react';
 import {Col, Form, FormGroup, Input, Label, Button} from 'reactstrap';
 import Dropzone from 'react-dropzone'
+import UrbanSporkAPI from "../api/UrbanSporkAPI";
 
 
 export default class AddSystemDetailComponent extends React.Component {
@@ -15,16 +16,6 @@ export default class AddSystemDetailComponent extends React.Component {
     // handleOnChange = (e) => {
     //     console.log(e.target)
     // };
-
-    handleAddSystem = () => {
-        this.refs.dropzone.open();
-    };
-
-    onDrop = (files) => {
-        this.setState({
-            files: files
-        });
-    };
 
     render() {
         return(
@@ -49,13 +40,12 @@ export default class AddSystemDetailComponent extends React.Component {
                     </FormGroup>
 
                     <FormGroup row>
+                        <Label color={"muted"} sm={"3"} for={"systemDescription"}>
+                            System Logo URL:
+                        </Label>
                         <Col sm={20}>
-                            <Dropzone ref="dropzone" onDrop={this.onDrop}>
-                                <div><br/><br/>Click the "Add Logo" button to upload an image here!</div>
-                            </Dropzone>
-                            <Button color="info" onClick={this.handleAddSystem}>Add System Logo</Button>
+                            <Input id={"systemLogo"}/>
                         </Col>
-
                     </FormGroup>
                 </Form>
             </div>

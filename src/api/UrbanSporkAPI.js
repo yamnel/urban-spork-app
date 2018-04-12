@@ -50,6 +50,15 @@ export class UrbanSporkAPI extends React.Component {
         });
     }
 
+    static getTemplates() {
+        return fetch('http://localhost:5000/api/permission/getTemplates').then(response => {
+            return response.json();
+        }).catch(error => {
+            console.log(error);
+            return [];
+        });
+    }
+
     static getSystemDashboard() {
         return fetch('http://localhost:5000/api/user/getSystemDashboard').then(response => {
             return response.json();
@@ -251,6 +260,116 @@ export class UrbanSporkAPI extends React.Component {
         }).then(response => {
             return response.json();
         }).catch(error => {
+
+            console.log('data', data);
+            console.log('error', error);
+        });
+    }
+
+    static removeDepartmentByName(data) {
+        return fetch('http://localhost:5000/api/department/removeByName',{
+            body: JSON.stringify(data),
+            credentials: 'same-origin',
+            headers: {
+                'content-type': 'application/json'
+            },
+            method: 'PUT'
+        }).then(response => {
+            return response.json();
+        }).catch(error => {
+
+            console.log('data', data);
+            console.log('error', error);
+        });
+    }
+
+    static addSystem(data) {
+        return fetch('http://localhost:5000/api/permission/create',{
+            body: JSON.stringify(data),
+            credentials: 'same-origin',
+            headers: {
+                'content-type': 'application/json'
+            },
+            method: 'POST'
+        }).then(response => {
+            return response.json();
+        }).catch(error => {
+
+            console.log('data', data);
+            console.log('error', error);
+        });
+    }
+
+    static addPosition(data) {
+        return fetch('http://localhost:5000/api/position/create',{
+            body: JSON.stringify(data),
+            credentials: 'same-origin',
+            headers: {
+                'content-type': 'application/json'
+            },
+            method: 'POST'
+        }).then(response => {
+            return response.json();
+        }).catch(error => {
+
+            console.log('data', data);
+            console.log('error', error);
+        });
+    }
+
+    static removePosition(data) {
+        return fetch(`http://localhost:5000/api/position/remove?id=${data}`, {
+            credentials: 'same-origin',
+                headers: {
+                'content-type': 'application/json'
+            },
+            method: 'PUT'
+        }).then(response => {
+            return response.json();
+        }).catch(error => {
+            console.log(error);
+            return [];
+        });
+    }
+
+    static getPositionByDepartment(department) {
+        return fetch(`http://localhost:5000/api/position/getByDepartment?name=${department}`).then(response => {
+            return response.json();
+        }).catch(error => {
+            console.log(error);
+            return [];
+        });
+    }
+
+    static addTemplate(data) {
+        return fetch('http://localhost:5000/api/permission/createPermissionTemplate',{
+            body: JSON.stringify(data),
+            credentials: 'same-origin',
+            headers: {
+                'content-type': 'application/json'
+            },
+            method: 'POST'
+        }).then(response => {
+            return response.json();
+        }).catch(error => {
+
+            console.log('data', data);
+            console.log('error', error);
+        });
+    }
+
+    static removeTemplate(data) {
+        return fetch('http://localhost:5000/api/permission/deletePermissionTemplate',{
+            body: JSON.stringify(data),
+            credentials: 'same-origin',
+            headers: {
+                'content-type': 'application/json'
+            },
+            method: 'PUT'
+        }).then(response => {
+            return response.json();
+        }).catch(error => {
+
             console.log('data', data);
             console.log('error', error);
         });

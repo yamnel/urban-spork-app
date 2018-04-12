@@ -1,25 +1,23 @@
 import React from 'react';
 import {Col, Form, FormGroup, Input, Label} from 'reactstrap';
 
-export default class AddPosition extends React.Component {
+export default class RemoveDepartments extends React.Component {
 
-    constructor(props){
-        super();
 
-        this.state = {
-            InputPlaceholder: 'Enter title of position',
-            Departments: props.department,
+       state = {
+            Departments: this.props.departments,
         };
-    }
+
 
 
     onInputChange = (data) => {
+        console.log("onInputChange");
         this.props.AddButton(data.target.value);
+
     };
 
-    updateDepartment = (department) => {
-
-        this.props.DepartmentSelected(department);
+    updateDepartmentField = (department) => {
+        this.props.DepartmentSelected(department.target.value);
     };
 
     getAllDepartments = () => {
@@ -39,7 +37,6 @@ export default class AddPosition extends React.Component {
         return(
             <div>
                 <Form>
-
                     <FormGroup row>
                         <Col md={6}>
                             <Label for="SelectDepartment">
@@ -48,22 +45,12 @@ export default class AddPosition extends React.Component {
                         </Col>
 
                         <Col md={6}>
-                            <Input type="select"  id="SelectDepartment" onChange={e => {this.updateDepartment(e)}}>
+                            <Input type="select"  id="SelectDepartment" onChange={e => {this.updateDepartmentField(e)}}>
                                 {this.getAllDepartments()}
+
                             </Input>
-                            <br/>
                         </Col>
 
-                        <FormGroup row>
-                            <Col ms={6}>
-                                <Label color={"muted"}  for={"Title"}>
-                                    Position Title
-                                </Label>
-                            </Col>
-                            <Col md={7}>
-                                <Input placeholder={"Enter title of position"} id={"Title"} onChange={e => {this.onInputChange(e)}}/>
-                            </Col>
-                        </FormGroup>
                     </FormGroup>
 
                 </Form>
