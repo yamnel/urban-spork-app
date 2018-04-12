@@ -146,6 +146,7 @@ const StaticUserDetail = (props) => (
         <div style={{marginLeft:200}}>
 
                     <div>
+                        <h6 style={{textAlign:"center"}}>{props.userData.fullName}'s History</h6>
                         <UserTable columns={columns} data={refactoredObject(props.userHistory)}/>
                     </div>
 
