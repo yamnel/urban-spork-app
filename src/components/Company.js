@@ -14,7 +14,7 @@ export default class Company extends React.Component {
         super(props);
 
         this.state = {
-            addPositions: true,
+            addPosition: true,
             addDepartment: true,
             addTemplate: true,
             PositionsModalIsOpen:false,
@@ -32,7 +32,7 @@ export default class Company extends React.Component {
 
         payload.then(data => {
             this.setState({departments: data}),
-            this.setState({addPositions: true})
+            this.setState({addPosition: true})
         }).then(() => this.togglePositionsModal())
     };
 
@@ -43,7 +43,7 @@ export default class Company extends React.Component {
 
         payload.then(data => {
             this.setState({departments: data}),
-            this.setState({addPositions: false})
+            this.setState({addPosition: false})
         }).then(() =>
 
             this.togglePositionsModal()
@@ -106,6 +106,10 @@ export default class Company extends React.Component {
         return ({SystemModalIsOpen: !this.state.SystemModalIsOpen});
     });
 
+    addPosition = (position) => {
+        this.setState({addPosition: position})
+    }
+
     styles = {
         flex: 1,
         justifyContent: 'center',
@@ -155,7 +159,7 @@ export default class Company extends React.Component {
                 <PositionsModal departments={this.state.departments}
                                 isOpen={this.state.PositionsModalIsOpen}
                                 toggle={this.togglePositionsModal}
-                                addPosition={this.state.addPositions}/>
+                                addPosition={this.state.addPosition}/>
 
                 <DepartmentsModal isOpen={this.state.DepartmentsModalIsOpen}
                                   toggle={this.toggleDepartmentsModal}

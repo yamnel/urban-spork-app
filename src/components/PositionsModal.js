@@ -32,7 +32,6 @@ class PositionsModal extends React.Component {
     handleOnClose = () => {
         this.props.toggle();
         this.setState({edit: true});
-        this.props.addPosition(true);
     };
 
     handleOnAdd = () => {
@@ -64,15 +63,14 @@ class PositionsModal extends React.Component {
     };
 
     titleUpdated = (data) => {
-        this.setState((prevState)=> {
-            return {position: data}
-        });
+        this.setState({position: data});
 
         this.toggleAddButton();
     };
 
     toggleAddButton = () => {
-        (!this.state.positionId.length && this.state.department.length > 0) ?
+
+        (this.state.position.length >= 1 && this.state.department.length > 0) ?
             this.setState({addPositionsButton: true})
             : this.setState({addPositionsButton: false});
     };
@@ -84,12 +82,12 @@ class PositionsModal extends React.Component {
 
     updatePositionId = (positionId) => {
         this.setState({positionId: positionId});
-    }
+    };
 
     updatePosition = (positionTitle) => {
         this.setState({position: positionTitle});
         this.toggleAddButton();
-    }
+    };
 
     render() {
         return (
@@ -99,14 +97,14 @@ class PositionsModal extends React.Component {
                     <ModalBody>
                         <div>
                             {this.state.edit ?
-                                ((this.state.addPosition === true) ?
+                                (this.props.addPosition ?
                                     <AddPosition DepartmentSelected={this.updateDepartment}
                                              AddButton={this.titleUpdated} department={this.props.departments}/>:<RemovePosition DepartmentSelected={this.updateDepartment}
                                                  AddButton={this.titleUpdated} department={this.props.departments}
                                                     positionId={this.updatePositionId}
                                                  position={this.updatePosition}/>) :
                                 <h6><FontAwesomeIcon icon={faCheckCircle}/> {" "} The position with the title
-                                    of {this.state.position}, was {this.state.addPositions ? "added to " : "removed from "} the {this.state.department} department!</h6>
+                                    of {this.state.position}, was {this.state.addPosition ? "added to " : "removed from "} the {this.state.department} department!</h6>
                             }
                         </div>
                     </ModalBody>

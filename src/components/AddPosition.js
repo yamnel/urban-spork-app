@@ -10,46 +10,36 @@ export default class AddPosition extends React.Component {
             InputPlaceholder: 'Enter title of position',
             Departments: props.department,
         };
-
-        this.onInputChange = this.onInputChange.bind(this);
-        this.updateDepartment = this.updateDepartment.bind(this);
     }
 
 
     onInputChange = (data) => {
         this.props.AddButton(data.target.value);
-
     };
 
     updateDepartment = (department) => {
 
-        this.props.DepartmentSelected(department);ß
+        this.props.DepartmentSelected(department);
     };
 
     getAllDepartments = () => {
 
-        return this.state.Departments.map((Department, index) => (
+        let options =  this.state.Departments.map((Department, index) => (
 
-            <option key={index} >{Department.name}</option>
+            <option key={index + 1} >{Department.name}</option>
 
         ));
+
+        options.unshift(<option key={0} ></option>)
+
+        return options
     };
 
     render() {
         return(
             <div>
                 <Form>
-                    <FormGroup row>
-                        <Col md={4}>
-                            <Label color={"muted"}  for={"Title"}>
-                                Position Title:
-                            </Label>
-                        </Col>
-                        <Col md={8}>
-                            <Input placeholder={this.state.InputPlaceholder} id={"Title"} onChange={e => {this.onInputChange(e)}}/>
-                        </Col>
-                    </FormGroup>
-                    <br/>
+
                     <FormGroup row>
                         <Col md={6}>
                             <Label for="SelectDepartment">
@@ -60,10 +50,20 @@ export default class AddPosition extends React.Component {
                         <Col md={6}>
                             <Input type="select"  id="SelectDepartment" onChange={e => {this.updateDepartment(e)}}>
                                 {this.getAllDepartments()}
-
                             </Input>
+                            <br/>
                         </Col>
 
+                        <FormGroup row>
+                            <Col ms={6}>
+                                <Label color={"muted"}  for={"Title"}>
+                                    Position Title
+                                </Label>
+                            </Col>
+                            <Col md={7}>
+                                <Input placeholder={"Enter title of position"} id={"Title"} onChange={e => {this.onInputChange(e)}}/>
+                            </Col>
+                        </FormGroup>
                     </FormGroup>
 
                 </Form>

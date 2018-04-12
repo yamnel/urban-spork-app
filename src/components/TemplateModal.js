@@ -77,7 +77,6 @@ export default class TemplateModal extends React.Component {
     };
 
     updateTemplatePermissionsForAdd = (templatePermissionsForAdd) => {
-        console.log(templatePermissionsForAdd);
         this.setState({templatePermissions: templatePermissionsForAdd});
         this.toggleAddButton(templatePermissionsForAdd);
     }

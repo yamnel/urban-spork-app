@@ -19,7 +19,6 @@ export default class AddTemplate extends React.Component {
     };
 
     onPermissionsChanged = (e) => {
-        console.log("Permission Event: ", e);
         this.setState({Permissions: e});
         this.props.templatePermissions(e);
     }
