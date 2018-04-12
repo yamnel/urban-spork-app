@@ -11,7 +11,6 @@ import {faFilePdf} from '@fortawesome/fontawesome-free-solid';
 
 
 
-
 export default class ApproverActivityReport extends React.Component {
     state = {
         Data: [],
@@ -62,6 +61,8 @@ export default class ApproverActivityReport extends React.Component {
         newData.then(data => this.setState({Data: data})).catch(() => this.setState({Data: []}));
 
     };
+
+
 
     formatReport = () => {
         let pdfBody = this.state.Data.map((entry, index) => (

@@ -48,6 +48,7 @@ const Header = (props) => (
 class UserDetailsComponents extends React.Component {
     state = {
         edit: false,
+        History: []
     };
 
     handleOnEdit = () => {
@@ -96,10 +97,27 @@ class UserDetailsComponents extends React.Component {
         const userId = this.props.match.params.id;
         const userData = UrbanSporkAPI.getUserFullData(userId);
         console.log('user id ', userId);
-        userData.then(data => this.setState({userData: data, originalData: data}))
+        userData.then(data => this.setState({userData: data, originalData: data}));
+        const userHistory = UrbanSporkAPI.getUserHistory(userId);
+        userHistory.then(data => {
+            this.setState({History: data});
+        });
     }
 
+
+
     render() {
+
+        let userHist = this.state.History.map((history, index) => (
+            {
+                Event:history.eventType,
+                Date: history.timeStamp,
+                PerformedBy: history.operator,
+                Description: JSON.parse(history.description),
+            }
+        ));
+
+        console.log(userHist);
         return (
             <div>
                 <h1 className={'titles'}>User Details</h1>
@@ -126,6 +144,7 @@ class UserDetailsComponents extends React.Component {
                                         <StaticUserDetail
                                             userData={this.state.userData}
                                             handleOnEditPermissions={this.handleOnEditPermissions}
+                                            userHistory={userHist}
                                         />
                                 )
                             }
