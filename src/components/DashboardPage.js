@@ -77,7 +77,6 @@ export default class DashboardPage extends React.Component {
 
     cardSelected = (SystemId, SystemName) => {
         const payload = this.getReport(SystemId);
-
         payload
             .then((data) => this.setState({ReportResults: data}))
             .then(() => {

@@ -1,70 +1,180 @@
 import React from 'react';
-import {Button, FormGroup, Input, Label} from "reactstrap";
-
-const SystemReportPartial = (props) => (
-    <div>
-
-        <h1 className={"text-center"}>System Report</h1>
-        <h5 className={"text-center"}>Lists all active users of a system for a given date.</h5>
-
-        <div style={{maxWidth: '600px', display: 'flex', justifyContent: 'space-between'}}>
-
-            <FormGroup>
-                <Input type={'select'} onChange={(e) => props.onSelectChange(e.target.value)}>
-                    <option>Pick System</option>
-                    <option>Pick System 2</option>
-                </Input>
-            </FormGroup>
-
-            {/*TODO: Still need to attach a date picker here*/}
-
-            <Button color={'success'} onClick={props.handleOnClick}>User Report</Button>
+import UserTable from "./UserTable";
+import UrbanSporkAPI from '../api/UrbanSporkAPI';
+import moment from 'moment';
+import {Row,Col,Input,Button,Table} from "reactstrap";
+import jsPDF from 'jspdf'
+import ReactDOMServer from 'react-dom/server';
+import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import {faFilePdf} from '@fortawesome/fontawesome-free-solid';
 
 
-        </div>
-        <div>
-            <Label for="permissions">{`Active Users for System ${props.selectedSystem} as of ${''}:`}</Label>
-            <Input type="select" name="permissions" id="permissions" multiple>
-                {/*
-                        This is a jumble of references, but the function I created above doesn't work on it...
-                        so I am leaving it like this.
-                */}
-
-                {/*{*/}
-                    {/*props.selectedSystem && Object.keys(props.selectedSystem.permissionList).map((permission, i) => {*/}
-                        {/*if (props.selectedSystem.permissionList[permission].permissionStatus !== 'Revoked') {*/}
-                            {/*return <option key={i} value={i} id={permission}>{props.selectedSystem.permissionList[permission].permissionName}</option>;*/}
-                        {/*}*/}
-                    {/*})*/}
-                {/*}*/}
-            </Input>
-
-            <Button color="danger" style={{marginTop: "20px"}}>Edit Permissions</Button>
-        </div>
-    </div>
-);
 
 
 export default class SystemReport extends React.Component {
     state = {
-        selectedSystem: 'Pick System'
+        Data: [],
+        SystemsList: [],
+        SelectedSystem: ""
+    };
+
+    componentWillMount() {
+        this.getData();
+        this.getSystemDropDown();
+    }
+
+    columns = [
+        {accessor: 'forFullName', Header: 'Name'},
+        {accessor: 'byFullName', Header: 'Granted By'},
+        {
+            accessor: 'timestamp',
+            Header: 'Date',
+            Cell: ({value}) => moment.utc(value).format('ddd MMM D YYYY').toString()
+        },
+    ];
+
+    styles = {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        textAlign: 'center'
+    };
+
+    getData = () => {
+        const Data = UrbanSporkAPI.getSystemsActivity();
+        Data.then(data => this.setState({Data: data})).catch(() => this.setState({Data: []}));
     };
 
 
-    // TODO: Have to apply the GET inside of handleOnClick and set the return inside of state.userData
-
-    handleOnClick = () => {
-        console.log('Send query to the API')
+    getSystemDropDown = () => {
+        const Systems = UrbanSporkAPI.getSystemsDropDown();
+        Systems.then(data => this.setState({SystemsList: data})).catch(() => this.setState({SystemsList: []}));
     };
 
+    updateTable = (system) => {
+        console.log(system.target.options[system.target.options.selectedIndex].text);
+        this.setState({SelectedSystem: system.target.options[system.target.options.selectedIndex].text});
+        let payload = {
+            PermissionId: system.target.value,
+        };
+        const newData = UrbanSporkAPI.getSystemReport(payload);
+        newData.then(data => this.setState({Data: data})).catch(() => this.setState({Data: []}));
+
+    };
+
+    formatReport = () => {
+        let pdfBody = this.state.Data.map((entry, index) => (
+            <tr key={index}>
+                <td>{index + 1}</td>
+                <td>{entry.forFullName}</td>
+                <td>{entry.byFullName}</td>
+                <td>{entry.timestamp}</td>
+            </tr>
+        ));
+        return pdfBody;
+    };
+
+    exportToPDF = () => {
+        let pdf = new jsPDF('p', 'pt', 'letter');
+        let rows = this.formatReport();
+        let table = (
+            <Table >
+                <thead style={{height:20}}>
+
+                <th>#</th>
+                <th>Name</th>
+                <th>Approved By</th>
+                <th>Date</th>
+
+                </thead>
+                <tbody>
+                {rows}
+                </tbody>
+            </Table>
+        );
+
+        let page = (
+            <Row>
+                <Row>
+                    <Col md={4}>
+
+                    </Col>
+                    <Col md={4} textalign="center">
+                        <h1>{this.state.SelectedSystem} System Report</h1>
+                    </Col>
+                    <Col md={4}>
+
+                    </Col>
+                </Row>
+                <Row>
+                    {table}
+                </Row>
+            </Row>
+        );
+        let source = ReactDOMServer.renderToStaticMarkup(page);
+
+        let margins = {
+            top: 50,
+            left: 60,
+            width: 545
+        };
+
+        let system = this.state.SelectedSystem;
+        console.log("system: " + system);
+
+        pdf.fromHTML(
+            source // HTML string or DOM elem ref.
+            , margins.left // x coord
+            , margins.top // y coord
+            , {
+                'width': margins.width // max width of content on PDF
+                ,
+            },
+            function (dispose) {
+
+                // dispose: object with X, Y of the last line add to the PDF
+                // this allow the insertion of new lines after html
+                pdf.save(system + 'SystemReport.pdf');
+            }
+        );
+    };
 
     render() {
+        const AllSystems = this.state.SystemsList.map((System, index) => (
+
+            <option name={System.permissionName} value={System.permissionID} key={System.permissionID} >{System.permissionName}</option>
+
+        ));
         return (
-            <SystemReportPartial
-                handleOnClick={this.handleOnClick} value={this.state.text}
-                onSelectChange={(value) => this.setState({selectedSystem: value})}
-                selectedSystem={this.state.selectedSystem}
-            />
+            <div>
+                <div >
+                    <Row style={{height: 50}}>
+                    </Row>
+                    <Row style={this.styles}>
+                        <Col md={3}>
+                            <Input type="select"  id="SelectSystem" onChange={e => {this.updateTable(e)}}>
+                                <option>
+                                    Select System
+                                </option>
+                                {AllSystems}
+                            </Input>
+                        </Col>
+                        <Col md={6}>
+                            <h1>System Report</h1>
+                        </Col>
+                        <Col md={3}>
+                            <Button onClick={() => {this.exportToPDF()}}>
+                                <FontAwesomeIcon icon={faFilePdf}/>
+
+
+                            </Button>
+                        </Col>
+                    </Row>
+                </div>
+                <div>
+                    <UserTable columns={this.columns} data={this.state.Data}/>
+                </div>
+            </div>
         )
     }
 }
