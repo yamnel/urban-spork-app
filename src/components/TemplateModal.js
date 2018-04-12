@@ -14,6 +14,7 @@ export default class TemplateModal extends React.Component {
         idForTemplateToRemove: "",
         templateToAdd: "",
         templateTitle: "",
+        templatePermissions: {},
         confirmButton: ""
     }
 
@@ -32,11 +33,23 @@ export default class TemplateModal extends React.Component {
 
     handleOnAdd = () => {
 
+        var permissionsToAdd = {}
+
+        this.state.templatePermissions.forEach(permission => {
+            permissionsToAdd[permission.permissionID] = permission.permissionName
+        });
+
+        var template = {
+            Name: this.state.templateTitle,
+            TemplatePermissions: permissionsToAdd
+        }
+
+        UrbanSporkAPI.addTemplate(template);
+        this.setState({edit: false});
+        this.forceUpdate();
     }
 
     handleOnRemove = () => {
-
-        console.log('handleOnRemove value is ---> ', this.state.idForTemplateToRemove);
         let templateToRemove = {
             Id : this.state.idForTemplateToRemove,
         };
@@ -47,8 +60,8 @@ export default class TemplateModal extends React.Component {
     };
 
     toggleAddButton = (templateForAdd) => {
-        this.setState({department:data});
-        templateForAdd.length > 0 ? this.setState({confirmButton: true}): this.setState({confirmButton: false});
+        this.setState({templateToAdd: templateForAdd});
+        (this.state.templateTitle != "" && templateForAdd.length >= 1) ? this.setState({confirmButton: true}): this.setState({confirmButton: false});
     };
 
     toggleRemoveButton = (templateForRemoval) => {
@@ -59,16 +72,17 @@ export default class TemplateModal extends React.Component {
         templateForRemoval.id.length > 0 ? this.setState({confirmButton: true}): this.setState({confirmButton: false});
     };
 
-    updateTemplateForAdd = (templateForAdd) => {
-        this.setState({templateToAdd: templateForAdd});
-        this.toggleAddButton(templateForAdd);
+    updateTemplateTitleForAdd = (templateTitleForAdd) => {
+        this.setState({templateTitle: templateTitleForAdd});
     };
 
+    updateTemplatePermissionsForAdd = (templatePermissionsForAdd) => {
+        console.log(templatePermissionsForAdd);
+        this.setState({templatePermissions: templatePermissionsForAdd});
+        this.toggleAddButton(templatePermissionsForAdd);
+    }
+
     updateTemplateForRemove = (templateForRemove) => {
-
-        console.log('updateTemplateForRemove id is ---> ', templateForRemove.id);
-        console.log('updateTemplateForRemove title is ---> ', templateForRemove.name);
-
         this.setState({idForTemplateToRemove: templateForRemove.id});
         this.setState({templateTitle: templateForRemove.name});
 
@@ -86,7 +100,8 @@ export default class TemplateModal extends React.Component {
                             {this.state.edit ?
                                 (this.props.addTemplate ?
                                     <AddTemplate updateDepartment={this.updateTemplateForAdd}
-                                                 templateToAdd={this.props.templateToAdd}/>
+                                                 templateTitle={this.updateTemplateTitleForAdd}
+                                                templatePermissions={this.updateTemplatePermissionsForAdd} />
                                     :
                                 <RemoveTemplate TemplateSelected={this.updateTemplateForRemove}
                                                 templates={this.props.templates}/>):
