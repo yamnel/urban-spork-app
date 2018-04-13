@@ -28,10 +28,9 @@ export default class LogInPage extends React.Component {
 
     onSelectHandle = (e) => {
         const selected = e.target.value;
-        console.dir(e.target);
         const selectedId = e.target.options[e.target.options.selectedIndex].id;
         const selectedName = e.target.options[e.target.options.selectedIndex].text;
-        console.log(selectedName);
+
 
         this.setState({id: selectedId});
         this.setState({name: selectedName});
