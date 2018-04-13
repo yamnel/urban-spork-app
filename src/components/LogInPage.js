@@ -12,8 +12,9 @@ export default class LogInPage extends React.Component {
     styles = {
         flex: 1,
         justifyContent: 'center',
-        // alignItems: 'center',
-        paddingTop: '300px'
+         alignItems: 'center',
+        margin:'auto'
+        //paddingTop: '300px'
     };
 
     componentWillMount() {
@@ -45,8 +46,13 @@ export default class LogInPage extends React.Component {
         ));
         return (
 
-            <div>
+            <div style={{paddingTop: '230px'}}>
+
+                <img style={{display: 'block', margin: 'auto',}} src="https://i.imgur.com/G7zI6wH.png" width="500" height="150"/>
+                <br/>
                 <Form style={this.styles} inline>
+
+                    <br/>
                     <FormGroup>
                         <Label for="adminSelector">Select User</Label>
                         <Col>
