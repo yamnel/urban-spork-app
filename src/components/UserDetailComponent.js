@@ -5,44 +5,22 @@ import {
     DropdownMenu,
     DropdownToggle,
     ModalBody,
+    Row,
+    Col,
+    Table,
     ModalFooter,
     UncontrolledDropdown
 } from 'reactstrap';
+import ReactDOMServer from 'react-dom/server';
 import {faCog} from '@fortawesome/fontawesome-free-solid'
 import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 import UrbanSporkAPI from "../api/UrbanSporkAPI";
 import StaticUserDetail from "./StaticUserDetail";
 import EditUserDetail from "./EditUserDetail";
+import jsPDF from 'jspdf'
 
 
-// this is the options button component
-const Options = (props) => (
-    <UncontrolledDropdown direction={'right'}>
-        <DropdownToggle disabled={props.edit}>
-            <FontAwesomeIcon icon={faCog}/>
-        </DropdownToggle>
 
-        <DropdownMenu>
-            <DropdownItem header>Options</DropdownItem>
-            <DropdownItem disabled={props.isAdmin}>Make Admin</DropdownItem>
-            <DropdownItem>Off-Board Report</DropdownItem>
-            <DropdownItem>Deactivate</DropdownItem>
-        </DropdownMenu>
-    </UncontrolledDropdown>
-);
-
-const Header = (props) => (
-    <div className={'modal-header'} style={{display: 'flex', justifyContent: 'space-between'}}>
-        <Button color={'danger'} onClick={props.handleOnBack}>Back</Button>
-        <h5 className={'modal-title'}>
-            {props.firstName} {props.lastName}
-        </h5>
-        {
-            // If it's not in edit mode show the options button
-            <Options edit={props.edit} isAdmin={props.isAdmin}/>
-        }
-    </div>
-);
 
 
 class UserDetailsComponents extends React.Component {
@@ -54,6 +32,7 @@ class UserDetailsComponents extends React.Component {
     handleOnEdit = () => {
         this.setState({edit: true})
     };
+
 
 
     handleOnCancel = () => {
@@ -90,6 +69,88 @@ class UserDetailsComponents extends React.Component {
         this.setState((prevState) => ({userData: {...prevState.userData, ...changedData}}));
     };
 
+    formatReport = () => {
+        let pdfBody = Object.values(this.state.userData.permissionList).map((permission, i) => {
+            if (permission.permissionStatus === 'Granted') {
+                return  <tr key={i}>
+                    <td>{i + 1}</td>
+                    <td>{permission.permissionName}</td>
+                    <td>{permission.approverFirstName} {permission.approverLastName}</td>
+                    <td>{permission.timeStamp}</td>
+                </tr>
+
+            }
+        });
+
+
+        return pdfBody;
+    };
+
+    exportToPDF = () => {
+        console.log("export entered");
+        let pdf = new jsPDF('p', 'pt', 'letter');
+        let rows = this.formatReport();
+        let table = (
+            <Table >
+                <thead style={{height:20}}>
+
+                <th>#</th>
+                <th>System Name</th>
+                <th>Approved By</th>
+                <th>Date</th>
+
+                </thead>
+                <tbody>
+                {rows}
+                </tbody>
+            </Table>
+        );
+
+        let page = (
+            <Row>
+                <Row>
+                    <Col md={4}>
+
+                    </Col>
+                    <Col md={4} textalign="center">
+                        <h1>Off-Boarding Report</h1>
+                    </Col>
+                    <Col md={4}>
+
+                    </Col>
+                </Row>
+                <Row>
+                    {table}
+                </Row>
+            </Row>
+        );
+        let source = ReactDOMServer.renderToStaticMarkup(page);
+
+        let margins = {
+            top: 50,
+            left: 60,
+            width: 545
+        };
+
+        let system = this.state.SelectedSystem;
+        console.log("system: " + system);
+
+        pdf.fromHTML(
+            source // HTML string or DOM elem ref.
+            , margins.left // x coord
+            , margins.top // y coord
+            , {
+                'width': margins.width // max width of content on PDF
+                ,
+            },
+            function (dispose) {
+
+                // dispose: object with X, Y of the last line add to the PDF
+                // this allow the insertion of new lines after html
+                pdf.save('OffBoardingReport.pdf');
+            }
+        );
+    };
 
     handleOnBack = () => this.props.history.push("/users");
 
@@ -104,9 +165,36 @@ class UserDetailsComponents extends React.Component {
         });
     }
 
-
-
     render() {
+        const Header = (props) => (
+            <div className={'modal-header'} style={{display: 'flex', justifyContent: 'space-between'}}>
+                <Button color={'danger'} onClick={props.handleOnBack}>Back</Button>
+                <h5 className={'modal-title'}>
+                    {props.firstName} {props.lastName}
+                </h5>
+                {
+                    // If it's not in edit mode show the options button
+                    <Options edit={props.edit} isAdmin={props.isAdmin}/>
+                }
+            </div>
+        );
+
+
+        // this is the options button component
+        const Options = (props) => (
+            <UncontrolledDropdown direction={'right'}>
+                <DropdownToggle disabled={props.edit}>
+                    <FontAwesomeIcon icon={faCog}/>
+                </DropdownToggle>
+
+                <DropdownMenu>
+                    <DropdownItem header>Options</DropdownItem>
+                    <DropdownItem disabled={props.isAdmin}>Make Admin</DropdownItem>
+                    <DropdownItem onClick={this.exportToPDF}>Off-Board Report</DropdownItem>
+                    <DropdownItem>Deactivate</DropdownItem>
+                </DropdownMenu>
+            </UncontrolledDropdown>
+        );
 
         let userHist = this.state.History.map((history, index) => (
             {
@@ -117,7 +205,6 @@ class UserDetailsComponents extends React.Component {
             }
         ));
 
-        console.log(userHist);
         return (
             <div>
                 <h1 className={'titles'}>User Details</h1>
