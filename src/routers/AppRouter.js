@@ -10,12 +10,12 @@ import PendingRequests from '../components/PendingRequests';
 import CreateUser from "../components/CreateUser";
 import Company from "../components/Company";
 // Reports
-import OffBoardingReport from "../components/OffBoardingReport";
+
 import SystemReport from "../components/SystemReport";
 import SystemActivityReport from "../components/SystemActivityReport";
 import ApproverActivityReport from "../components/ApproverActivityReport";
 import UserDetailComponent from "../components/UserDetailComponent";
-import NonAdminView from "../components/NonAdminView";
+
 
 const AppRouter = () => (
     <BrowserRouter>

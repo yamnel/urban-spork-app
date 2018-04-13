@@ -3,13 +3,16 @@ import {Input, Form, Label, FormGroup, Button, Row, Col} from "reactstrap";
 import UrbanSporkAPI from '../api/UrbanSporkAPI';
 import UserTable from "./UserTable";
 import moment from 'moment';
+import {connect} from "react-redux";
 
 
-export default class NonAdminView extends React.Component {
+
+
+class NonAdminView extends React.Component {
 
     state = {
         SystemData: [],
-        UserID: "928956b8-6dba-4878-bb96-e91f98b0ffed",
+        UserID: this.props.managerId,
         Reason:"",
         System:undefined,
         requestData:[],
@@ -21,7 +24,7 @@ export default class NonAdminView extends React.Component {
     };
 
     getPendingRequestsForUser = () => {
-        console.log("getting requests")
+        console.log(this.state.UserID);
         let payload = {
             UserID: this.state.UserID
         };
@@ -31,9 +34,7 @@ export default class NonAdminView extends React.Component {
     };
 
     updateSystem = (system) => {
-        console.log(system.target.value);
        this.setState({System: system.target.value});
-
     };
 
     getData = () => {
@@ -128,3 +129,10 @@ export default class NonAdminView extends React.Component {
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        managerId: state.manager.id
+    }
+};
+export default  connect(mapStateToProps)(NonAdminView);
