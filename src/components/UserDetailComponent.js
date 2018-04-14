@@ -1,14 +1,15 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import {
     Button,
+    Col,
     DropdownItem,
     DropdownMenu,
     DropdownToggle,
     ModalBody,
-    Row,
-    Col,
-    Table,
     ModalFooter,
+    Row,
+    Table,
     UncontrolledDropdown
 } from 'reactstrap';
 import ReactDOMServer from 'react-dom/server';
@@ -20,19 +21,16 @@ import EditUserDetail from "./EditUserDetail";
 import jsPDF from 'jspdf'
 
 
-
-
-
 class UserDetailsComponents extends React.Component {
     state = {
         edit: false,
-        History: []
+        History: [],
+        // selectedPermissions: [],
     };
 
     handleOnEdit = () => {
         this.setState({edit: true})
     };
-
 
 
     handleOnCancel = () => {
@@ -46,6 +44,17 @@ class UserDetailsComponents extends React.Component {
     };
 
     handleOnSave = () => {
+        const permissionDetail = {
+            Reason: 'User was created with these permissions.',
+            RequestedBy: this.props.managerId,
+        };
+
+        const permissionList = {};
+
+        this.state.selectedPermissions.map((permission) => {
+            return permissionList[permission.permissionID] = permissionDetail
+        });
+
         const data = {
             ForID: this.state.userData.userId,
             FirstName: this.state.userData.firstName,
@@ -53,7 +62,8 @@ class UserDetailsComponents extends React.Component {
             Email: this.state.userData.email,
             Position: this.state.userData.position,
             Department: this.state.userData.department,
-            IsAdmin: this.state.userData.isAdmin
+            IsAdmin: this.state.userData.isAdmin,
+            PermissionList: permissionList,
         };
 
         UrbanSporkAPI.updateUserDetails(data)
@@ -72,7 +82,7 @@ class UserDetailsComponents extends React.Component {
     formatReport = () => {
         let pdfBody = Object.values(this.state.userData.permissionList).map((permission, i) => {
             if (permission.permissionStatus === 'Granted') {
-                return  <tr key={i}>
+                return <tr key={i}>
                     <td>{i + 1}</td>
                     <td>{permission.permissionName}</td>
                     <td>{permission.approverFirstName} {permission.approverLastName}</td>
@@ -91,8 +101,8 @@ class UserDetailsComponents extends React.Component {
         let pdf = new jsPDF('p', 'pt', 'letter');
         let rows = this.formatReport();
         let table = (
-            <Table >
-                <thead style={{height:20}}>
+            <Table>
+                <thead style={{height: 20}}>
 
                 <th>#</th>
                 <th>System Name</th>
@@ -158,7 +168,23 @@ class UserDetailsComponents extends React.Component {
         const userId = this.props.match.params.id;
         const userData = UrbanSporkAPI.getUserFullData(userId);
         console.log('user id ', userId);
-        userData.then(data => this.setState({userData: data, originalData: data}));
+        userData
+            .then(data => {
+                this.setState({userData: data, originalData: data});
+                const selectedPermissions = [];
+
+                Object.keys(data.permissionList).map((permission) => {
+                    if (data.permissionList[permission].permissionStatus === 'Granted') {
+                        return selectedPermissions.push({
+                            permissionID: permission,
+                            permissionName: data.permissionList[permission].permissionName
+                        });
+                    }
+                });
+
+                this.setState({selectedPermissions: selectedPermissions});
+            });
+
         const userHistory = UrbanSporkAPI.getUserHistory(userId);
         userHistory.then(data => {
             this.setState({History: data});
@@ -198,7 +224,7 @@ class UserDetailsComponents extends React.Component {
 
         let userHist = this.state.History.map((history, index) => (
             {
-                Event:history.eventType,
+                Event: history.eventType,
                 Date: history.timeStamp,
                 PerformedBy: history.operator,
                 Description: JSON.parse(history.description),
@@ -226,6 +252,8 @@ class UserDetailsComponents extends React.Component {
                                         <EditUserDetail
                                             onDataChange={this.handleOnDataChange}
                                             userData={this.state.userData}
+                                            selectedPermissions={this.state.selectedPermissions}
+                                            setPermissions={(selectedPermissions) => this.setState({selectedPermissions})}
                                         />
                                         :
                                         <StaticUserDetail
@@ -258,4 +286,10 @@ class UserDetailsComponents extends React.Component {
     }
 }
 
-export default UserDetailsComponents;
+const mapStateToProps = (state) => {
+    return {
+        managerId: state.manager.id,
+    }
+};
+
+export default connect(mapStateToProps)(UserDetailsComponents);

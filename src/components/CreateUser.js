@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import UrbanSporkAPI from "../api/UrbanSporkAPI";
 import {
     Button,
@@ -55,7 +56,7 @@ const Header = (props) => (
 );
 
 
-export default class CreateUser extends React.Component {
+class CreateUser extends React.Component {
 
     state = {
         firstName: '',
@@ -81,6 +82,18 @@ export default class CreateUser extends React.Component {
         this.setState({[e.target.name]: e.target.value});
     };
     handleOnUserCreation = () => {
+        const permissionDetail = {
+            Reason: 'User was created with these permissions.',
+            RequestedBy: this.props.managerId,
+        };
+
+        const permissionList = {};
+
+        this.state.selectedPermissions.map((permission)=>{
+            return permissionList[permission.permissionID] = permissionDetail
+        });
+
+
         const payload = {
             FirstName: this.state.firstName,
             LastName: this.state.lastName,
@@ -89,6 +102,7 @@ export default class CreateUser extends React.Component {
             Department: this.state.department,
             IsAdmin: false,
             IsActive: true,
+            PermissionList: permissionList,
 
         };
 
@@ -189,3 +203,12 @@ export default class CreateUser extends React.Component {
         )
     }
 }
+
+
+const mapStateToProps = (state) => {
+    return {
+        managerId: state.manager.id,
+    }
+};
+
+export default connect(mapStateToProps)(CreateUser);

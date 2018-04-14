@@ -39,10 +39,9 @@ const columns = [
 
 
 const StaticUserDetail = (props) => (
-    <div style={{display: 'flex', justifyContent: 'center'}}>
+    <div style={{display: 'flex', justifyContent: 'space-evenly', flexDirection: 'column'}}>
         <div>
             <Row style={{display: 'flex', justifyContent: 'space-evenly'}}>
-                <Col md={12}>
                     {/*
             Left Side of the modal, is the User Info
             */}
@@ -137,21 +136,22 @@ const StaticUserDetail = (props) => (
 
                         {/*<Button color="danger" style={{marginTop: "20px"}} onClick={props.handleOnEditPermissions}>Edit Permissions</Button>*/}
                     </div>
-                </Col>
-
             </Row>
         </div>
 
 
-        <div style={{marginLeft:200}}>
+        <Row>
+            <div style={{alignContent: 'center'}}>
 
-                    <div>
-                        <h6 style={{textAlign:"center"}}>{props.userData.fullName}'s History</h6>
-                        <UserTable columns={columns} data={refactoredObject(props.userHistory)}/>
-                    </div>
+                <div style={{paddingTop: '20px'}}>
+                    <h2 style={{textAlign:"center"}}>{props.userData.fullName}'s History</h2>
+                    <UserTable columns={columns} data={refactoredObject(props.userHistory)}/>
+                </div>
 
 
-        </div>
+            </div>
+        </Row>
+
     </div>
 );
 

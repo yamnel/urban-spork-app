@@ -24,6 +24,7 @@ class AppComponent extends React.Component{
         // this.setState(() => ({allowAccess: true, managerId}));
         this.props.getUserData();
         this.props.getAllPermissions();
+
     };
 
 

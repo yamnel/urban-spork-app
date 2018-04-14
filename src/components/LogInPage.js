@@ -63,7 +63,11 @@ export default class LogInPage extends React.Component {
 
                     </FormGroup>
                     {' '}
-                    <Button onClick={()=> this.props.isAdmin(this.state.admin, this.state.id, this.state.name)}>Submit</Button>
+                    <Button
+                        onClick={()=> {
+                            this.props.isAdmin(this.state.admin, this.state.id, this.state.name);
+                        }}
+                    >LogIn</Button>
                 </Form>
             </div>
         )
