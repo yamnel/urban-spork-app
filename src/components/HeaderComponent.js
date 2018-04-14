@@ -17,59 +17,50 @@ const HeaderComponent = (props) => (
                 </div>
                 <h2 style={{color: "#CBD4D2", marginTop: "40px"}}>
                     <span>
-                        <h6><FontAwesomeIcon icon={faUserCircle} style={{color: "white"}}/>  {props.managerId}</h6>
+                        <h6><FontAwesomeIcon icon={faUserCircle} style={{color: "white"}}/> {props.managerId}</h6>
                     </span>
                 </h2>
             </div>
 
             <Nav tabs justified>
                 <NavItem>
-                    <NavLink to={"/"} exact={true} activeClassName={"is-active"} tag={RouterNavLink}>Home</NavLink>
+                    <NavLink to={"/"} exact={true} activeClassName={"is-active"}
+                             tag={RouterNavLink}>Home</NavLink>
                 </NavItem>
 
-                {
-
-                    <NavItem>
-                        <NavLink to={`/users`} activeClassName={"is-active"} tag={RouterNavLink}
-                                 style={{whiteSpace: 'nowrap'}}>User Management</NavLink>
-                    </NavItem>
-                }
 
                 <NavItem>
-                    <NavLink to={`/company`} activeClassName={"is-active"} tag={RouterNavLink}
-                             style={{whiteSpace: 'nowrap'}}>Company</NavLink>
+                    <NavLink to={"/users"} activeClassName={"is-active"} tag={RouterNavLink}
+                             style={{whiteSpace: 'nowrap'}}>User Management</NavLink>
                 </NavItem>
 
-                {/*<NavItem>*/}
-                {/*<NavLink to={"/requests"} activeClassName={"is-active"} tag={RouterNavLink} style={{whiteSpace: 'nowrap'}}>Pending Requests</NavLink>*/}
-                {/*</NavItem>*/}
+
+                <NavItem>
+                    <NavLink to={"/company"} activeClassName={"is-active"}
+                             tag={RouterNavLink}>Company</NavLink>
+                </NavItem>
 
 
-                {/*<NavItem>*/}
-                {/*<NavLink to={"/reports"} activeClassName={"is-active"} tag={RouterNavLink}>Reports</NavLink>*/}
-                {/*</NavItem>*/}
+                <UncontrolledDropdown nav inNavbar>
+                    <DropdownToggle caret nav>
+                        Reports
+                    </DropdownToggle>
+                    <DropdownMenu right>
 
-                {
-                    <UncontrolledDropdown nav inNavbar>
-                        <DropdownToggle caret nav>
-                            Reports
-                        </DropdownToggle>
-                        <DropdownMenu right>
+                        <DropdownItem tag={RouterNavLink} to={"/reports/system-report"}>
+                            System Report
+                        </DropdownItem>
 
-                            <DropdownItem tag={RouterNavLink} to={"/reports/system-report"}>
-                                System Report
-                            </DropdownItem>
+                        <DropdownItem tag={RouterNavLink} to={"/reports/system-activity-report"}>
+                            System Activity Report
+                        </DropdownItem>
 
-                            <DropdownItem tag={RouterNavLink} to={"/reports/system-activity-report"}>
-                                System Activity Report
-                            </DropdownItem>
+                        <DropdownItem tag={RouterNavLink} to={"/reports/approver-activity-report"}>
+                            Approver Activity Report
+                        </DropdownItem>
+                    </DropdownMenu>
+                </UncontrolledDropdown>
 
-                            <DropdownItem tag={RouterNavLink} to={"/reports/approver-activity-report"}>
-                                Approver Activity Report
-                            </DropdownItem>
-                        </DropdownMenu>
-                    </UncontrolledDropdown>
-                }
 
             </Nav>
 
