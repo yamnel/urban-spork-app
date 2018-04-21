@@ -45,9 +45,7 @@ class UserDetailsComponents extends React.Component {
 
     handleOnSave = () => {
         const permissionDetail = {
-            Reason: 'Permission added by admin.',
-            // RequestedBy: this.props.managerId,
-            // RequestedFor: this.state.userData.userId
+            Reason: 'Permission added by admin.'
         };
 
         const permissionList = {};
@@ -67,23 +65,47 @@ class UserDetailsComponents extends React.Component {
             // PermissionList: permissionList,
         };
 
-        console.log({
-            ForId: this.state.userData.userId,
-            ById: this.props.managerId,
-            PermissionsToGrant: permissionList
-        });
-
-
         UrbanSporkAPI.updateUserDetails(data)
-            .then(UrbanSporkAPI.grantPermissions(
+            .then(() => UrbanSporkAPI.grantRevokePermissions(
                 {
                     ForId: this.state.userData.userId,
                     ById: this.props.managerId,
-                    PermissionsToGrant: permissionList,
+                    Permissions: permissionList,
                 }
-            ))
-            .then(this.setState({edit: false})
-        )
+                ).then(() => {
+
+                    //    MESSSSSSYYYYYY
+
+                    const userId = this.props.match.params.id;
+                    const userData = UrbanSporkAPI.getUserFullData(userId);
+                    console.log('user id ', userId);
+                    userData
+                        .then(data => {
+                            this.setState({userData: data, originalData: data});
+                            const selectedPermissions = [];
+
+                            Object.keys(data.permissionList).map((permission) => {
+                                if (data.permissionList[permission].permissionStatus === 'Granted') {
+                                    return selectedPermissions.push({
+                                        permissionID: permission,
+                                        permissionName: data.permissionList[permission].permissionName
+                                    });
+                                }
+                            });
+
+                            this.setState({selectedPermissions: selectedPermissions});
+                        });
+
+                    const userHistory = UrbanSporkAPI.getUserHistory(userId);
+                    userHistory.then(data => {
+                        this.setState({History: data});
+                    });
+
+                    //END OF MESSSYYYY
+
+                }).then(() => this.setState({edit: false})
+                )
+            )
 
 
     };
@@ -293,14 +315,14 @@ class UserDetailsComponents extends React.Component {
                     </ModalBody>
                     <ModalFooter>
                         {this.state.edit &&
-                            <div>
-                                <Button
-                                    color="success" onClick={this.handleOnSave}
-                                    active={!this.state.edit}>Save
-                                </Button>
-                                {' '}
-                                <Button color="secondary" onClick={this.handleOnCancel}>Cancel</Button>
-                            </div>
+                        <div>
+                            <Button
+                                color="success" onClick={this.handleOnSave}
+                                active={!this.state.edit}>Save
+                            </Button>
+                            {' '}
+                            <Button color="secondary" onClick={this.handleOnCancel}>Cancel</Button>
+                        </div>
 
                         }
                     </ModalFooter>
