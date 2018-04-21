@@ -133,10 +133,10 @@ class CreateUser extends React.Component {
         payload.then((data) => {
             this.setState({templates: data})
         });
-        UrbanSporkAPI.getDepartments().then((data)=> this.setState({departments: data}))
+        UrbanSporkAPI.getDepartments().then((data) => this.setState({departments: data}))
     }
 
-    handleDepartmentClick(departmentName){
+    handleDepartmentClick(departmentName) {
         UrbanSporkAPI.getPositionByDepartment(departmentName).then(positions => this.setState({positions: positions}))
     }
 
@@ -195,26 +195,34 @@ class CreateUser extends React.Component {
                                                }}>
                                             <option></option>
                                             {
-                                               this.state.departments && this.state.departments.map((department, i)=> <option  key={i} id={department.id} value={department.name}>{department.name}</option>)
+                                                this.state.departments && this.state.departments.map((department, i) =>
+                                                    <option key={i} id={department.id}
+                                                            value={department.name}>{department.name}</option>)
                                             }
                                         </Input>
                                     </Col>
                                 </FormGroup>
 
-                                <FormGroup row>
-                                    <Label for="position" sm={"3"}>
-                                        Title:
-                                    </Label>
+                                {
+                                    this.state.positions && this.state.positions.length > 0 &&
+                                    <FormGroup row>
+                                        <Label for="position" sm={"3"}>
+                                            Title:
+                                        </Label>
 
-                                    <Col sm={20}>
-                                        <Input type="select" name="position" id="position" onChange={e => this.handleOnChange(e)}>
-                                            <option></option>
-                                            {
-                                                this.state.positions && this.state.positions.map((position, i)=> <option key={i} id={position.id} value={position.positionName}>{position.positionName}</option>)
-                                            }
-                                        </Input>
-                                    </Col>
-                                </FormGroup>
+                                        <Col sm={20}>
+                                            <Input type="select" name="position" id="position"
+                                                   onChange={e => this.handleOnChange(e)}>
+                                                <option></option>
+                                                {
+                                                    this.state.positions && this.state.positions.map((position, i) =>
+                                                        <option key={i} id={position.id}
+                                                                value={position.positionName}>{position.positionName}</option>)
+                                                }
+                                            </Input>
+                                        </Col>
+                                    </FormGroup>
+                                }
 
                                 <FormGroup row>
                                     <Label for="email" sm={"3"}>
