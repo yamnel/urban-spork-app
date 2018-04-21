@@ -54,7 +54,7 @@ class NonAdminView extends React.Component {
             ById: this.state.UserID,
             Requests: {
                 [this.state.System]:{
-                    ReasonForRequest : this.state.Reason
+                    Reason : this.state.Reason
                 }
             }
         };
