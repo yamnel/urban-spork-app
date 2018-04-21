@@ -17,14 +17,32 @@ export default class Company extends React.Component {
             addPosition: true,
             addDepartment: true,
             addTemplate: true,
+            addSystem: true,
             PositionsModalIsOpen:false,
             DepartmentsModalIsOpen:false,
             SystemModalIsOpen: false,
             TemplateModalIsOpen: false,
             departments: [],
-            templates: []
+            templates: [],
+            systems: []
         };
     }
+
+    toggleTemplateModal = () => this.setState(() => {
+        return ({TemplateModalIsOpen: !this.state.TemplateModalIsOpen});
+    });
+
+    toggleDepartmentsModal = () => this.setState(() => {
+        return ({DepartmentsModalIsOpen: !this.state.DepartmentsModalIsOpen});
+    });
+
+    togglePositionsModal = () => this.setState(() => {
+        return ({PositionsModalIsOpen: !this.state.PositionsModalIsOpen});
+    });
+
+    toggleModalIsOpen = () => this.setState(() => {
+        return ({SystemModalIsOpen: !this.state.SystemModalIsOpen});
+    });
 
     openAddPositionsModal = () => {
 
@@ -32,7 +50,7 @@ export default class Company extends React.Component {
 
         payload.then(data => {
             this.setState({departments: data}),
-            this.setState({addPosition: true})
+                this.setState({addPosition: true})
         }).then(() => this.togglePositionsModal())
     };
 
@@ -43,23 +61,19 @@ export default class Company extends React.Component {
 
         payload.then(data => {
             this.setState({departments: data}),
-            this.setState({addPosition: false})
+                this.setState({addPosition: false})
         }).then(() =>
 
             this.togglePositionsModal()
         )
     };
 
-    togglePositionsModal = () => this.setState(() => {
-        return ({PositionsModalIsOpen: !this.state.PositionsModalIsOpen});
-    });
-
     openAddDepartmentsModal = () => {
         var payload = UrbanSporkAPI.getDepartments();
 
         payload.then(data => {
             this.setState({departments: data}),
-            this.setState({addDepartment: true})
+                this.setState({addDepartment: true})
         }).then(() => this.toggleDepartmentsModal())
     };
 
@@ -68,13 +82,9 @@ export default class Company extends React.Component {
 
         payload.then(data => {
             this.setState({departments: data}),
-            this.setState({addDepartment: false})
+                this.setState({addDepartment: false})
         }).then(() => this.toggleDepartmentsModal())
     };
-
-    toggleDepartmentsModal = () => this.setState(() => {
-        return ({DepartmentsModalIsOpen: !this.state.DepartmentsModalIsOpen});
-    });
 
     openAddTemplateModal = () => {
         var payload = UrbanSporkAPI.getTemplates();
@@ -94,17 +104,18 @@ export default class Company extends React.Component {
         }).then(() => this.toggleTemplateModal())
     };
 
-    toggleTemplateModal = () => this.setState(() => {
-        return ({TemplateModalIsOpen: !this.state.TemplateModalIsOpen});
-    });
-
     openSystemDetailModal = () => {
         this.toggleModalIsOpen();
     };
 
-    toggleModalIsOpen = () => this.setState(() => {
-        return ({SystemModalIsOpen: !this.state.SystemModalIsOpen});
-    });
+    openEditSystemModal = () => {
+        var payload = UrbanSporkAPI.getPermissions();
+
+        payload.then(data => {
+            this.setState({systems: data}),
+                this.setState({addSystem: false})
+        }).then(() => this.toggleModalIsOpen());
+    };
 
     addPosition = (position) => {
         this.setState({addPosition: position})
@@ -133,7 +144,7 @@ export default class Company extends React.Component {
                         <Col sm={3}>
                             <CompanyCard cardTitle={"Manage Systems"} color={"#28a745"}
                                          fontAwesomeIcon={faCogs} addButtonOnClick={this.openSystemDetailModal}
-                                         removeButtonOnClick={this.openSystemDetailModal}/>
+                                         removeButtonOnClick={this.openEditSystemModal}/>
                         </Col>
 
                         <Col sm={3}>
@@ -167,7 +178,9 @@ export default class Company extends React.Component {
                                   addDepartment={this.state.addDepartment}/>
 
                 <SystemModal isOpen={this.state.SystemModalIsOpen}
-                             toggle={this.toggleModalIsOpen}/>
+                             toggle={this.toggleModalIsOpen}
+                             systems={this.state.systems}
+                             addSystem={this.state.addSystem}/>
 
                 <TemplateModal isOpen={this.state.TemplateModalIsOpen}
                                   toggle={this.toggleTemplateModal}

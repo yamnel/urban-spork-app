@@ -50,6 +50,15 @@ export class UrbanSporkAPI extends React.Component {
         });
     }
 
+    static getPermissions() {
+        return fetch('http://localhost:5000/api/permission').then(response => {
+            return response.json();
+        }).catch(error => {
+            console.log(error);
+            return [];
+        });
+    }
+
     static getDepartments() {
         return fetch('http://localhost:5000/api/department').then(response => {
             return response.json();
@@ -211,6 +220,22 @@ export class UrbanSporkAPI extends React.Component {
 
     static denyPermission(data) {
         return fetch('http://localhost:5000/api/user/denyPermissions', {
+            body: JSON.stringify(data),
+            credentials: 'same-origin',
+            headers: {
+                'content-type': 'application/json'
+            },
+            method: 'PUT'
+        }).then(response => {
+            return response.json();
+        }).catch(error => {
+            console.log(data);
+            console.log(error);
+        });
+    }
+
+    static updatePermission(data) {
+        return fetch('http://localhost:5000/api/permission/update', {
             body: JSON.stringify(data),
             credentials: 'same-origin',
             headers: {

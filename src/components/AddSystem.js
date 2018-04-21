@@ -2,14 +2,12 @@ import React from 'react';
 import {Col, Form, FormFeedback, FormGroup, Input, Label} from 'reactstrap';
 
 
-export default class AddDepartment extends React.Component {
+export default class AddSystem extends React.Component {
 
     constructor() {
         super();
 
         this.state = {
-            DescriptionPlaceholder: 'Enter System Description',
-            LogoURLPlaceholder: 'Logo Image URL HERE',
         };
     }
 
@@ -19,7 +17,7 @@ export default class AddDepartment extends React.Component {
                 <Form>
                     <FormGroup row>
                         <Col md={6}>
-                            <Label color={"muted"} for={"SystemName"}>
+                            <Label color={"muted"} for={"systemName"}>
                                 System Name:
                             </Label>
                         </Col>
@@ -35,13 +33,13 @@ export default class AddDepartment extends React.Component {
 
                     <FormGroup row>
                         <Col md={6}>
-                            <Label color={"muted"} for={"SystemDescription"}>
+                            <Label color={"muted"} for={"systemDescription"}>
                                 System Description:
                             </Label>
                         </Col>
 
                         <Col md={6}>
-                            <Input placeholder={this.state.DescriptionPlaceholder} id={"systemDescription"}
+                            <Input placeholder={'Enter Description'} id={"systemDescription"}
                                    onChange={evt => {
                                        this.props.onInputChange(evt)
                                    }}/>
@@ -56,7 +54,7 @@ export default class AddDepartment extends React.Component {
                         </Col>
 
                         <Col md={6}>
-                            <Input placeholder={this.state.LogoURLPlaceholder} id={"systemLogoURL"} onChange={evt => {
+                            <Input placeholder={'Enter Logo Image URL'} id={"systemLogoURL"} onChange={evt => {
                                 this.props.onInputChange(evt)
                             }}/>
                         </Col>
