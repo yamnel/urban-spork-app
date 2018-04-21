@@ -1,23 +1,5 @@
 import React from 'react';
-import {
-    Card,
-    Alert,
-    CardImg,
-    CardBody,
-    Table,
-    Badge,
-    Dropdown,
-    DropdownToggle,
-    DropdownItem,
-    DropdownMenu,
-    CardText,
-    CardTitle,
-    Button,
-    CardGroup,
-    Row,
-    Col,
-    CardColumns
-} from "reactstrap";
+import {Badge, Card, CardBody, CardImg, CardTitle, Col, Row, Table} from "reactstrap";
 
 import Scroll from 'react-scrollbar';
 import PendingRequests from './PendingRequests';
@@ -28,29 +10,17 @@ import ReactDOMServer from 'react-dom/server';
 
 export default class DashboardPage extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            data: [],
-            ReportResults: [],
-
-        };
-    }
-
     componentDidMount = () => {
         console.log('example Component mounted');
         this.getDashboardData();
 
     };
-
     getDashboardData = () => {
         let Data = UrbanSporkAPI.getSystemDashboard();
         Data.then(data => {
             this.setState({data: data})
         });
     };
-
-
     getReport = (ID) => {
         let payload = {
             PermissionId: ID,
@@ -61,7 +31,6 @@ export default class DashboardPage extends React.Component {
         };
         return UrbanSporkAPI.getSystemReport(payload);
     };
-
     formatReport = () => {
         let pdfBody = this.state.ReportResults.map((entry, index) => (
             <tr key={index}>
@@ -73,8 +42,6 @@ export default class DashboardPage extends React.Component {
         ));
         return pdfBody;
     };
-
-
     cardSelected = (SystemId, SystemName) => {
         const payload = this.getReport(SystemId);
         payload
@@ -83,13 +50,13 @@ export default class DashboardPage extends React.Component {
                 let pdf = new jsPDF('p', 'pt', 'letter');
                 let rows = this.formatReport();
                 let table = (
-                    <Table >
-                        <thead style={{height:20}}>
+                    <Table>
+                        <thead style={{height: 20}}>
 
-                            <th>#</th>
-                            <th>Name</th>
-                            <th>Approved By</th>
-                            <th>Date</th>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Approved By</th>
+                        <th>Date</th>
 
                         </thead>
                         <tbody>
@@ -141,6 +108,15 @@ export default class DashboardPage extends React.Component {
             });
     };
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: [],
+            ReportResults: [],
+
+        };
+    }
+
     render() {
         const systems = this.state.data.map((_System, index) => (
             <Col key={index}>
@@ -149,10 +125,6 @@ export default class DashboardPage extends React.Component {
                 }} style=
                           {{
                               backgroundColor: "#FFFFFF",
-                              borderWidth: 1,
-                              borderColor: "#000000",
-                              borderLeftWidth: 3,
-                              borderBottomWidth: 3,
                               cursor: "pointer",
 
                           }}>
@@ -168,12 +140,14 @@ export default class DashboardPage extends React.Component {
                             <Row>
                                 <Col md={6}>
                                    <span>
-                                       <Badge pill color="success">{_System.pendingRequests} Pending</Badge>
+                                       <Badge pill
+                                              tyle={{backgroundColor: 'rgb(39, 144, 39)'}}>{_System.pendingRequests} Pending</Badge>
                                    </span>
                                 </Col>
                                 <Col md={6}>
                                       <span>
-                                          <Badge pill color="info">{_System.activeUsers} Active Users</Badge>
+                                          <Badge pill
+                                                 style={{backgroundColor: 'rgb(19, 79, 88)'}}>{_System.activeUsers} Active Users</Badge>
                                       </span>
                                 </Col>
                             </Row>
@@ -187,37 +161,35 @@ export default class DashboardPage extends React.Component {
             <div>
                 <div>
                     <br/>
-                    {/*top row */}
                     <Row style={{height: 50}}>
 
                     </Row>
                 </div>
-                <div>
+                <div style={{display: 'flex', justifyContent: 'center'}}>
+                    <div>
+                        <Col md={3}>
 
-                    <Row>
-                        <div>
-                            <Col md={3} style={{alignContent: "center"}}>
-                                {/*<h1 align="center">Systems</h1>*/}
-                                {/*<hr width={250} color="#000000"/>*/}
-                                <Scroll
-                                    style={{height: 500, width: 300}}
-                                >
-                                    <Row>
-                                        <Col>
-                                            {systems}
-                                        </Col>
-                                    </Row>
+                            <div style={{alignText: 'center'}}>
+                                <h1 style={{paddingLeft: '100px'}}>Systems</h1>
+                                <Col md={3}>
+                                    <Scroll
+                                        style={{height: 500, width: 300}}
+                                    >
+                                        <Row>
+                                            <Col>
+                                                {systems}
+                                            </Col>
+                                        </Row>
 
-                                </Scroll>
-                            </Col>
-                        </div>
-                        <Col md={8}>
-                            <PendingRequests getDashboard={this.getDashboardData}/>
+                                    </Scroll>
+                                </Col>
+                            </div>
                         </Col>
-                        <Col md={1}>
-                        </Col>
+                    </div>
 
-                    </Row>
+                    <Col md={9}>
+                        <PendingRequests getDashboard={this.getDashboardData}/>
+                    </Col>
                 </div>
 
             </div>

@@ -81,7 +81,8 @@ class UserDetailsComponents extends React.Component {
                     ById: this.props.managerId,
                     PermissionsToGrant: permissionList,
                 }
-            )).then(this.setState({edit: false})
+            ))
+            .then(this.setState({edit: false})
         )
 
 
@@ -214,10 +215,19 @@ class UserDetailsComponents extends React.Component {
                 <h5 className={'modal-title'}>
                     {props.firstName} {props.lastName}
                 </h5>
-                {
-                    // If it's not in edit mode show the options button
-                    <Options edit={props.edit} isAdmin={props.isAdmin}/>
-                }
+                <div style={{display: 'flex'}}>
+                    {
+                        !this.state.edit &&
+                        <div style={{paddingRight: '5px'}}>
+                            <Button color="primary" onClick={this.handleOnEdit} active={!this.state.edit}>Edit</Button>
+                        </div>
+                    }
+                    {
+                        // If it's not in edit mode show the options button
+                        <Options style={{paddingLeft: '5px'}} edit={props.edit} isAdmin={props.isAdmin}/>
+                    }
+                </div>
+
             </div>
         );
 
@@ -282,7 +292,7 @@ class UserDetailsComponents extends React.Component {
                         </div>
                     </ModalBody>
                     <ModalFooter>
-                        {this.state.edit ?
+                        {this.state.edit &&
                             <div>
                                 <Button
                                     color="success" onClick={this.handleOnSave}
@@ -291,8 +301,7 @@ class UserDetailsComponents extends React.Component {
                                 {' '}
                                 <Button color="secondary" onClick={this.handleOnCancel}>Cancel</Button>
                             </div>
-                            :
-                            <Button color="primary" onClick={this.handleOnEdit} active={!this.state.edit}>Edit</Button>
+
                         }
                     </ModalFooter>
                 </div>

@@ -23,6 +23,15 @@ export class UrbanSporkAPI extends React.Component {
             });
     }
 
+    static getTemplates() {
+        return fetch('http://localhost:5000/api/permission/getTemplates')
+            .then(response => {
+                return response.json();
+            }).catch(error => {
+                return error;
+            });
+    }
+
     // http://localhost:5000/api/user/id/6da06fc4-02cb-4ce3-b63f-112596fe6bff
     static getUserFullData(id) {
         return fetch(`http://localhost:5000/api/user/id/${id}`).then(response => {

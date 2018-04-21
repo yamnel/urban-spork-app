@@ -30,8 +30,13 @@ const AccessTemplates = (props) => (
         <DropdownMenu>
             <DropdownItem header>Templates</DropdownItem>
 
-            {/* need to map the props.Templates here */}
 
+            {
+                props.templates && props.templates.map((permissionSet, i) => <DropdownItem key={permissionSet.id} id={i}
+                                                                                           onClick={(e) => props.onTemplateClick(e.target.id)}>{permissionSet.name}</DropdownItem>)
+            }
+
+            {/* need to map the props.Templates here */}
 
             {/*<DropdownItem disabled={props.isAdmin}>Make Admin</DropdownItem>*/}
             {/*<DropdownItem>Off-Board Report</DropdownItem>*/}
@@ -50,7 +55,10 @@ const Header = (props) => (
         {/*</h5>*/}
         {
             // need to pass props.templates
-            <AccessTemplates/>
+            <AccessTemplates
+                templates={props.templates}
+                onTemplateClick={props.onTemplateClick}
+            />
         }
     </div>
 );
@@ -68,7 +76,6 @@ class CreateUser extends React.Component {
         selectedPermissions: [],
     };
 
-
     styles = {
         flex: 1,
         justifyContent: 'center',
@@ -76,8 +83,20 @@ class CreateUser extends React.Component {
         textAlign: 'center'
     };
 
-    handleOnCancel = () => this.props.history.push("/users");
+    onTemplateClick = (index) => {
+        const listFromTemplate = JSON.parse(this.state.templates[index].templatePermissions);
+        const rawList = Object.keys(listFromTemplate).map((permission) =>
+            ({
+                permissionID: permission,
+                permissionName: listFromTemplate[permission]
+            })
+        );
 
+        console.log(rawList);
+
+        this.setState(prevState => ({selectedPermissions: [...prevState.selectedPermissions, ...rawList]}));
+    };
+    handleOnCancel = () => this.props.history.push("/users");
     handleOnChange = (e) => {
         this.setState({[e.target.name]: e.target.value});
     };
@@ -89,7 +108,7 @@ class CreateUser extends React.Component {
 
         const permissionList = {};
 
-        this.state.selectedPermissions.map((permission)=>{
+        this.state.selectedPermissions.map((permission) => {
             return permissionList[permission.permissionID] = permissionDetail
         });
 
@@ -109,6 +128,21 @@ class CreateUser extends React.Component {
         UrbanSporkAPI.createUser(payload).then(() => this.props.history.push("/users"))
     };
 
+    componentDidMount() {
+        const payload = UrbanSporkAPI.getTemplates();
+        payload.then((data) => {
+            this.setState({templates: data})
+        });
+        UrbanSporkAPI.getDepartments().then((data)=> this.setState({departments: data}))
+    }
+
+    handleDepartmentClick(departmentName){
+        UrbanSporkAPI.getPositionByDepartment(departmentName).then(positions => this.setState({positions: positions}))
+    }
+
+    // componentWillMount(){
+    // }
+
     render() {
         return (
             <div>
@@ -117,7 +151,11 @@ class CreateUser extends React.Component {
                     <h1>Create User</h1>
                 </div>
 
-                <Header handleOnBack={this.handleOnCancel}/>
+                <Header
+                    handleOnBack={this.handleOnCancel}
+                    templates={this.state.templates}
+                    onTemplateClick={this.onTemplateClick}
+                />
 
                 <ModalBody>
                     <div style={{display: 'flex', justifyContent: 'space-around'}}>
@@ -151,12 +189,14 @@ class CreateUser extends React.Component {
                                     <Col sm={20}>
                                         {/* Hard Coded permissions... I love it!*/}
                                         <Input type="select" name="department" id="department"
-                                               onChange={e => this.handleOnChange(e)}>
+                                               onChange={e => {
+                                                   this.handleOnChange(e);
+                                                   this.handleDepartmentClick(e.target.value);
+                                               }}>
                                             <option></option>
-                                            <option>Warehouse</option>
-                                            <option>Marketing</option>
-                                            <option>Human Resource</option>
-                                            <option>Complaints</option>
+                                            {
+                                               this.state.departments && this.state.departments.map((department, i)=> <option  key={i} id={department.id} value={department.name}>{department.name}</option>)
+                                            }
                                         </Input>
                                     </Col>
                                 </FormGroup>
@@ -167,8 +207,12 @@ class CreateUser extends React.Component {
                                     </Label>
 
                                     <Col sm={20}>
-                                        <Input type="text" name="position" id="position"
-                                               onChange={e => this.handleOnChange(e)}/>
+                                        <Input type="select" name="position" id="position" onChange={e => this.handleOnChange(e)}>
+                                            <option></option>
+                                            {
+                                                this.state.positions && this.state.positions.map((position, i)=> <option key={i} id={position.id} value={position.positionName}>{position.positionName}</option>)
+                                            }
+                                        </Input>
                                     </Col>
                                 </FormGroup>
 

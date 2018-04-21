@@ -17,7 +17,7 @@ class UserTable extends React.Component {
                             desc: false
                         }
                     ]}
-                    resizable={false}
+                    resizable={true}
                     defaultPageSize={10}
                     className="-striped -highlight"
 
