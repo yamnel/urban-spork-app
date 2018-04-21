@@ -28,7 +28,7 @@ export default class ApproverActivityReport extends React.Component {
         {accessor: 'forFullName', Header: 'For'},
         {accessor: 'approverFullName', Header: 'By'},
         {
-            accessor: 'timestamp',
+            accessor: 'timeStamp',
             Header: 'Date',
             Cell: ({value}) => moment.utc(value).format('ddd MMM D YYYY').toString()
         },

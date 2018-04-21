@@ -45,8 +45,9 @@ class UserDetailsComponents extends React.Component {
 
     handleOnSave = () => {
         const permissionDetail = {
-            Reason: 'User was created with these permissions.',
-            RequestedBy: this.props.managerId,
+            Reason: 'Permission added by admin.',
+            // RequestedBy: this.props.managerId,
+            // RequestedFor: this.state.userData.userId
         };
 
         const permissionList = {};
@@ -63,11 +64,26 @@ class UserDetailsComponents extends React.Component {
             Position: this.state.userData.position,
             Department: this.state.userData.department,
             IsAdmin: this.state.userData.isAdmin,
-            PermissionList: permissionList,
+            // PermissionList: permissionList,
         };
 
+        console.log({
+            ForId: this.state.userData.userId,
+            ById: this.props.managerId,
+            PermissionsToGrant: permissionList
+        });
+
+
         UrbanSporkAPI.updateUserDetails(data)
-            .then(this.setState({edit: false}))
+            .then(UrbanSporkAPI.grantPermission(
+                {
+                    ForId: this.state.userData.userId,
+                    ById: this.props.managerId,
+                    PermissionsToGrant: permissionList,
+                }
+            )).then(this.setState({edit: false})
+        )
+
 
     };
 

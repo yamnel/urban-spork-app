@@ -23,8 +23,7 @@ export default class EditUserDetailComponent extends React.Component {
                                     defaultValue={this.state.firstName}
                                     onChange={(e) => {
                                         this.props.onDataChange(e)
-                                    }
-                                    }
+                                    }}
                                 />
                             </Col>
                         </FormGroup>
@@ -41,8 +40,7 @@ export default class EditUserDetailComponent extends React.Component {
                                     defaultValue={this.state.lastName}
                                     onChange={(e) => {
                                         this.props.onDataChange(e)
-                                    }
-                                    }
+                                    }}
                                 />
                             </Col>
                         </FormGroup>
@@ -60,8 +58,7 @@ export default class EditUserDetailComponent extends React.Component {
                                     defaultValue={this.state.position}
                                     onChange={(e) => {
                                         this.props.onDataChange(e)
-                                    }
-                                    }
+                                    }}
                                 />
                             </Col>
                         </FormGroup>
@@ -79,8 +76,7 @@ export default class EditUserDetailComponent extends React.Component {
                                     defaultValue={this.state.department}
                                     onChange={(e) => {
                                         this.props.onDataChange(e)
-                                    }
-                                    }
+                                    }}
                                 />
                             </Col>
                         </FormGroup>
@@ -98,8 +94,7 @@ export default class EditUserDetailComponent extends React.Component {
                                     defaultValue={this.state.email}
                                     onChange={(e) => {
                                         this.props.onDataChange(e)
-                                    }
-                                    }
+                                    }}
                                 />
                             </Col>
                         </FormGroup>
