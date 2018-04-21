@@ -232,7 +232,7 @@ export class UrbanSporkAPI extends React.Component {
         });
     }
 
-    static granttPermissions(data) {
+    static grantPermissions(data) {
         return fetch('http://localhost:5000/api/user/grantPermissions',{
             body: JSON.stringify(data),
             credentials: 'same-origin',

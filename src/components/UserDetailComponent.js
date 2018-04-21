@@ -75,7 +75,7 @@ class UserDetailsComponents extends React.Component {
 
 
         UrbanSporkAPI.updateUserDetails(data)
-            .then(UrbanSporkAPI.grantPermission(
+            .then(UrbanSporkAPI.grantPermissions(
                 {
                     ForId: this.state.userData.userId,
                     ById: this.props.managerId,

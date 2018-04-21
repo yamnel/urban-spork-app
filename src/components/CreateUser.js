@@ -76,7 +76,7 @@ class CreateUser extends React.Component {
         textAlign: 'center'
     };
 
-    handleOnCancel = () => this.props.history.push("/users");f
+    handleOnCancel = () => this.props.history.push("/users");
 
     handleOnChange = (e) => {
         this.setState({[e.target.name]: e.target.value});
