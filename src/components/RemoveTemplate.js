@@ -29,8 +29,6 @@ export default class RemoveTemplate extends React.Component {
             name: e.target.value
         }
 
-        console.log(' ' + template.id + ' ' + template.name);
-
         this.props.TemplateSelected(template);
     };
 
@@ -40,7 +38,7 @@ export default class RemoveTemplate extends React.Component {
             <option id={Template.id} key={index + 1} >{Template.name}</option>
         ));
 
-        templateList.unshift(<option key={0} ></option>);
+        templateList.unshift(<option key={0} >Select Template</option>);
 
         return templateList;
     };

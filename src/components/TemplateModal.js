@@ -69,7 +69,7 @@ export default class TemplateModal extends React.Component {
         this.setState({idForTemplateToRemove: templateForRemoval.id});
         this.setState({templateTitle: templateForRemoval.name})
 
-        templateForRemoval.id.length > 0 ? this.setState({confirmButton: true}): this.setState({confirmButton: false});
+        templateForRemoval.id.length > 1 ? this.setState({confirmButton: true}): this.setState({confirmButton: false});
     };
 
     updateTemplateTitleForAdd = (templateTitleForAdd) => {
@@ -88,6 +88,8 @@ export default class TemplateModal extends React.Component {
         this.toggleRemoveButton(templateForRemove);
     };
 
+
+
     render() {
         return (
             <div>
@@ -102,8 +104,8 @@ export default class TemplateModal extends React.Component {
                                                  templateTitle={this.updateTemplateTitleForAdd}
                                                 templatePermissions={this.updateTemplatePermissionsForAdd} />
                                     :
-                                <RemoveTemplate TemplateSelected={this.updateTemplateForRemove}
-                                                templates={this.props.templates}/>):
+                                    <RemoveTemplate TemplateSelected={this.updateTemplateForRemove}
+                                                    templates={this.props.templates}/>):
                                 <h6><FontAwesomeIcon icon={faCheckCircle}/>{" "} The {this.state.templateTitle}{' '}
                                 was successfully {this.props.addTemplate? "added":"removed"}!</h6>
                             }
