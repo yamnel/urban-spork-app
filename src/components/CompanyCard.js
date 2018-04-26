@@ -32,12 +32,12 @@ export default class CompanyCard extends React.Component{
                         <Row>
                             <Col md={6} sm={6}>
                                 <span>
-                                <Button color={"success"} onClick={this.props.addButtonOnClick}>Add New</Button>
+                                <Button color={this.props.buttonOneColor} onClick={this.props.addButtonOnClick}>{this.props.buttonOneText}</Button>
                                 </span>
                             </Col>
                             <Col md={6} sm={6}>
                                 <span>
-                                <Button color={"danger"} onClick={this.props.removeButtonOnClick}>Remove</Button>
+                                <Button color={this.props.buttonTwoColor} onClick={this.props.removeButtonOnClick}>{this.props.buttonTwoText}</Button>
                                 </span>
                             </Col>
                         </Row>

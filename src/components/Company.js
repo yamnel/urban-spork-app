@@ -148,30 +148,46 @@ export default class Company extends React.Component {
                     </Row>
                     <Row >
                         <Col md={3} style={{justifyContent:"center"}}>
-                            <CompanyCard cardTitle={"Manage Systems"} color={"#28a745"}
+                            <CompanyCard cardTitle={"Manage Systems"} color={"#217246"}
                                          fontAwesomeIcon={faCogs} addButtonOnClick={this.openSystemDetailModal}
-                                         removeButtonOnClick={this.openEditSystemModal}/>
+                                         removeButtonOnClick={this.openEditSystemModal}
+                                         buttonOneText={"Add New"}
+                                        buttonOneColor={"success"}
+                                        buttonTwoText={"Edit"}
+                                        buttonTwoColor={"warning"}/>
                             <br/>
                         </Col>
 
                         <Col md={3}>
                             <CompanyCard cardTitle={"Manage Departments"} color={"#9933ff"}
                                          fontAwesomeIcon={faBuilding} addButtonOnClick={this.openAddDepartmentsModal}
-                                         removeButtonOnClick={this.openRemoveDepartmentsModal}/>
+                                         removeButtonOnClick={this.openRemoveDepartmentsModal}
+                                         buttonOneText={"Add New"}
+                                         buttonOneColor={"success"}
+                                         buttonTwoText={"Remove"}
+                                         buttonTwoColor={"danger"}/>
                             <br/>
                         </Col>
 
                         <Col md={3}>
                             <CompanyCard cardTitle={"Manage Positions"} color={"#0066cc"}
                                          fontAwesomeIcon={faIdBadge} addButtonOnClick={this.openAddPositionsModal}
-                                         removeButtonOnClick={this.openRemovePositionsModal}/>
+                                         removeButtonOnClick={this.openRemovePositionsModal}
+                                         buttonOneText={"Add New"}
+                                         buttonOneColor={"success"}
+                                         buttonTwoText={"Remove"}
+                                         buttonTwoColor={"danger"}/>
                             <br/>
                         </Col>
 
                         <Col md={3}>
                             <CompanyCard cardTitle={"Manage Templates"} color={"#00bdff"}
                                          fontAwesomeIcon={faTasks} addButtonOnClick={this.openAddTemplateModal}
-                                         removeButtonOnClick={this.openRemoveTemplateModal}/>
+                                         removeButtonOnClick={this.openRemoveTemplateModal}
+                                         buttonOneText={"Add New"}
+                                         buttonOneColor={"success"}
+                                         buttonTwoText={"Remove"}
+                                         buttonTwoColor={"danger"}/>
                             <br/>
                         </Col>
                     </Row>

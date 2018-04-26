@@ -26,8 +26,8 @@ const refactoredObject = (props) => (
 const columns = [
     {accessor: 'Event', Header: 'User Activity'},
     {accessor: 'PerformedBy', Header: 'By'},
-    {accessor: 'System', Header: 'System'},
-    {accessor: 'Reason', Header: 'Reason'},
+    {accessor: 'System', Header: 'Field / System'},
+    {accessor: 'Reason', Header: 'Detail'},
     {
         accessor: 'TheDate',
         Header: 'Date',
