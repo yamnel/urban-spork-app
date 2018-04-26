@@ -6,7 +6,7 @@ export default class CompanyCard extends React.Component{
 
     render() {
         return (
-            <Card body className="text-center"
+            <Card  className="text-center"
                   style=
                       {{
                           borderWidth: 1,
@@ -14,33 +14,33 @@ export default class CompanyCard extends React.Component{
                           borderLeftWidth: 3,
                           borderBottomWidth: 3
                       }}>
-
+                <br/>
+                <CardTitle>{this.props.cardTitle}</CardTitle>
                 <CardBody>
-
-                    <FontAwesomeIcon icon={this.props.fontAwesomeIcon} size="10x"
+                    <Row className="text-center" style={{justifyContent: "center"}}>
+                    <FontAwesomeIcon icon={this.props.fontAwesomeIcon} size="8x"
                                      style={{
+                                         align: "center",
                                          color: this.props.color
                                      }}/>
+                    </Row>
 
-                </CardBody>
 
-                <CardTitle>{this.props.cardTitle}</CardTitle>
 
-                <CardBody>
-                    <Col md={12}>
+                <br/>
+
                         <Row>
-                            <Col md={6}>
+                            <Col md={6} sm={6}>
                                 <span>
                                 <Button color={"success"} onClick={this.props.addButtonOnClick}>Add New</Button>
                                 </span>
                             </Col>
-                            <Col md={6}>
+                            <Col md={6} sm={6}>
                                 <span>
                                 <Button color={"danger"} onClick={this.props.removeButtonOnClick}>Remove</Button>
                                 </span>
                             </Col>
                         </Row>
-                    </Col>
                 </CardBody>
 
             </Card>

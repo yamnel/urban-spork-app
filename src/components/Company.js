@@ -140,34 +140,39 @@ export default class Company extends React.Component {
             <div>
                 <div >
                     <Row style={this.styles}>
-                        <Col sm="8">
+                        <Col md={12} sm={12}>
                             <h1 align="center">Company Management</h1>
                             <hr width={500} color="#000000"/>
+                            <br/>
                         </Col>
                     </Row>
-                    <Row style = {{ alignContent: "center" }}>
-                        <Col sm={3}>
+                    <Row >
+                        <Col md={3} style={{justifyContent:"center"}}>
                             <CompanyCard cardTitle={"Manage Systems"} color={"#28a745"}
                                          fontAwesomeIcon={faCogs} addButtonOnClick={this.openSystemDetailModal}
                                          removeButtonOnClick={this.openEditSystemModal}/>
+                            <br/>
                         </Col>
 
-                        <Col sm={3}>
+                        <Col md={3}>
                             <CompanyCard cardTitle={"Manage Departments"} color={"#9933ff"}
                                          fontAwesomeIcon={faBuilding} addButtonOnClick={this.openAddDepartmentsModal}
                                          removeButtonOnClick={this.openRemoveDepartmentsModal}/>
+                            <br/>
                         </Col>
 
-                        <Col sm={3}>
+                        <Col md={3}>
                             <CompanyCard cardTitle={"Manage Positions"} color={"#0066cc"}
                                          fontAwesomeIcon={faIdBadge} addButtonOnClick={this.openAddPositionsModal}
                                          removeButtonOnClick={this.openRemovePositionsModal}/>
+                            <br/>
                         </Col>
 
-                        <Col sm={3}>
+                        <Col md={3}>
                             <CompanyCard cardTitle={"Manage Templates"} color={"#00bdff"}
                                          fontAwesomeIcon={faTasks} addButtonOnClick={this.openAddTemplateModal}
                                          removeButtonOnClick={this.openRemoveTemplateModal}/>
+                            <br/>
                         </Col>
                     </Row>
                 </div>
