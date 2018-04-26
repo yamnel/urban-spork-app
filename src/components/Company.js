@@ -17,7 +17,7 @@ export default class Company extends React.Component {
             addPosition: true,
             addDepartment: true,
             addTemplate: true,
-            addSystem: true,
+            addSystem: false,
             PositionsModalIsOpen:false,
             DepartmentsModalIsOpen:false,
             SystemModalIsOpen: false,
@@ -43,6 +43,10 @@ export default class Company extends React.Component {
     toggleModalIsOpen = () => this.setState(() => {
         return ({SystemModalIsOpen: !this.state.SystemModalIsOpen});
     });
+
+    toggleAddSystem = () => this.setState(() => {
+        return ({addSystem: !this.state.addSystem});
+    })
 
     openAddPositionsModal = () => {
 
@@ -105,6 +109,7 @@ export default class Company extends React.Component {
     };
 
     openSystemDetailModal = () => {
+        this.toggleAddSystem();
         this.toggleModalIsOpen();
     };
 
@@ -180,7 +185,8 @@ export default class Company extends React.Component {
                 <SystemModal isOpen={this.state.SystemModalIsOpen}
                              toggle={this.toggleModalIsOpen}
                              systems={this.state.systems}
-                             addSystem={this.state.addSystem}/>
+                             addSystem={this.state.addSystem}
+                             addSystemToggle={this.toggleAddSystem}/>
 
                 <TemplateModal isOpen={this.state.TemplateModalIsOpen}
                                   toggle={this.toggleTemplateModal}

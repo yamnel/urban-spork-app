@@ -25,13 +25,20 @@ class PositionsModal extends React.Component {
         if (!this.state.edit) {
             this.setState({edit: false});
         } else {
+            this.setState({position: ""});
+            this.setState({department: ""});
+            this.setState({positionId: ""});
             this.props.toggle();
         }
     };
 
     handleOnClose = () => {
+        this.setState({position: ""});
+        this.setState({department: ""});
+        this.setState({positionId: ""});
         this.props.toggle();
         this.setState({edit: true});
+        this.setState({addPositionsButton: false})
     };
 
     handleOnAdd = () => {
@@ -70,9 +77,12 @@ class PositionsModal extends React.Component {
 
     toggleAddButton = () => {
 
-        (this.state.position.length >= 1 && this.state.department.length > 0) ?
-            this.setState({addPositionsButton: true})
-            : this.setState({addPositionsButton: false});
+        console.log("ToggleAddButton was called!")
+        if (this.state.position === "" && this.state.department === ""){
+            this.setState({addPositionsButton: false})
+        } else {
+            this.setState({addPositionsButton: true});
+        }
     };
 
     updateDepartment = (department) => {
@@ -104,7 +114,7 @@ class PositionsModal extends React.Component {
                                                     positionId={this.updatePositionId}
                                                  position={this.updatePosition}/>) :
                                 <h6><FontAwesomeIcon icon={faCheckCircle}/> {" "} The position with the title
-                                    of {this.state.position}, was {this.state.addPosition ? "added to " : "removed from "} the {this.state.department} department!</h6>
+                                    of {this.state.position}, was {this.props.addPosition ? "added to " : "removed from "} the {this.state.department} department!</h6>
                             }
                         </div>
                     </ModalBody>
