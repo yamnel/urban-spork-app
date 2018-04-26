@@ -8,7 +8,8 @@ export default class EditSystem extends React.Component {
         Systems: this.props.systems,
         systemName: "Select System Above",
         systemDescription: "Select System Above",
-        systemLogoUrl: "Select System Above"
+        systemLogoUrl: "Select System Above",
+        systemId:""
     }
 
     handleOnSystemChange = (event) => {
@@ -22,7 +23,9 @@ export default class EditSystem extends React.Component {
         this.setState({systemName: system.name});
         this.setState({systemDescription: system.description});
         this.setState({systemLogoUrl: system.image});
+        this.setState({systemId: system.id});
 
+        this.props.idChanged(system.id);
     }
 
     getAllSystems = () => {
