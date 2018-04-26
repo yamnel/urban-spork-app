@@ -5,6 +5,7 @@ import FontAwesomeIcon from "@fortawesome/react-fontawesome";
 import AddSystem from "./AddSystem";
 import UrbanSporkAPI from "../api/UrbanSporkAPI";
 import EditSystem from "./EditSystem";
+import {connect} from "react-redux";
 
 
 class SystemModal extends React.Component {
@@ -23,6 +24,7 @@ class SystemModal extends React.Component {
         systemName: "",
         systemDescription: "",
         systemLogoURL: "",
+        systemId: ""
     };
 
     handleOnCancel = () => {
@@ -31,16 +33,17 @@ class SystemModal extends React.Component {
         if (!this.state.edit) {
             this.setState({edit: false});
         } else {
+            // this.props.addSystemToggle();
             this.props.toggle();
         }
     };
 
     handleOnClose = () => {
-        this.setState({systemName: "", systemLogoURL: "", systemDescription: ""});
-
+        this.setState({systemName: "", systemLogoURL: "", systemDescription: "", systemId: ""});
+        // this.props.addSystemToggle();
         this.props.toggle();
-        this.setState({edit: false});
-
+        this.setState({edit: true});
+        this.setState({addSystemButton: true})
     };
 
     handleOnSave = () => {
@@ -59,6 +62,8 @@ class SystemModal extends React.Component {
                });
 
         this.setState({systemName: "", systemLogoURL: "", systemDescription: ""});
+
+        // this.setState({})
     };
 
     handleOnUpdateSystem = () => {
@@ -67,7 +72,9 @@ class SystemModal extends React.Component {
             Name: this.state.systemName,
             Description: this.state.systemDescription,
             Image: this.state.systemLogoURL,
-            IsActive: true
+            IsActive: true,
+            UpdatedById: this.props.managerId,
+            Id: this.state.systemId
         };
 
         UrbanSporkAPI.updatePermission(newSystem)
@@ -86,13 +93,18 @@ class SystemModal extends React.Component {
 
         this.setState({[e.target.id]: e.target.value});
 
-        this.toggleAddButton();
+        // this.toggleAddButton();
     };
+
+    onIdChange = (e) => {
+        this.setState({systemId: e})
+    }
 
     onEditInputChange = (e) => {
 
         this.setState({[e.target.id]: e.target.value});
 
+        // if(this.state.systemId != null && this.state.)
         this.setState({addSystemButton: true});
     };
 
@@ -137,9 +149,9 @@ class SystemModal extends React.Component {
                             {this.state.edit?
                                 (this.props.addSystem ?
                                 <AddSystem onInputChange={this.onInputChange}/>:
-                                    <EditSystem onInputChange={this.onEditInputChange} systems={this.props.systems}/>
+                                    <EditSystem onInputChange={this.onEditInputChange} systems={this.props.systems} idChanged={this.onIdChange}/>
                                 ):
-                                <h6><FontAwesomeIcon icon={faCheckCircle}/> {" "} The {this.state.system.name} system was successfully added!</h6>
+                                <h6><FontAwesomeIcon icon={faCheckCircle}/> {" "} The {this.state.system.name} system was successfully {this.props.addSystem ? "added" : "updated"}!</h6>
                             }
                         </div>
                     </ModalBody>
@@ -166,5 +178,9 @@ class SystemModal extends React.Component {
         );
     }
 }
-
-export default SystemModal;
+const mapStateToProps = (state) => {
+    return {
+        managerId: state.manager.id
+    }
+};
+export default connect(mapStateToProps)(SystemModal);
