@@ -44,7 +44,6 @@ class UserDetailComponent extends React.Component {
     };
 
 
-
     handleOnSave = () => {
         const permissionDetail = {
             Reason: 'Permission added by admin.'
@@ -64,7 +63,6 @@ class UserDetailComponent extends React.Component {
             Position: this.state.userData.position,
             Department: this.state.userData.department,
             IsAdmin: this.state.userData.isAdmin,
-            IsActive: this.state.userData.isActive
         };
 
         UrbanSporkAPI.updateUserDetails(data)
@@ -201,6 +199,14 @@ class UserDetailComponent extends React.Component {
         );
     };
 
+    onActivateDeactivate = () => () => {
+        const data = {UserId: this.state.userData.userId, ById: this.props.managerId};
+        if (this.state.isActive) {
+            return UrbanSporkAPI.disableUser(data).then(() => this.handleOnSave())
+        }
+        return UrbanSporkAPI.enableUser(data).then(() => this.handleOnSave())
+    };
+
     handleOnBack = () => this.props.history.push("/users");
 
     componentDidMount() {
@@ -254,7 +260,6 @@ class UserDetailComponent extends React.Component {
             </div>
         );
 
-
         // this is the options button component
         const Options = (props) => (
             <UncontrolledDropdown direction={'right'}>
@@ -278,15 +283,37 @@ class UserDetailComponent extends React.Component {
                         }}
                     >{props.isAdmin ? 'Remove Admin' : 'Make Admin'}</DropdownItem>
 
-                    <DropdownItem onClick={() => {
-                        this.setState((prevState) => ({
-                            userData: {
-                                ...prevState.userData,
-                                isActive: !prevState.userData.isActive
-                            }
-                        }), this.handleOnSave);
-                    }}
-                    >{props.isActive ? 'Deactivate' : 'Activate'}</DropdownItem>
+                    {
+                        !this.state.userData.isActive && <DropdownItem onClick={() => {
+                            this.setState((prevState) => ({
+                                userData: {
+                                    ...prevState.userData,
+                                    isActive: !prevState.userData.isActive
+                                }
+                            }), () => UrbanSporkAPI.enableUser({
+                                UserId: this.state.userData.userId,
+                                ById: this.props.managerId
+                            }).then(() => this.handleOnSave()));
+                        }}
+                        >Activate</DropdownItem>
+                    }
+
+
+                    {
+                        this.state.userData.isActive && <DropdownItem onClick={() => {
+                            this.setState((prevState) => ({
+                                userData: {
+                                    ...prevState.userData,
+                                    isActive: !prevState.userData.isActive
+                                }
+                            }), () => UrbanSporkAPI.disableUser({
+                                UserId: this.state.userData.userId,
+                                ById: this.props.managerId
+                            }).then(() => this.handleOnSave()));
+                        }}
+                        >Deactivate</DropdownItem>
+                    }
+
                 </DropdownMenu>
             </UncontrolledDropdown>
         );

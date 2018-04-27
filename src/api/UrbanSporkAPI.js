@@ -195,7 +195,42 @@ export class UrbanSporkAPI extends React.Component {
             },
             method: 'PUT'
         }).then(response => {
-            console.log('data that got sent to update', data);
+            return response.json();
+        }).catch(error => {
+            console.log(data);
+            console.log(error);
+        });
+    }
+
+    static enableUser(data) {
+        return fetch('http://localhost:5000/api/user/enable', {
+            body: JSON.stringify(data),
+            credentials: 'same-origin',
+            headers: {
+                'content-type': 'application/json'
+            },
+            method: 'PUT'
+        }).then(response => {
+
+            console.log('disable ', data);
+            return response.json();
+        }).catch(error => {
+            console.log(data);
+            console.log(error);
+        });
+    }
+
+    static disableUser(data) {
+        return fetch('http://localhost:5000/api/user/disable', {
+            body: JSON.stringify(data),
+            credentials: 'same-origin',
+            headers: {
+                'content-type': 'application/json'
+            },
+            method: 'PUT'
+        }).then(response => {
+
+            console.log('disable ', data);
             return response.json();
         }).catch(error => {
             console.log(data);
