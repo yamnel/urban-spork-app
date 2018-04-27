@@ -43,6 +43,8 @@ class UserDetailComponent extends React.Component {
         }
     };
 
+
+
     handleOnSave = () => {
         const permissionDetail = {
             Reason: 'Permission added by admin.'
@@ -62,7 +64,7 @@ class UserDetailComponent extends React.Component {
             Position: this.state.userData.position,
             Department: this.state.userData.department,
             IsAdmin: this.state.userData.isAdmin,
-            // PermissionList: permissionList,
+            IsActive: this.state.userData.isActive
         };
 
         UrbanSporkAPI.updateUserDetails(data)
@@ -106,15 +108,13 @@ class UserDetailComponent extends React.Component {
                 }).then(() => this.setState({edit: false})
                 )
             )
-
-
     };
 
     // this handles the input change in the user info form fields
     handleOnDataChange = (e) => {
         const changedData = {[e.target.id]: e.target.value};
 
-        // this replaces ONLY the changed data values in the old user data.
+        // this replaces ONLY the changed data values in the old user data.         aa7acd83-c512-453b-a0f4-8757de0b2997
         this.setState((prevState) => ({userData: {...prevState.userData, ...changedData}}));
     };
 
@@ -246,7 +246,8 @@ class UserDetailComponent extends React.Component {
                     }
                     {
                         // If it's not in edit mode show the options button
-                        <Options style={{paddingLeft: '5px'}} edit={props.edit} isAdmin={props.isAdmin}/>
+                        <Options style={{paddingLeft: '5px'}} edit={props.edit} isActive={props.isActive}
+                                 isAdmin={props.isAdmin}/>
                     }
                 </div>
 
@@ -263,9 +264,29 @@ class UserDetailComponent extends React.Component {
 
                 <DropdownMenu>
                     <DropdownItem header>Options</DropdownItem>
-                    <DropdownItem disabled={props.isAdmin}>Make Admin</DropdownItem>
                     <DropdownItem onClick={this.exportToPDF}>Off-Board Report</DropdownItem>
-                    <DropdownItem>Deactivate</DropdownItem>
+
+                    {/*<DropdownItem onClick={()=> this.setState({isAdmin: true})} disabled={props.isAdmin}>Make Admin</DropdownItem>*/}
+                    <DropdownItem
+                        onClick={() => {
+                            this.setState((prevState) => ({
+                                userData: {
+                                    ...prevState.userData,
+                                    isAdmin: !prevState.userData.isAdmin
+                                }
+                            }), this.handleOnSave);
+                        }}
+                    >{props.isAdmin ? 'Remove Admin' : 'Make Admin'}</DropdownItem>
+
+                    <DropdownItem onClick={() => {
+                        this.setState((prevState) => ({
+                            userData: {
+                                ...prevState.userData,
+                                isActive: !prevState.userData.isActive
+                            }
+                        }), this.handleOnSave);
+                    }}
+                    >{props.isActive ? 'Deactivate' : 'Activate'}</DropdownItem>
                 </DropdownMenu>
             </UncontrolledDropdown>
         );
@@ -290,6 +311,7 @@ class UserDetailComponent extends React.Component {
                         firstName={this.state.userData.firstName}
                         lastName={this.state.userData.lastName}
                         isAdmin={this.state.userData.isAdmin}
+                        isActive={this.state.userData.isActive}
                     />
 
                     <ModalBody>

@@ -68,16 +68,6 @@ const StaticUserDetail = (props) => (
                             </Col>
                         </FormGroup>
 
-                        <FormGroup row>
-                            <Col md={20}>
-                                <Label for="title" sm={'3'}>Title:</Label>
-                            </Col>
-
-                            <Col md={"auto"}>
-                                <Input style={{paddingLeft: "45px"}} plaintext type="text" name="title"
-                                       id="title">{props.userData.position}</Input>
-                            </Col>
-                        </FormGroup>
 
                         <FormGroup row>
                             <Col md={20}>
@@ -87,6 +77,17 @@ const StaticUserDetail = (props) => (
                             <Col md={"auto"}>
                                 <Input plaintext type="text" name="department"
                                        id="department">{props.userData.department}</Input>
+                            </Col>
+                        </FormGroup>
+
+                        <FormGroup row>
+                            <Col md={20}>
+                                <Label for="title" sm={'3'}>Title:</Label>
+                            </Col>
+
+                            <Col md={"auto"}>
+                                <Input style={{paddingLeft: "45px"}} plaintext type="text" name="title"
+                                       id="title">{props.userData.position}</Input>
                             </Col>
                         </FormGroup>
 
