@@ -95,7 +95,9 @@ class PermissionRequestModal extends React.Component {
                     <ModalHeader toggle={this.handleOnClose}>Permission Request</ModalHeader>
                     <ModalBody>
                         {/*If requestData exists do something*/}
-                        {this.props.requestData && <p>{`${this.props.requestData.permissionName}`}</p>}
+                        {this.props.requestData && <p><h5>Access to:</h5> {this.props.requestData.permissionName}</p>}
+                        <hr/>
+                        {this.props.requestData && <p><h5>Reason:</h5> {this.props.requestData.reason}</p>}
                         {/*{this.state.userData? (this.state.edit? <EditUserDetail  userData={this.state.userData}/>: <StaticUserDetail userData={this.state.userData}/>):null}*/}
                     </ModalBody>
                     <ModalFooter>
