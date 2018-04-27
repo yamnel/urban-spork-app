@@ -21,7 +21,7 @@ import EditUserDetail from "./EditUserDetail";
 import jsPDF from 'jspdf'
 
 
-class UserDetailsComponents extends React.Component {
+class UserDetailComponent extends React.Component {
     state = {
         edit: false,
         History: [],
@@ -101,7 +101,7 @@ class UserDetailsComponents extends React.Component {
                         this.setState({History: data});
                     });
 
-                    //END OF MESSSYYYY
+                    // //END OF MESSSYYYY
 
                 }).then(() => this.setState({edit: false})
                 )
@@ -339,4 +339,4 @@ const mapStateToProps = (state) => {
     }
 };
 
-export default connect(mapStateToProps)(UserDetailsComponents);
+export default connect(mapStateToProps)(UserDetailComponent);

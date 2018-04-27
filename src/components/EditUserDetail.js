@@ -46,15 +46,15 @@ export default class EditUserDetailComponent extends React.Component {
                         </FormGroup>
 
                         <FormGroup row>
-                            <Label for="title" sm={"3"}>
+                            <Label for="position" sm={"3"}>
                                 Title:
                             </Label>
 
                             <Col sm={20}>
                                 <Input
                                     type="text"
-                                    name="tile"
-                                    id="tile"
+                                    name="position"
+                                    id="position"
                                     defaultValue={this.state.position}
                                     onChange={(e) => {
                                         this.props.onDataChange(e)

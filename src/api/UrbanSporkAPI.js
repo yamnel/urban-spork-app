@@ -195,6 +195,7 @@ export class UrbanSporkAPI extends React.Component {
             },
             method: 'PUT'
         }).then(response => {
+            console.log('data that got sent to update', data);
             return response.json();
         }).catch(error => {
             console.log(data);
