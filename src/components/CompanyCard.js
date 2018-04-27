@@ -37,7 +37,7 @@ export default class CompanyCard extends React.Component{
                             </Col>
                             <Col md={6} sm={6}>
                                 <span>
-                                <Button color={this.props.buttonTwoColor} onClick={this.props.removeButtonOnClick}>{this.props.buttonTwoText}</Button>
+                                <Button color={this.props.buttonTwoColor} onClick={this.props.removeButtonOnClick} style={this.props.style}>{this.props.buttonTwoText}</Button>
                                 </span>
                             </Col>
                         </Row>
