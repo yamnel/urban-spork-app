@@ -45,7 +45,7 @@ export default class Company extends React.Component {
     });
 
     toggleAddSystem = () => this.setState(() => {
-        return ({addSystem: !this.state.addSystem});
+        return ({addSystem: true});
     })
 
     openAddPositionsModal = () => {
@@ -153,8 +153,9 @@ export default class Company extends React.Component {
                                          removeButtonOnClick={this.openEditSystemModal}
                                          buttonOneText={"Add New"}
                                         buttonOneColor={"success"}
-                                        buttonTwoText={"Edit"}
-                                        buttonTwoColor={"warning"}/>
+                                        buttonTwoText={" Edit"}
+                                        buttonTwoColor={"warning"}
+                                        style={{width: "90px"}}/>
                             <br/>
                         </Col>
 
@@ -165,7 +166,8 @@ export default class Company extends React.Component {
                                          buttonOneText={"Add New"}
                                          buttonOneColor={"success"}
                                          buttonTwoText={"Remove"}
-                                         buttonTwoColor={"danger"}/>
+                                         buttonTwoColor={"danger"}
+                                         style={{width: "90px"}}/>
                             <br/>
                         </Col>
 
@@ -176,7 +178,8 @@ export default class Company extends React.Component {
                                          buttonOneText={"Add New"}
                                          buttonOneColor={"success"}
                                          buttonTwoText={"Remove"}
-                                         buttonTwoColor={"danger"}/>
+                                         buttonTwoColor={"danger"}
+                                         style={{width: "90px"}}/>
                             <br/>
                         </Col>
 
@@ -187,7 +190,8 @@ export default class Company extends React.Component {
                                          buttonOneText={"Add New"}
                                          buttonOneColor={"success"}
                                          buttonTwoText={"Remove"}
-                                         buttonTwoColor={"danger"}/>
+                                         buttonTwoColor={"danger"}
+                                         style={{width: "90px"}}/>
                             <br/>
                         </Col>
                     </Row>

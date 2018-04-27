@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import UrbanSporkAPI from "../api/UrbanSporkAPI";
 import {
     Button,
+    ButtonGroup,
     Col,
     DropdownItem,
     DropdownMenu,
@@ -74,7 +75,11 @@ class CreateUser extends React.Component {
         email: '',
 
         selectedPermissions: [],
-    };
+        rSelected: false
+
+        // this.onRadioBtnClick = this.onRadioBtnClick.bind(this);
+        // this.onCheckboxBtnClick = this.onCheckboxBtnClick.bind(this);
+      };
 
     styles = {
         flex: 1,
@@ -82,6 +87,10 @@ class CreateUser extends React.Component {
         alignItems: 'center',
         textAlign: 'center'
     };
+
+    onRadioBtnClick = (value) => {
+        this.setState({ rSelected: value });
+      } 
 
     onTemplateClick = (index) => {
         const listFromTemplate = JSON.parse(this.state.templates[index].templatePermissions);
@@ -114,12 +123,13 @@ class CreateUser extends React.Component {
 
 
         const payload = {
+            ById: this.props.managerId,
             FirstName: this.state.firstName,
             LastName: this.state.lastName,
             Email: this.state.email,
             Position: this.state.position,
             Department: this.state.department,
-            IsAdmin: false,
+            IsAdmin: this.state.rSelected,
             IsActive: true,
             PermissionList: permissionList,
 
@@ -233,6 +243,25 @@ class CreateUser extends React.Component {
                                         <Input type="email" name="email" id="email"
                                                onChange={e => this.handleOnChange(e)}/>
                                     </Col>
+                                </FormGroup>
+
+                                <FormGroup row style={{paddingTop: 10}}>
+                                    <Label for="admin" sm={"4"}>
+                                        Admin Status:
+                                    </Label>                                    
+                                    <ButtonGroup>
+                                        {this.state.rSelected?
+                                            <React.Fragment>
+                                                <Button color="primary" onClick={() => this.onRadioBtnClick(true)} active={this.state.rSelected === true}>Admin</Button>
+                                                <Button color="secondary"  onClick={() => this.onRadioBtnClick(false)} active={this.state.rSelected === false}>Non-Admin</Button>
+                                            </React.Fragment>
+                                            :
+                                            <React.Fragment>
+                                                <Button color="secondary" onClick={() => this.onRadioBtnClick(true)} active={this.state.rSelected === true}>Admin</Button>
+                                                <Button color="primary"  onClick={() => this.onRadioBtnClick(false)} active={this.state.rSelected === false}>Non-Admin</Button>
+                                            </React.Fragment>
+                                        }
+                                    </ButtonGroup>
                                 </FormGroup>
                             </Form>
                         </div>
