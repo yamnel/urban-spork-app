@@ -9,8 +9,8 @@ serve as a company auditing tool.
 
 Team Project created by
 
-Tyler Hall
-Tyler Hansen
-Stephen Lomangino
+Tyler Hall,
+Tyler Hansen,
+Stephen Lomangino and 
 Yamnel Serra (Team Lead)
 
